@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 # Custom path
-src/api/api_key.js
+src/api/api_key.ts
 
 # Editor directories and files
 .vscode/*
