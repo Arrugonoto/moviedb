@@ -1,5 +1,12 @@
+import { Button } from '@nextui-org/react';
+
 const Home = () => {
-   return <section>Home Page</section>;
+   return (
+      <section>
+         Home Page
+         <Button>click me</Button>
+      </section>
+   );
 };
 
 export default Home;
