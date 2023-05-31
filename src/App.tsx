@@ -28,14 +28,15 @@ function App() {
       });
       console.log(isDark);
       return () => observer.disconnect();
+      // eslint-disable-next-line
    }, []);
 
    return (
       <NextUIProvider theme={isDark ? darkTheme : lightTheme}>
          <div className="App">
-            <Header />
-            <main>
-               <BrowserRouter>
+            <BrowserRouter>
+               <Header />
+               <main>
                   <Routes>
                      <Route
                         path="/"
@@ -52,9 +53,9 @@ function App() {
                         element={<MovieDetails />}
                      ></Route>
                   </Routes>
-               </BrowserRouter>
-            </main>
-            <Footer />
+               </main>
+               <Footer />
+            </BrowserRouter>
          </div>
       </NextUIProvider>
    );
