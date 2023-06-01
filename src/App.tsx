@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { NextUIProvider, getDocumentTheme } from '@nextui-org/react';
+import { NextUIProvider, getDocumentTheme, Container } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Genre from './pages/Genre';
@@ -34,28 +34,34 @@ function App() {
    return (
       <NextUIProvider theme={isDark ? darkTheme : lightTheme}>
          <div className="App">
-            <BrowserRouter>
-               <Header />
-               <main>
-                  <Routes>
-                     <Route
-                        path="/"
-                        element={<Navigate replace to={`/${ROUTES.HOME}`} />}
-                     ></Route>
-                     <Route path={ROUTES.HOME} element={<Home />}></Route>
-                     <Route path={ROUTES.GENRE} element={<Genre />}></Route>
-                     <Route
-                        path={ROUTES.TOP_RATED}
-                        element={<TopRated />}
-                     ></Route>
-                     <Route
-                        path={ROUTES.MOVIE_DETAILS}
-                        element={<MovieDetails />}
-                     ></Route>
-                  </Routes>
-               </main>
-               <Footer />
-            </BrowserRouter>
+            <Container
+               css={{ bc: 'red', d: 'flex', fd: 'column', ai: 'center' }}
+               fluid
+               responsive={false}
+            >
+               <BrowserRouter>
+                  <Header />
+                  <main>
+                     <Routes>
+                        <Route
+                           path="/"
+                           element={<Navigate replace to={`/${ROUTES.HOME}`} />}
+                        ></Route>
+                        <Route path={ROUTES.HOME} element={<Home />}></Route>
+                        <Route path={ROUTES.GENRE} element={<Genre />}></Route>
+                        <Route
+                           path={ROUTES.TOP_RATED}
+                           element={<TopRated />}
+                        ></Route>
+                        <Route
+                           path={ROUTES.MOVIE_DETAILS}
+                           element={<MovieDetails />}
+                        ></Route>
+                     </Routes>
+                  </main>
+                  <Footer />
+               </BrowserRouter>
+            </Container>
          </div>
       </NextUIProvider>
    );
