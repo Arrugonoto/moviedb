@@ -1,5 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { NextUIProvider, getDocumentTheme, Container } from '@nextui-org/react';
+import {
+   NextUIProvider,
+   getDocumentTheme,
+   Container,
+   Spacer,
+} from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Genre from './pages/Genre';
@@ -35,12 +40,13 @@ function App() {
       <NextUIProvider theme={isDark ? darkTheme : lightTheme}>
          <div className="App">
             <Container
-               css={{ bc: 'red', d: 'flex', fd: 'column', ai: 'center' }}
+               css={{ d: 'flex', fd: 'column', ai: 'center' }}
                fluid
                responsive={false}
             >
                <BrowserRouter>
                   <Header />
+                  <Spacer y={1} />
                   <main>
                      <Routes>
                         <Route
@@ -48,7 +54,10 @@ function App() {
                            element={<Navigate replace to={`/${ROUTES.HOME}`} />}
                         ></Route>
                         <Route path={ROUTES.HOME} element={<Home />}></Route>
-                        <Route path={ROUTES.GENRE} element={<Genre />}></Route>
+                        <Route
+                           path={`${ROUTES.GENRE}/:genre`}
+                           element={<Genre />}
+                        ></Route>
                         <Route
                            path={ROUTES.TOP_RATED}
                            element={<TopRated />}
@@ -59,6 +68,7 @@ function App() {
                         ></Route>
                      </Routes>
                   </main>
+                  <Spacer y={1} />
                   <Footer />
                </BrowserRouter>
             </Container>
