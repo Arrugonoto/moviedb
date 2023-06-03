@@ -1,0 +1,18 @@
+.container_scrollbar {
+   scrollbar-width: none;
+}
+
+.container_scrollbar a {
+   color: #c340c5;
+   background-color: #9110a069;
+   padding: 0.6rem 1.4rem;
+   border-radius: 0.8rem;
+   font-weight: 600;
+}
+
+.container_scrollbar a.active {
+}
+
+.container_scrollbar::-webkit-scrollbar {
+   display: none;
+}
