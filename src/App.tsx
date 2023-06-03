@@ -31,7 +31,6 @@ function App() {
          attributes: true,
          attributeFilter: ['data-theme', 'style'],
       });
-      console.log(isDark);
       return () => observer.disconnect();
       // eslint-disable-next-line
    }, []);
