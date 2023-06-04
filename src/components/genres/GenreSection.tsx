@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Grid, Card } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
+import { API_KEY } from '../../services/api-key';
 
 type movieProps = {
    adult: boolean;
@@ -34,8 +35,7 @@ const GenreSection = () => {
          method: 'GET',
          headers: {
             accept: 'application/json',
-            Authorization:
-               'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZjQzZWZkNTk4YzUwZDA0ZmU2OGJkNzA0YWU4NGMwNyIsInN1YiI6IjYyMTEzYmE0YWE3ODk4MDA0MmZiODg3ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cIbSHTG7u3unuodoQoKHzouw-e9ju7cIMyWvI1_kFQc',
+            Authorization: `Bearer ${API_KEY.access_token}`,
          },
       };
 
