@@ -4,6 +4,16 @@ export const lightTheme = createTheme({
    type: 'light',
    theme: {
       colors: {
+         // neutral text and background
+         white: '#ffffff',
+         black: '#000000',
+
+         // background colors
+         background: '#fafafa',
+         backgroundAlpha: 'rgba(250, 250, 250, 0.8)',
+         foreground: '#080808',
+         backgroundContrast: '#F1F3FE',
+
          // primary
          violet100: '#FACDF0',
          violet200: '#F59DE8',
@@ -64,7 +74,7 @@ export const darkTheme = createTheme({
          background: '#080808',
          backgroundAlpha: 'rgba(8, 8, 8, 0.8)',
          foreground: '#fafafa',
-         backgroundContrast: '#080808',
+         backgroundContrast: 'rgba(245, 157, 232, .2)',
 
          // primary
          violet100: '#FACDF0',
