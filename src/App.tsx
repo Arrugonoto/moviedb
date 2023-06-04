@@ -54,7 +54,7 @@ function App() {
                         ></Route>
                         <Route path={ROUTES.HOME} element={<Home />}></Route>
                         <Route
-                           path={`${ROUTES.GENRE}/:genre`}
+                           path={`${ROUTES.GENRE}/:genreId`}
                            element={<Genre />}
                         ></Route>
                         <Route
