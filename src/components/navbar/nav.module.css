@@ -1,18 +1,37 @@
 .container_scrollbar {
    scrollbar-width: none;
-}
-
-.container_scrollbar a {
-   color: #c340c5;
-   background-color: #9110a069;
-   padding: 0.6rem 1.4rem;
-   border-radius: 0.8rem;
-   font-weight: 600;
-}
-
-.container_scrollbar a.active {
+   overflow-x: auto;
+   padding: 0.8rem 0.5rem 0.4rem 0.5rem;
 }
 
 .container_scrollbar::-webkit-scrollbar {
    display: none;
+}
+
+.container_scrollbar a {
+   color: #c340c5;
+   border: 2px solid rgba(146, 16, 160, 0.7);
+   padding: 0.4rem 1.2rem;
+   border-radius: 0.8rem;
+   font-size: 1rem;
+   font-weight: 600;
+   white-space: nowrap;
+   box-shadow: 0 0 10px 0 transparent;
+   transition: all 0.2s linear;
+}
+
+.container_scrollbar a:hover {
+   color: #f59de8;
+   border-color: #f59de8;
+}
+
+.container_scrollbar a:active {
+   scale: 0.95;
+}
+
+.active {
+   color: #fff !important;
+   background-color: #9210a0;
+   border-color: #9210a0;
+   box-shadow: 0 0 6px 0 #9210a0 !important;
 }
