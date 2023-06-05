@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Grid, Card } from '@nextui-org/react';
+import { Grid } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { API_KEY } from '../../services/api-key';
+import { METHODS, API_ENDPOINT } from '../../services/api';
+import MovieCard from '../moviecard/MovieCard';
 
-type movieProps = {
+type MovieProps = {
    adult: boolean;
    backdrop_path: string;
    genre_ids: number[];
@@ -21,10 +23,10 @@ type movieProps = {
 };
 
 const GenreSection = () => {
-   const [movies, setMovies] = useState<movieProps[]>([]);
+   const [movies, setMovies] = useState<MovieProps[]>([]);
    const { genreId } = useParams();
 
-   const fetchMovies = async () => {
+   const fetchMovies = async (): Promise<void> => {
       const options: {
          method: string;
          headers: {
@@ -32,7 +34,7 @@ const GenreSection = () => {
             Authorization: string;
          };
       } = {
-         method: 'GET',
+         method: METHODS.GET,
          headers: {
             accept: 'application/json',
             Authorization: `Bearer ${API_KEY.access_token}`,
@@ -40,7 +42,7 @@ const GenreSection = () => {
       };
 
       const response = await fetch(
-         `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genreId}`,
+         `${API_ENDPOINT.GENRE}&page=1&sort_by=popularity.desc&with_genres=${genreId}`,
          options
       );
       const result = await response.json();
@@ -59,16 +61,23 @@ const GenreSection = () => {
    }, [genreId]);
 
    return (
-      <Grid.Container>
-         container
-         <Grid>
-            grid wrapper
-            {movies.map(movie => (
-               <Card key={movie.id}>
-                  <Card.Body>{movie.title}</Card.Body>
-               </Card>
-            ))}
-         </Grid>
+      <Grid.Container gap={2}>
+         {movies.map(movie => (
+            <Grid key={movie.id}>
+               <MovieCard
+                  id={movie.id}
+                  backdrop_path={movie.backdrop_path}
+                  original_title={movie.original_title}
+                  overview={movie.overview}
+                  popularity={movie.popularity}
+                  poster_path={movie.poster_path}
+                  release_date={movie.release_date}
+                  title={movie.title}
+                  vote_average={movie.vote_average}
+                  vote_count={movie.vote_count}
+               ></MovieCard>
+            </Grid>
+         ))}
       </Grid.Container>
    );
 };
