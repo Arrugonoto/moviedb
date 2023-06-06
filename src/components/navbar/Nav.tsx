@@ -9,7 +9,8 @@ import {
 import styles from './nav.module.css';
 import { NavLink } from 'react-router-dom';
 import { GENRES } from '../../data/genres';
-import { IoSearchOutline, IoMoon } from 'react-icons/io5';
+import { IoMoon } from 'react-icons/io5';
+import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdSunny } from 'react-icons/io';
 
 const Nav = () => {
@@ -22,7 +23,13 @@ const Nav = () => {
    };
 
    return (
-      <Navbar maxWidth="fluid" css={{ py: '.4rem' }} height="auto">
+      <Navbar
+         maxWidth="fluid"
+         css={{ py: '.4rem' }}
+         height="auto"
+         variant="sticky"
+         shouldHideOnScroll
+      >
          <Container fluid css={{ fd: 'column', p: '0 .2rem' }}>
             <Navbar.Content css={{ jc: 'flex-end', ai: 'center' }}>
                <Input
@@ -32,7 +39,12 @@ const Nav = () => {
                   clearable
                   aria-label="Input search"
                   placeholder="Search by title/series"
-                  contentRight={<IoSearchOutline />}
+                  contentLeft={
+                     <HiOutlineSearch
+                        style={{ width: '14px', marginLeft: '3px' }}
+                     />
+                  }
+                  contentLeftStyling={false}
                   color="primary"
                />
                <Switch
