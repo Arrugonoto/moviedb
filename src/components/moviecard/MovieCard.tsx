@@ -1,4 +1,4 @@
-import { Card, Text } from '@nextui-org/react';
+import { Card, Text, Col } from '@nextui-org/react';
 import { ReactElement } from 'react';
 
 interface PropTypes {
@@ -28,22 +28,29 @@ const MovieCard = ({
 }: PropTypes): ReactElement => {
    return (
       <article>
-         <Card isPressable>
+         <Card
+            isPressable
+            allowTextSelectionOnPress
+            css={{ w: '12rem', h: '24rem' }}
+         >
             <Card.Body css={{ p: '0' }}>
-               <Card.Image
-                  src={`https://image.tmdb.org/t/p/w300${poster_path}`}
-                  width="100%"
-                  height="100%"
-                  objectFit="cover"
-                  alt="Movie poster"
-                  loading="lazy"
-                  css={{ br: '0 0 1rem 1rem' }}
-               />
+               <Col css={{ h: '18rem' }}>
+                  <Card.Image
+                     src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                     width="100%"
+                     height="100%"
+                     objectFit="cover"
+                     alt="Movie poster"
+                     loading="lazy"
+                     css={{ br: '0 0 1rem 1rem' }}
+                  />
+               </Col>
+               <Col css={{ p: '.5rem .6rem 0 .6rem' }}>
+                  <Text size={15} b>
+                     {title}
+                  </Text>
+               </Col>
             </Card.Body>
-
-            <Card.Footer>
-               <Text>{title}</Text>
-            </Card.Footer>
          </Card>
       </article>
    );
