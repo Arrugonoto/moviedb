@@ -25,6 +25,7 @@ type MovieProps = {
 const GenreSection = () => {
    const [movies, setMovies] = useState<MovieProps[]>([]);
    const { genreId } = useParams();
+   const [page, setPage] = useState<number>(1);
 
    const fetchMovies = async (): Promise<void> => {
       const options: {
@@ -42,7 +43,7 @@ const GenreSection = () => {
       };
 
       const response = await fetch(
-         `${API_ENDPOINT.GENRE}&page=1&sort_by=popularity.desc&with_genres=${genreId}`,
+         `${API_ENDPOINT.GENRE}&page=${page}&sort_by=popularity.desc&with_genres=${genreId}`,
          options
       );
       const result = await response.json();
@@ -56,13 +57,14 @@ const GenreSection = () => {
    };
 
    useEffect(() => {
+      setPage(1);
       fetchMovies();
       // eslint-disable-next-line
    }, [genreId]);
 
    return (
-      <Grid.Container gap={2}>
-         {movies.map(movie => (
+      <Grid.Container gap={2} justify="center">
+         {movies?.map(movie => (
             <Grid key={movie.id}>
                <MovieCard
                   id={movie.id}
