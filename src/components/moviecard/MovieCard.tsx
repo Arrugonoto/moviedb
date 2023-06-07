@@ -42,7 +42,7 @@ const MovieCard = ({
                      objectFit="cover"
                      alt="Movie poster"
                      loading="lazy"
-                     css={{ br: '0 0 1rem 1rem' }}
+                     css={{ br: '0 0 .6rem .6rem' }}
                   />
                </Col>
                <Col css={{ p: '.5rem .6rem 0 .6rem' }}>
