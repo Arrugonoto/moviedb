@@ -53,10 +53,11 @@ const GenreSection = () => {
          throw new Error(`Couldn't fetch source`);
       }
       console.log(result);
-      setMovies(result.results);
+      setMovies(prev => [...prev, ...result.results]);
    };
 
    useEffect(() => {
+      setMovies([]);
       setPage(1);
       fetchMovies();
       // eslint-disable-next-line
