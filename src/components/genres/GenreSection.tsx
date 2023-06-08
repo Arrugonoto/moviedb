@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Grid } from '@nextui-org/react';
+import { Grid, Container, Button } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { API_KEY } from '../../services/api-key';
 import { METHODS, API_ENDPOINT } from '../../services/api';
 import MovieCard from '../moviecard/MovieCard';
+import SelectFilter from './SelectFilter';
 
 type MovieProps = {
    adult: boolean;
@@ -26,6 +27,7 @@ const GenreSection = () => {
    const [movies, setMovies] = useState<MovieProps[]>([]);
    const { genreId } = useParams();
    const [page, setPage] = useState<number>(1);
+   const [sortType, setSortType] = useState<string>('popularity.desc');
 
    const fetchMovies = async (): Promise<void> => {
       const options: {
@@ -43,7 +45,7 @@ const GenreSection = () => {
       };
 
       const response = await fetch(
-         `${API_ENDPOINT.GENRE}&page=${page}&sort_by=popularity.desc&with_genres=${genreId}`,
+         `${API_ENDPOINT.GENRE}&page=${page}&sort_by=${sortType}&with_genres=${genreId}`,
          options
       );
       const result = await response.json();
@@ -53,7 +55,9 @@ const GenreSection = () => {
          throw new Error(`Couldn't fetch source`);
       }
       console.log(result);
-      setMovies(prev => [...prev, ...result.results]);
+      setMovies(prev => [
+         ...new Map([...prev, ...result.results].map(m => [m.id, m])).values(),
+      ]);
    };
 
    useEffect(() => {
@@ -61,27 +65,41 @@ const GenreSection = () => {
       setPage(1);
       fetchMovies();
       // eslint-disable-next-line
-   }, [genreId]);
+   }, [genreId, sortType]);
+
+   useEffect(() => {
+      if (page !== 1) {
+         fetchMovies();
+      }
+   }, [page]);
 
    return (
-      <Grid.Container gap={2} justify="center">
-         {movies?.map(movie => (
-            <Grid key={movie.id}>
-               <MovieCard
-                  id={movie.id}
-                  backdrop_path={movie.backdrop_path}
-                  original_title={movie.original_title}
-                  overview={movie.overview}
-                  popularity={movie.popularity}
-                  poster_path={movie.poster_path}
-                  release_date={movie.release_date}
-                  title={movie.title}
-                  vote_average={movie.vote_average}
-                  vote_count={movie.vote_count}
-               ></MovieCard>
-            </Grid>
-         ))}
-      </Grid.Container>
+      <Container direction="column" fluid={true}>
+         <Container>
+            <SelectFilter setSortType={setSortType} />
+         </Container>
+         <Grid.Container gap={2} justify="center">
+            {movies?.map(movie => (
+               <Grid key={movie.id}>
+                  <MovieCard
+                     id={movie.id}
+                     backdrop_path={movie.backdrop_path}
+                     original_title={movie.original_title}
+                     overview={movie.overview}
+                     popularity={movie.popularity}
+                     poster_path={movie.poster_path}
+                     release_date={movie.release_date}
+                     title={movie.title}
+                     vote_average={movie.vote_average}
+                     vote_count={movie.vote_count}
+                  ></MovieCard>
+               </Grid>
+            ))}
+            <Button onClick={() => setPage(prev => prev + 1)}>
+               Fetch more
+            </Button>
+         </Grid.Container>
+      </Container>
    );
 };
 
