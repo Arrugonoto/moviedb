@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
 import { FILTER_BY } from '../../data/filterCategory';
 
 interface PropTypes {
@@ -6,13 +6,25 @@ interface PropTypes {
 }
 
 const SelectFilter = ({ setSortType }: PropTypes): ReactElement => {
+   const [sortValue, setSortValue] = useState<string>('popularity.desc');
+
+   const changeSortOrder = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const newValue: string = e.target.value;
+
+      setSortValue(newValue);
+   };
+
+   useEffect(() => {
+      setSortType(sortValue);
+   }, [sortValue]);
+
    return (
       <select
          aria-label="Filter movies by value"
          name="filter_movie"
          id="filter_movie"
          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            setSortType(e.target.value)
+            changeSortOrder(e)
          }
       >
          {FILTER_BY.map((category, i) => (
