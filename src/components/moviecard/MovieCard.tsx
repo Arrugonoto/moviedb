@@ -35,15 +35,19 @@ const MovieCard = ({
          >
             <Card.Body css={{ p: '0' }}>
                <Col css={{ h: '18rem' }}>
-                  <Card.Image
-                     src={`https://image.tmdb.org/t/p/w400${poster_path}`}
-                     width="100%"
-                     height="100%"
-                     objectFit="cover"
-                     alt="Movie poster"
-                     loading="lazy"
-                     css={{ br: '0 0 .6rem .6rem' }}
-                  />
+                  {poster_path ? (
+                     <Card.Image
+                        src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                        width="100%"
+                        height="100%"
+                        objectFit="cover"
+                        alt="Movie poster"
+                        loading="lazy"
+                        css={{ br: '0 0 .6rem .6rem' }}
+                     />
+                  ) : (
+                     <Text>Movie Poster</Text>
+                  )}
                </Col>
                <Col css={{ p: '.5rem .6rem 0 .6rem' }}>
                   <Text size={15} b>
