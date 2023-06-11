@@ -19,7 +19,7 @@ export const lightTheme = createTheme({
          violet200: '#F59DE8',
          violet300: '#E268DA',
          violet400: '#C340C5',
-         violet500: '#9210A0',
+         violet500: '#9210a0',
          violet600: '#730B89',
          violet700: '#730B89',
          violet800: '#3E055C',
