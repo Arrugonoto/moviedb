@@ -46,7 +46,7 @@ function App() {
                <BrowserRouter>
                   <Header />
                   <Spacer y={1} />
-                  <main>
+                  <main style={{ width: '100%' }}>
                      <Routes>
                         <Route
                            path="/"
