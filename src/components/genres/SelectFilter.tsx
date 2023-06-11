@@ -1,5 +1,6 @@
 import { ReactElement, useState, useEffect } from 'react';
 import { FILTER_BY } from '../../data/filterCategory';
+import style from './selectFilter.module.css';
 
 interface PropTypes {
    setSortType: React.Dispatch<React.SetStateAction<string>>;
@@ -20,6 +21,7 @@ const SelectFilter = ({ setSortType }: PropTypes): ReactElement => {
 
    return (
       <select
+         className={style.selectFilter}
          aria-label="Filter movies by value"
          name="filter_movie"
          id="filter_movie"
