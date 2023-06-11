@@ -1,0 +1,10 @@
+.selectFilter {
+   padding: 0.2rem 0.3rem;
+   cursor: pointer;
+   border: 2px solid rgba(146, 16, 160, 0.7);
+   border-radius: 0.3rem;
+}
+
+.selectFilter option:hover {
+   background-color: rgba(245, 157, 232, 1);
+}
