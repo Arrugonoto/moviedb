@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 type MovieProps = {
    adult: boolean;
@@ -45,6 +45,7 @@ const useFetchMovies = () => {
       if (signal.aborted) return;
       if (!response.ok) {
          console.error(result);
+         setError(result);
          throw new Error(`Couldn't fetch source`);
       }
       console.log(result);

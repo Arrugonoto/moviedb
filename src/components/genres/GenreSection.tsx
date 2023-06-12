@@ -23,19 +23,19 @@ const GenreSection = () => {
    const { handleFetch, movies, setMovies, loading, lastPage } =
       useFetchMovies();
 
-   const lastMovieRef = useCallback(
-      node => {
-         if (loading) return;
-         if (observer.current) observer?.current.disconnect();
-         observer.current = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting && page !== lastPage) {
-               setPage(prev => prev + 1);
-            }
-         });
-         if (node) observer.current?.observe(node);
-      },
-      [loading]
-   );
+   // const lastMovieRef = useCallback(
+   //    node => {
+   //       if (loading) return;
+   //       if (observer.current) observer?.current.disconnect();
+   //       observer.current = new IntersectionObserver(entries => {
+   //          if (entries[0].isIntersecting && page !== lastPage) {
+   //             setPage(prev => prev + 1);
+   //          }
+   //       });
+   //       if (node) observer.current?.observe(node);
+   //    },
+   //    [loading]
+   // );
 
    const fetchMovies = async (): Promise<void> => {
       const options: OptionsTypes = {
@@ -49,42 +49,6 @@ const GenreSection = () => {
 
       handleFetch({ url, options });
    };
-
-   const moviesContent = movies?.map((movie, i) => {
-      if (movies?.length === i + 1) {
-         return (
-            <Grid key={movie.id}>
-               <MovieCard
-                  ref={observer}
-                  id={movie.id}
-                  backdrop_path={movie.backdrop_path}
-                  original_title={movie.original_title}
-                  overview={movie.overview}
-                  popularity={movie.popularity}
-                  poster_path={movie.poster_path}
-                  release_date={movie.release_date}
-                  title={movie.title}
-                  vote_average={movie.vote_average}
-                  vote_count={movie.vote_count}
-               />
-            </Grid>
-         );
-      }
-      return (
-         <MovieCard
-            id={movie.id}
-            backdrop_path={movie.backdrop_path}
-            original_title={movie.original_title}
-            overview={movie.overview}
-            popularity={movie.popularity}
-            poster_path={movie.poster_path}
-            release_date={movie.release_date}
-            title={movie.title}
-            vote_average={movie.vote_average}
-            vote_count={movie.vote_count}
-         />
-      );
-   });
 
    useEffect(() => {
       setMovies([]);

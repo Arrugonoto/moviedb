@@ -17,6 +17,7 @@ const SelectFilter = ({ setSortType }: PropTypes): ReactElement => {
 
    useEffect(() => {
       setSortType(sortValue);
+      // eslint-disable-next-line
    }, [sortValue]);
 
    return (
