@@ -29,7 +29,7 @@ type PropTypes = {
 };
 const useFetchMovies = () => {
    const [loading, setLoading] = useState<boolean>(false);
-   const [error, setError] = useState<any>('');
+   const [error, setError] = useState<any>(null);
    const [movies, setMovies] = useState<MovieProps[]>([]);
    const [lastPage, setLastPage] = useState<number>(0);
 
@@ -48,7 +48,6 @@ const useFetchMovies = () => {
          setError(result);
          throw new Error(`Couldn't fetch source`);
       }
-      console.log(result);
       setMovies(prev => [
          ...new Map([...prev, ...result.results].map(m => [m.id, m])).values(),
       ]);
