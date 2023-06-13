@@ -1,4 +1,4 @@
-import { ReactElement, forwardRef } from 'react';
+import { ReactElement } from 'react';
 import { Card, Text, Col, Row, Tooltip, useTheme } from '@nextui-org/react';
 import { FaImage, FaStar, FaUser } from 'react-icons/fa';
 import style from './movieCard.module.css';
