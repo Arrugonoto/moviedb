@@ -5,6 +5,7 @@ import {
    useTheme,
    Container,
    Input,
+   Image,
 } from '@nextui-org/react';
 import styles from './nav.module.css';
 import { NavLink } from 'react-router-dom';
@@ -12,6 +13,7 @@ import { GENRES } from '../../data/genres';
 import { IoMoon } from 'react-icons/io5';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdSunny } from 'react-icons/io';
+import Logo from '../../assets/logo.svg';
 
 const Nav = () => {
    const { isDark } = useTheme();
@@ -31,30 +33,42 @@ const Nav = () => {
          shouldHideOnScroll
       >
          <Container fluid css={{ fd: 'column', p: '0 .2rem' }}>
-            <Navbar.Content css={{ jc: 'flex-end', ai: 'center' }}>
-               <Input
-                  type="search"
-                  size="xs"
-                  bordered
-                  clearable
-                  aria-label="Input search"
-                  placeholder="Search by title/series"
-                  contentLeft={
-                     <HiOutlineSearch
-                        style={{ width: '14px', marginLeft: '3px' }}
-                     />
-                  }
-                  contentLeftStyling={false}
-                  color="primary"
-               />
-               <Switch
-                  checked={isDark}
-                  onChange={handleChange}
-                  size="sm"
-                  iconOn={<IoMoon />}
-                  iconOff={<IoMdSunny />}
-               />
-            </Navbar.Content>
+            <Container
+               css={{ d: 'flex', jc: 'space-between', ai: 'center', p: '0' }}
+            >
+               <Navbar.Brand>
+                  <Image
+                     width={140}
+                     src={Logo}
+                     alt="MovieDB - app logo"
+                     style={{ cursor: 'pointer' }}
+                  />
+               </Navbar.Brand>
+               <Navbar.Content>
+                  <Input
+                     type="search"
+                     size="xs"
+                     bordered
+                     clearable
+                     aria-label="Input search"
+                     placeholder="Search by title/series"
+                     contentLeft={
+                        <HiOutlineSearch
+                           style={{ width: '14px', marginLeft: '3px' }}
+                        />
+                     }
+                     contentLeftStyling={false}
+                     color="primary"
+                  />
+                  <Switch
+                     checked={isDark}
+                     onChange={handleChange}
+                     size="sm"
+                     iconOn={<IoMoon />}
+                     iconOff={<IoMdSunny />}
+                  />
+               </Navbar.Content>
+            </Container>
             <Navbar.Content className={styles.container_scrollbar}>
                {GENRES.map(
                   (genre: { id: number; name: string }): JSX.Element => (
