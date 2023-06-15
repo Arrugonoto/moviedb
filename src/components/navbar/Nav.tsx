@@ -8,15 +8,17 @@ import {
    Image,
 } from '@nextui-org/react';
 import styles from './nav.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { GENRES } from '../../data/genres';
 import { IoMoon } from 'react-icons/io5';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdSunny } from 'react-icons/io';
 import Logo from '../../assets/logo.svg';
+import ROUTES from '../../routes/routes';
 
 const Nav = () => {
    const { isDark } = useTheme();
+   const navigate = useNavigate();
 
    const handleChange = () => {
       const nextTheme = isDark ? 'light' : 'dark';
@@ -38,10 +40,11 @@ const Nav = () => {
             >
                <Navbar.Brand>
                   <Image
-                     width={140}
+                     width={130}
                      src={Logo}
                      alt="MovieDB - app logo"
                      style={{ cursor: 'pointer' }}
+                     onClick={() => navigate(`${ROUTES.HOME}`)}
                   />
                </Navbar.Brand>
                <Navbar.Content>
@@ -74,7 +77,7 @@ const Nav = () => {
                   (genre: { id: number; name: string }): JSX.Element => (
                      <NavLink
                         key={genre.id}
-                        to={`/moviedb/movie/genre/${genre.id}`}
+                        to={`${ROUTES.GENRE}/${genre.id}`}
                         className={({ isActive, isPending }) =>
                            isPending ? 'pending' : isActive ? styles.active : ''
                         }
