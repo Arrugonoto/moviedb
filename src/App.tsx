@@ -39,20 +39,14 @@ function App() {
       <NextUIProvider theme={isDark ? darkTheme : lightTheme}>
          <div className="App">
             <Container
-               css={{ d: 'flex', fd: 'column', ai: 'center', p: '0' }}
+               css={{ d: 'flex', fd: 'column', ai: 'center' }}
                fluid
                responsive={false}
             >
                <BrowserRouter>
                   <Header />
                   <Spacer y={1} />
-                  <main
-                     style={{
-                        maxWidth: '1500px',
-                        width: '100%',
-                        padding: '0rem 1rem',
-                     }}
-                  >
+                  <main style={{ width: '100%' }}>
                      <Routes>
                         <Route
                            path="/"
