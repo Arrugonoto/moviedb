@@ -21,3 +21,14 @@
 .card:focus-visible .cardHeader {
    opacity: 1;
 }
+
+.cardTitle {
+   display: -webkit-box;
+   overflow: hidden;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2;
+}
+
+.cardTitle:hover {
+   text-decoration: underline;
+}

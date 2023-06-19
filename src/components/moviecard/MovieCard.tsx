@@ -34,8 +34,8 @@ const MovieCard = ({
       <div>
          <Card
             isPressable
-            allowTextSelectionOnPress
-            css={{ w: '12rem', h: '24rem' }}
+            allowTextSelectionOnPress={true}
+            css={{ w: '12.3rem', h: '22.2rem', br: '.5rem' }}
             className={style.card}
          >
             <Card.Header
@@ -94,14 +94,21 @@ const MovieCard = ({
                   </Col>
                )}
 
-               <Col css={{ p: '.5rem .6rem 0 .6rem' }}>
+               <Col
+                  css={{
+                     p: '.5rem .5rem 0',
+                     h: '4rem',
+                  }}
+               >
                   <Text
+                     className={style.cardTitle}
                      size={15}
                      css={{
                         ta: 'center',
                         fontWeight: '600',
                         letterSpacing: '0.05px',
                      }}
+                     title={title}
                   >
                      {title}
                   </Text>

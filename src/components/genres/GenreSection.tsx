@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Grid, Container, Button } from '@nextui-org/react';
+import { Grid, Container } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { API_KEY } from '../../services/api-key';
 import { METHODS, API_ENDPOINT } from '../../services/api';
@@ -115,9 +115,6 @@ const GenreSection = () => {
                   </Grid>
                );
             })}
-            <Button onPress={() => setPage(prev => prev + 1)}>
-               Fetch more
-            </Button>
          </Grid.Container>
       </Container>
    );
