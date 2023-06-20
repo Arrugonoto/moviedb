@@ -3,7 +3,7 @@ import { Grid, Container } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { API_KEY } from '../../services/api-key';
 import { METHODS, API_ENDPOINT } from '../../services/api';
-import MovieCard from '../moviecard/MovieCard';
+import CardMd from '../moviecard/CardMd';
 import SelectFilter from './SelectFilter';
 import useFetchMovies from '../../hooks/useFetchMovies';
 import { useIntersection } from '@mantine/hooks';
@@ -27,20 +27,6 @@ const GenreSection = () => {
       root: lastMovieRef.current,
       threshold: 1,
    });
-
-   // const lastMovieRef = useCallback(
-   //    node => {
-   //       if (loading) return;
-   //       if (observer.current) observer?.current.disconnect();
-   //       observer.current = new IntersectionObserver(entries => {
-   //          if (entries[0].isIntersecting && page !== lastPage) {
-   //             setPage(prev => prev + 1);
-   //          }
-   //       });
-   //       if (node) observer.current?.observe(node);
-   //    },
-   //    [loading]
-   // );
 
    const fetchMovies = async (): Promise<void> => {
       const options: OptionsTypes = {
@@ -81,10 +67,10 @@ const GenreSection = () => {
          </Container>
          <Grid.Container gap={2} justify="center">
             {movies?.map((movie, i) => {
-               if (i === movies.length - 1)
+               if (i === movies.length - 3)
                   return (
                      <Grid key={movie.id} ref={ref}>
-                        <MovieCard
+                        <CardMd
                            id={movie.id}
                            backdrop_path={movie.backdrop_path}
                            original_title={movie.original_title}
@@ -95,12 +81,12 @@ const GenreSection = () => {
                            title={movie.title}
                            vote_average={movie.vote_average}
                            vote_count={movie.vote_count}
-                        ></MovieCard>
+                        ></CardMd>
                      </Grid>
                   );
                return (
                   <Grid key={movie.id}>
-                     <MovieCard
+                     <CardMd
                         id={movie.id}
                         backdrop_path={movie.backdrop_path}
                         original_title={movie.original_title}
@@ -111,7 +97,7 @@ const GenreSection = () => {
                         title={movie.title}
                         vote_average={movie.vote_average}
                         vote_count={movie.vote_count}
-                     ></MovieCard>
+                     ></CardMd>
                   </Grid>
                );
             })}
