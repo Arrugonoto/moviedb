@@ -1,11 +1,11 @@
-import { Button } from '@nextui-org/react';
+import { Container } from '@nextui-org/react';
+import Trending from '../components/trending/Trending';
 
 const Home = () => {
    return (
-      <section>
-         Home Page
-         <Button>click me</Button>
-      </section>
+      <Container fluid>
+         <Trending />
+      </Container>
    );
 };
 
