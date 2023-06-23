@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, PointerEvent } from 'react';
 
 interface PropTypes {
    url: string;
@@ -26,12 +26,13 @@ interface MovieProps {
    video: boolean;
    vote_average: number;
    vote_count: number;
+   onPointerDown: PointerEvent;
 }
 
 const useFetch = () => {
    const [loading, setLoading] = useState<boolean>(false);
    const [error, setError] = useState<any>(null);
-   const [data, setData] = useState<MovieProps[]>([]);
+   const [data, setData] = useState<MovieProps[] | []>([]);
    const [lastPage, setLastPage] = useState<number>(0);
 
    const handleFetch = async ({ url, options }: PropTypes): Promise<void> => {
