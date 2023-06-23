@@ -29,13 +29,19 @@ const CardMdBlur = ({
    vote_count,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
+   const rating = vote_average.toFixed(1);
 
    return (
       <div>
          <Card
             isPressable
             allowTextSelectionOnPress={true}
-            css={{ w: '12.3rem', h: '22.2rem', br: '.5rem' }}
+            css={{
+               w: '12rem',
+               h: '20rem',
+               br: '0.3rem',
+               ov: 'hidden',
+            }}
             className={style.card}
          >
             <Card.Header
@@ -53,7 +59,7 @@ const CardMdBlur = ({
                   <Tooltip content={'Rating'} shadow={true}>
                      <FaStar style={{ fontSize: '1.2rem', color: '#9210A0' }} />
                   </Tooltip>
-                  <Text>{vote_average}</Text>
+                  <Text>{rating}</Text>
                </Row>
                <Row align="center" justify="center" css={{ gap: '.4rem;' }}>
                   <Tooltip content={'Vote count'} shadow={true}>
@@ -62,26 +68,21 @@ const CardMdBlur = ({
                   <Text>{vote_count}</Text>
                </Row>
             </Card.Header>
-            <Card.Body css={{ p: '0' }}>
+            <Card.Body css={{ p: '0', ov: 'hidden' }}>
                {poster_path ? (
-                  <Col css={{ h: '18rem', ov: 'hidden' }}>
-                     <Card.Image
-                        src={`https://image.tmdb.org/t/p/w400${poster_path}`}
-                        width="100%"
-                        height="100%"
-                        objectFit="cover"
-                        alt="Movie poster"
-                        loading="lazy"
-                        css={{ br: '0 0 .6rem .6rem' }}
-                        className={style.cardImage}
-                     />
-                  </Col>
+                  <Card.Image
+                     src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                     width="100%"
+                     objectFit="cover"
+                     alt="Movie poster"
+                     loading="lazy"
+                     className={style.cardImage}
+                  />
                ) : (
                   <Col
                      css={{
                         d: 'flex',
                         fd: ' column',
-                        h: '18rem',
                         w: '100%',
                         jc: 'center',
                         ai: 'center',
@@ -95,18 +96,26 @@ const CardMdBlur = ({
                )}
 
                <Card.Footer
+                  isBlurred
                   css={{
                      position: 'absolute',
-                     p: '.5rem .5rem 0',
+                     bottom: 0,
+                     zIndex: 1,
+                     br: '0',
+                     h: '2rem',
                   }}
                >
                   <Text
-                     className={style.cardTitle}
                      size={15}
                      css={{
                         ta: 'center',
                         fontWeight: '600',
                         letterSpacing: '0.05px',
+                        w: '100%',
+                        truncateText: '100%',
+                        '&:hover': {
+                           tdl: 'underline',
+                        },
                      }}
                      title={title}
                   >
