@@ -1,10 +1,9 @@
-import { useEffect, PointerEvent } from 'react';
+import { useEffect, useRef } from 'react';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import { Container } from '@nextui-org/react';
 import CardMdBlur from '../moviecard/CardMdBlur';
-import { motion, useDragControls } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface OptionsTypes {
    method: string;
@@ -14,13 +13,26 @@ interface OptionsTypes {
    };
 }
 
-const TrendingMovies = () => {
-   const { handleFetch, data } = useFetch();
-   const controls = useDragControls();
+interface MovieProps {
+   adult: boolean;
+   backdrop_path: string;
+   genre_ids: number[];
+   id: number;
+   original_language: string;
+   original_title: string;
+   overview: string;
+   popularity: number;
+   poster_path: string;
+   release_date: string;
+   title: string;
+   video: boolean;
+   vote_average: number;
+   vote_count: number;
+}
 
-   function startDrag(e: PointerEvent) {
-      controls.start(e);
-   }
+const TrendingMovies = () => {
+   const { handleFetch, data } = useFetch<MovieProps[]>([]);
+   const constraintsRef = useRef<HTMLDivElement>(null);
 
    const fetchMovies = async (): Promise<void> => {
       const options: OptionsTypes = {
@@ -37,39 +49,42 @@ const TrendingMovies = () => {
 
    useEffect(() => {
       fetchMovies();
+      // eslint-disable-next-line
    }, []);
 
    return (
-      <Container
-         display="flex"
-         direction="row"
-         wrap="nowrap"
-         gap={0}
-         css={{
-            ox: 'scroll',
-            py: '1rem',
-            gap: '1rem',
+      <motion.div
+         ref={constraintsRef}
+         style={{
+            display: 'flex',
+            overflowX: 'hidden',
+            gap: '1.2rem',
+            padding: '.5rem 1rem',
          }}
       >
-         {data.map(movie => (
-            <CardMdBlur
-               key={movie.id}
-               id={movie.id}
-               backdrop_path={movie.backdrop_path}
-               original_title={movie.original_title}
-               overview={movie.overview}
-               popularity={movie.popularity}
-               poster_path={movie.poster_path}
-               release_date={movie.release_date}
-               title={movie.title}
-               vote_average={movie.vote_average}
-               vote_count={movie.vote_count}
-               onPointerDown={(e: PointerEvent) => startDrag(e)}
-            />
-         ))}
-         {/* FIXME: pointer event needs to be fixed for framer motion*/}
-         <motion.div drag="x" dragControls={controls} />
-      </Container>
+         <motion.div
+            drag="x"
+            dragConstraints={constraintsRef}
+            style={{ display: 'flex', gap: '1.2rem' }}
+            dragElastic={0.1}
+         >
+            {data?.map(movie => (
+               <CardMdBlur
+                  key={movie.id}
+                  id={movie.id}
+                  backdrop_path={movie.backdrop_path}
+                  original_title={movie.original_title}
+                  overview={movie.overview}
+                  popularity={movie.popularity}
+                  poster_path={movie.poster_path}
+                  release_date={movie.release_date}
+                  title={movie.title}
+                  vote_average={movie.vote_average}
+                  vote_count={movie.vote_count}
+               />
+            ))}
+         </motion.div>
+      </motion.div>
    );
 };
 
