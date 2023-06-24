@@ -54,7 +54,7 @@ const Trending = () => {
                   </Button>
                </Button.Group>
             </Row>
-            <Row>
+            <Row css={{ br: '0.3rem' }}>
                {displayTrending === 'movies' && <TrendingMovies />}
                {displayTrending === 'series' && <TrendingSeries />}
                {displayTrending === 'people' && <TrendingPeople />}
