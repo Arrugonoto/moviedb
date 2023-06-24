@@ -73,7 +73,7 @@ const Nav = () => {
                </Navbar.Content>
             </Container>
             <Navbar.Content className={styles.container_scrollbar}>
-               {GENRES.map(
+               {GENRES?.map(
                   (genre: { id: number; name: string }): JSX.Element => (
                      <NavLink
                         key={genre.id}
@@ -81,6 +81,7 @@ const Nav = () => {
                         className={({ isActive, isPending }) =>
                            isPending ? 'pending' : isActive ? styles.active : ''
                         }
+                        style={{ textTransform: 'uppercase' }}
                      >
                         {genre.name}
                      </NavLink>

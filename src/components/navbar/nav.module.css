@@ -10,8 +10,8 @@
 
 .container_scrollbar a {
    color: #c340c5;
-   border: 2px solid rgba(146, 16, 160, 0.7);
-   padding: 0.4rem 1rem;
+   border: 1px solid rgba(146, 16, 160, 0.7);
+   padding: 0.3rem 1rem;
    border-radius: 0.8rem;
    font-size: 0.9rem;
    font-weight: 700;
