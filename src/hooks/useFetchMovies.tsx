@@ -29,7 +29,7 @@ type PropTypes = {
 };
 const useFetchMovies = () => {
    const [loading, setLoading] = useState<boolean>(false);
-   const [error, setError] = useState<any>(null);
+   const [error, setError] = useState<unknown>(null);
    const [movies, setMovies] = useState<MovieProps[]>([]);
    const [lastPage, setLastPage] = useState<number>(0);
 
