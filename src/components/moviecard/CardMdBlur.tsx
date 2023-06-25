@@ -4,26 +4,26 @@ import { FaImage, FaStar, FaUser } from 'react-icons/fa';
 import style from './movieCard.module.css';
 
 interface PropTypes {
-   backdrop_path: string;
    id: number;
-   original_title: string;
    overview: string;
    popularity: number;
    poster_path: string;
-   release_date: string;
-   title: string;
+   release_date?: string;
+   first_air_date?: string;
+   title?: string;
+   name?: string;
    vote_average: number;
    vote_count: number;
 }
 
 const CardMdBlur = ({
-   backdrop_path,
    id,
-   original_title,
    overview,
    popularity,
    poster_path,
    release_date,
+   first_air_date,
+   name,
    title,
    vote_average,
    vote_count,
@@ -117,9 +117,9 @@ const CardMdBlur = ({
                            tdl: 'underline',
                         },
                      }}
-                     title={title}
+                     title={title ? title : name}
                   >
-                     {title}
+                     {title ? title : name}
                   </Text>
                </Card.Footer>
             </Card.Body>
