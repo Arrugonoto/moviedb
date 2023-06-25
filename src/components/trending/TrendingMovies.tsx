@@ -72,8 +72,6 @@ const TrendingMovies = () => {
                <CardMdBlur
                   key={movie.id}
                   id={movie.id}
-                  backdrop_path={movie.backdrop_path}
-                  original_title={movie.original_title}
                   overview={movie.overview}
                   popularity={movie.popularity}
                   poster_path={movie.poster_path}
