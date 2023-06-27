@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import CardMdBlurPeople from '../moviecard/CardMdBlurPeople';
+import { Container } from '@nextui-org/react';
+import CardMdBlurPeople from '../card/CardMdBlurPeople';
 import { motion } from 'framer-motion';
 
 interface OptionsTypes {
@@ -50,33 +51,35 @@ const TrendingPeople = () => {
    }, []);
 
    return (
-      <motion.div
-         ref={constraintsRef}
-         style={{
-            display: 'flex',
-            overflowX: 'hidden',
-            gap: '1.2rem',
-            padding: '.5rem 1rem',
-         }}
-      >
+      <Container>
          <motion.div
-            drag="x"
-            dragConstraints={constraintsRef}
-            style={{ display: 'flex', gap: '1.2rem' }}
-            dragElastic={0.1}
+            ref={constraintsRef}
+            style={{
+               display: 'flex',
+               overflowX: 'hidden',
+               gap: '1.2rem',
+               padding: '.5rem 1rem',
+            }}
          >
-            {data?.map(person => (
-               <CardMdBlurPeople
-                  key={person.id}
-                  id={person.id}
-                  name={person.name}
-                  popularity={person.popularity}
-                  original_name={person.original_name}
-                  profile_path={person.profile_path}
-               />
-            ))}
+            <motion.div
+               drag="x"
+               dragConstraints={constraintsRef}
+               style={{ display: 'flex', gap: '1.2rem' }}
+               dragElastic={0.1}
+            >
+               {data?.map(person => (
+                  <CardMdBlurPeople
+                     key={person.id}
+                     id={person.id}
+                     name={person.name}
+                     popularity={person.popularity}
+                     original_name={person.original_name}
+                     profile_path={person.profile_path}
+                  />
+               ))}
+            </motion.div>
          </motion.div>
-      </motion.div>
+      </Container>
    );
 };
 

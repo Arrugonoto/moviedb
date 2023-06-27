@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import CardMdBlur from '../moviecard/CardMdBlur';
+import { Container } from '@nextui-org/react';
+import CardMdBlur from '../card/CardMdBlur';
 import { motion } from 'framer-motion';
 
 interface OptionsTypes {
@@ -53,36 +54,38 @@ const TrendingMovies = () => {
    }, []);
 
    return (
-      <motion.div
-         ref={constraintsRef}
-         style={{
-            display: 'flex',
-            overflowX: 'hidden',
-            gap: '1.2rem',
-            padding: '.5rem 1rem',
-         }}
-      >
+      <Container>
          <motion.div
-            drag="x"
-            dragConstraints={constraintsRef}
-            style={{ display: 'flex', gap: '1.2rem' }}
-            dragElastic={0.1}
+            ref={constraintsRef}
+            style={{
+               display: 'flex',
+               overflowX: 'hidden',
+               gap: '1.2rem',
+               padding: '.5rem 1rem',
+            }}
          >
-            {data?.map(movie => (
-               <CardMdBlur
-                  key={movie.id}
-                  id={movie.id}
-                  overview={movie.overview}
-                  popularity={movie.popularity}
-                  poster_path={movie.poster_path}
-                  release_date={movie.release_date}
-                  title={movie.title}
-                  vote_average={movie.vote_average}
-                  vote_count={movie.vote_count}
-               />
-            ))}
+            <motion.div
+               drag="x"
+               dragConstraints={constraintsRef}
+               style={{ display: 'flex', gap: '1.2rem' }}
+               dragElastic={0.1}
+            >
+               {data?.map(movie => (
+                  <CardMdBlur
+                     key={movie.id}
+                     id={movie.id}
+                     overview={movie.overview}
+                     popularity={movie.popularity}
+                     poster_path={movie.poster_path}
+                     release_date={movie.release_date}
+                     title={movie.title}
+                     vote_average={movie.vote_average}
+                     vote_count={movie.vote_count}
+                  />
+               ))}
+            </motion.div>
          </motion.div>
-      </motion.div>
+      </Container>
    );
 };
 

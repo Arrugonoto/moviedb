@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import CardMdBlur from '../moviecard/CardMdBlur';
+import { Container } from '@nextui-org/react';
+import CardMdBlur from '../card/CardMdBlur';
 import { motion } from 'framer-motion';
 
 interface OptionsTypes {
@@ -54,36 +55,38 @@ const TrendingSeries = () => {
    }, []);
 
    return (
-      <motion.div
-         ref={constraintsRef}
-         style={{
-            display: 'flex',
-            overflowX: 'hidden',
-            gap: '1.2rem',
-            padding: '.5rem 1rem',
-         }}
-      >
+      <Container>
          <motion.div
-            drag="x"
-            dragConstraints={constraintsRef}
-            style={{ display: 'flex', gap: '1.2rem' }}
-            dragElastic={0.1}
+            ref={constraintsRef}
+            style={{
+               display: 'flex',
+               overflowX: 'hidden',
+               gap: '1.2rem',
+               padding: '.5rem 1rem',
+            }}
          >
-            {data?.map(series => (
-               <CardMdBlur
-                  key={series.id}
-                  id={series.id}
-                  overview={series.overview}
-                  popularity={series.popularity}
-                  poster_path={series.poster_path}
-                  first_air_date={series.first_air_date}
-                  name={series.name}
-                  vote_average={series.vote_average}
-                  vote_count={series.vote_count}
-               />
-            ))}
+            <motion.div
+               drag="x"
+               dragConstraints={constraintsRef}
+               style={{ display: 'flex', gap: '1.2rem' }}
+               dragElastic={0.1}
+            >
+               {data?.map(series => (
+                  <CardMdBlur
+                     key={series.id}
+                     id={series.id}
+                     overview={series.overview}
+                     popularity={series.popularity}
+                     poster_path={series.poster_path}
+                     first_air_date={series.first_air_date}
+                     name={series.name}
+                     vote_average={series.vote_average}
+                     vote_count={series.vote_count}
+                  />
+               ))}
+            </motion.div>
          </motion.div>
-      </motion.div>
+      </Container>
    );
 };
 

@@ -10,7 +10,7 @@ const Trending = () => {
 
    return (
       <section>
-         <Container fluid>
+         <Container fluid css={{ minHeight: '28rem' }}>
             <Row>
                <Text
                   h1
@@ -27,28 +27,31 @@ const Trending = () => {
                <Button.Group light rounded size="lg">
                   <Button
                      onPress={() => setDisplayTrending('movies')}
-                     css={{
-                        color: displayTrending === 'movies' ? '#9210a0' : '',
-                     }}
-                     className={style.trendingBtn}
+                     className={`${style.trendingBtn} ${
+                        displayTrending === 'movies'
+                           ? style.selectedCategory
+                           : ''
+                     }`}
                   >
                      Movies
                   </Button>
                   <Button
                      onPress={() => setDisplayTrending('series')}
-                     css={{
-                        color: displayTrending === 'series' ? '#9210a0' : '',
-                     }}
-                     className={style.trendingBtn}
+                     className={`${style.trendingBtn} ${
+                        displayTrending === 'series'
+                           ? style.selectedCategory
+                           : ''
+                     }`}
                   >
                      TV Series
                   </Button>
                   <Button
                      onPress={() => setDisplayTrending('people')}
-                     css={{
-                        color: displayTrending === 'people' ? '#9210a0' : '',
-                     }}
-                     className={style.trendingBtn}
+                     className={`${style.trendingBtn} ${
+                        displayTrending === 'people'
+                           ? style.selectedCategory
+                           : ''
+                     }`}
                   >
                      People
                   </Button>
