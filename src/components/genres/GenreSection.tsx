@@ -3,7 +3,7 @@ import { Grid, Container } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { API_KEY } from '../../services/api-key';
 import { METHODS, API_ENDPOINT } from '../../services/api';
-import CardMd from '../moviecard/CardMd';
+import CardMd from '../card/CardMd';
 import SelectFilter from './SelectFilter';
 import useFetchMovies from '../../hooks/useFetchMovies';
 import { useIntersection } from '@mantine/hooks';
