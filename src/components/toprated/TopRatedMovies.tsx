@@ -1,5 +1,5 @@
-const TopRated = () => {
-   return <div></div>;
+const TopRatedMovies = () => {
+   return <div>TopRatedMovies</div>;
 };
 
-export default TopRated;
+export default TopRatedMovies;
