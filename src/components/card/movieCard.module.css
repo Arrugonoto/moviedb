@@ -1,0 +1,34 @@
+.cardImage {
+   transition: scale 0.2s linear;
+}
+
+.card:hover .cardImage {
+   scale: 1.1;
+}
+
+.card:focus-visible .cardImage {
+   scale: 1.1;
+}
+
+.cardHeader {
+   opacity: 0.6;
+}
+
+.card:hover .cardHeader {
+   opacity: 1;
+}
+
+.card:focus-visible .cardHeader {
+   opacity: 1;
+}
+
+.cardTitle {
+   display: -webkit-box;
+   overflow: hidden;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2;
+}
+
+.cardTitle:hover {
+   text-decoration: underline;
+}
