@@ -31,7 +31,7 @@ const CardMd = ({
    const { isDark } = useTheme();
 
    return (
-      <div>
+      <article>
          <Card
             isPressable
             allowTextSelectionOnPress={true}
@@ -115,7 +115,7 @@ const CardMd = ({
                </Col>
             </Card.Body>
          </Card>
-      </div>
+      </article>
    );
 };
 

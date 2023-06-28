@@ -1,5 +1,5 @@
 const CardLgAnimated = () => {
-   return <div>CardLgAnimated</div>;
+   return <article>CardLgAnimated</article>;
 };
 
 export default CardLgAnimated;

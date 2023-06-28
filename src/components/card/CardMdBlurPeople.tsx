@@ -23,7 +23,7 @@ const CardMdBlurPeople = ({
    profile_path,
 }: PropTypes): ReactElement => {
    return (
-      <div>
+      <article>
          <Card
             isPressable
             allowTextSelectionOnPress={true}
@@ -92,7 +92,7 @@ const CardMdBlurPeople = ({
                </Card.Footer>
             </Card.Body>
          </Card>
-      </div>
+      </article>
    );
 };
 

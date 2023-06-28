@@ -32,7 +32,7 @@ const CardMdBlur = ({
    const rating = vote_average.toFixed(1);
 
    return (
-      <div>
+      <article>
          <Card
             isPressable
             allowTextSelectionOnPress={true}
@@ -124,7 +124,7 @@ const CardMdBlur = ({
                </Card.Footer>
             </Card.Body>
          </Card>
-      </div>
+      </article>
    );
 };
 
