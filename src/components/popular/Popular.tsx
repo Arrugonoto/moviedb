@@ -7,7 +7,7 @@ const Popular = () => {
    const [displayPopular, setDisplayPopular] = useState<string>('movies');
 
    return (
-      <section>
+      <section style={{ width: '100%' }}>
          <Container fluid css={{ minHeight: '28rem' }}>
             <Row>
                <Text

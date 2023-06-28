@@ -9,8 +9,8 @@ const Trending = () => {
    const [displayTrending, setDisplayTrending] = useState<string>('movies');
 
    return (
-      <section>
-         <Container fluid css={{ minHeight: '28rem' }}>
+      <section style={{ width: '100%' }}>
+         <Container fluid css={{ minHeight: '28rem', width: '100%' }}>
             <Row>
                <Text
                   h1
