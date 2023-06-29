@@ -94,35 +94,34 @@ const CardMdBlur = ({
                      <FaImage style={{ fontSize: '2rem' }} />
                   </Col>
                )}
-
-               <Card.Footer
-                  isBlurred
-                  css={{
-                     position: 'absolute',
-                     bottom: 0,
-                     zIndex: 1,
-                     br: '0',
-                     h: '2rem',
-                  }}
-               >
-                  <Text
-                     size={15}
-                     css={{
-                        ta: 'center',
-                        fontWeight: '600',
-                        letterSpacing: '0.05px',
-                        w: '100%',
-                        truncateText: '100%',
-                        '&:hover': {
-                           tdl: 'underline',
-                        },
-                     }}
-                     title={title ? title : name}
-                  >
-                     {title ? title : name}
-                  </Text>
-               </Card.Footer>
             </Card.Body>
+            <Card.Footer
+               isBlurred
+               css={{
+                  position: 'absolute',
+                  bottom: 0,
+                  zIndex: 1,
+                  br: '0',
+                  h: '2rem',
+               }}
+            >
+               <Text
+                  size={15}
+                  css={{
+                     ta: 'center',
+                     fontWeight: '600',
+                     letterSpacing: '0.05px',
+                     w: '100%',
+                     truncateText: '100%',
+                     '&:hover': {
+                        tdl: 'underline',
+                     },
+                  }}
+                  title={title ? title : name}
+               >
+                  {title ? title : name}
+               </Text>
+            </Card.Footer>
          </Card>
       </article>
    );
