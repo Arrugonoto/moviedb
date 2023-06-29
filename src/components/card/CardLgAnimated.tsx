@@ -25,6 +25,27 @@ interface PropTypes {
    vote_count: number;
 }
 
+const containerMotion = {
+   rest: {
+      width: '12rem',
+   },
+   hover: {
+      width: '22rem',
+      transition: {
+         delayChildren: 0.3,
+      },
+   },
+};
+
+const overwiewMotion = {
+   rest: {
+      opacity: 0,
+   },
+   hover: {
+      opacity: 1,
+   },
+};
+
 const CardLgAnimated = ({
    id,
    overview,
@@ -42,14 +63,15 @@ const CardLgAnimated = ({
    return (
       <motion.article
          style={{
-            width: '12rem',
-            height: '20rem',
+            height: '22rem',
             borderRadius: '0.3rem',
             overflow: 'hidden',
          }}
-         whileHover={{
-            width: '22rem',
-         }}
+         initial="rest"
+         whileHover="hover"
+         animate="initial"
+         transition={{ delay: 0.5 }}
+         variants={containerMotion}
       >
          <Card
             isPressable
@@ -87,14 +109,16 @@ const CardLgAnimated = ({
             </Card.Header>
             <Card.Body css={{ p: '0', ov: 'hidden' }}>
                {poster_path ? (
-                  <Card.Image
-                     src={`https://image.tmdb.org/t/p/w400${poster_path}`}
-                     width="100%"
-                     objectFit="cover"
-                     alt="Movie poster"
-                     loading="lazy"
-                     className={style.cardImage}
-                  />
+                  <>
+                     <Card.Image
+                        src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                        width="100%"
+                        objectFit="cover"
+                        alt="Movie poster"
+                        loading="lazy"
+                        className={style.cardImage}
+                     />
+                  </>
                ) : (
                   <Col
                      css={{
@@ -112,35 +136,37 @@ const CardLgAnimated = ({
                      <FaImage style={{ fontSize: '2rem' }} />
                   </Col>
                )}
-
-               <Card.Footer
-                  isBlurred
-                  css={{
-                     position: 'absolute',
-                     bottom: 0,
-                     zIndex: 1,
-                     br: '0',
-                     h: '2rem',
-                  }}
-               >
-                  <Text
-                     size={15}
-                     css={{
-                        ta: 'center',
-                        fontWeight: '600',
-                        letterSpacing: '0.05px',
-                        w: '100%',
-                        truncateText: '100%',
-                        '&:hover': {
-                           tdl: 'underline',
-                        },
-                     }}
-                     title={'title'}
-                  >
-                     movie title
-                  </Text>
-               </Card.Footer>
+               <motion.p variants={overwiewMotion}>
+                  movie description larger random text
+               </motion.p>
             </Card.Body>
+            <Card.Footer
+               isBlurred
+               css={{
+                  position: 'absolute',
+                  bottom: 0,
+                  zIndex: 1,
+                  br: '0',
+                  h: '2rem',
+               }}
+            >
+               <Text
+                  size={15}
+                  css={{
+                     ta: 'center',
+                     fontWeight: '600',
+                     letterSpacing: '0.05px',
+                     w: '100%',
+                     truncateText: '100%',
+                     '&:hover': {
+                        tdl: 'underline',
+                     },
+                  }}
+                  title={'title'}
+               >
+                  movie title
+               </Text>
+            </Card.Footer>
          </Card>
       </motion.article>
    );
