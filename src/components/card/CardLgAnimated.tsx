@@ -1,24 +1,22 @@
 import { ReactElement } from 'react';
-import { Card, Text, Col, Row, Tooltip, useTheme } from '@nextui-org/react';
-import { FaImage, FaStar, FaUser } from 'react-icons/fa';
+import { Card, Text, Col, useTheme } from '@nextui-org/react';
+import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
 import { motion } from 'framer-motion';
 
 interface PropTypes {
-   adult: boolean;
-   backdrop_path: string;
+   backdrop_path?: string;
    genre_ids: number[];
    id: number;
-   original_language: string;
-   original_title: string;
-   original_name: string;
+   original_title?: string;
+   original_name?: string;
    overview: string;
    popularity: number;
    poster_path: string;
    release_date?: string;
    first_air_date?: string;
-   title: string;
-   name: string;
+   title?: string;
+   name?: string;
    origin_country: string[];
    video: boolean;
    vote_average: number;
@@ -27,10 +25,12 @@ interface PropTypes {
 
 const containerMotion = {
    rest: {
-      width: '12rem',
+      minWidth: '6rem',
+      width: '14rem',
+      flex: 1,
    },
    hover: {
-      width: '22rem',
+      flex: 2,
       transition: {
          delayChildren: 0.3,
       },
@@ -43,6 +43,7 @@ const overwiewMotion = {
    },
    hover: {
       opacity: 1,
+      translate: '0 -10px',
    },
 };
 
@@ -83,40 +84,16 @@ const CardLgAnimated = ({
             }}
             className={style.card}
          >
-            <Card.Header
-               css={{
-                  position: 'absolute',
-                  h: '1.6rem',
-                  bf: 'blur(5px)',
-                  bc: `${
-                     isDark ? 'rgba(8, 8, 8, .8)' : 'rgba(250, 250, 250, .8)'
-                  }`,
-               }}
-               className={style.cardHeader}
-            >
-               <Row align="center" justify="center" css={{ gap: '.4rem;' }}>
-                  <Tooltip content={'Rating'} shadow={true}>
-                     <FaStar style={{ fontSize: '1.2rem', color: '#9210A0' }} />
-                  </Tooltip>
-                  <Text>{5.5}</Text>
-               </Row>
-               <Row align="center" justify="center" css={{ gap: '.4rem;' }}>
-                  <Tooltip content={'Vote count'} shadow={true}>
-                     <FaUser style={{ fontSize: '1.2rem', color: '#9210A0' }} />
-                  </Tooltip>
-                  <Text>{16000}</Text>
-               </Row>
-            </Card.Header>
             <Card.Body css={{ p: '0', ov: 'hidden' }}>
                {poster_path ? (
                   <>
                      <Card.Image
                         src={`https://image.tmdb.org/t/p/w400${poster_path}`}
                         width="100%"
+                        height="100%"
                         objectFit="cover"
                         alt="Movie poster"
                         loading="lazy"
-                        className={style.cardImage}
                      />
                   </>
                ) : (
@@ -136,8 +113,16 @@ const CardLgAnimated = ({
                      <FaImage style={{ fontSize: '2rem' }} />
                   </Col>
                )}
-               <motion.p variants={overwiewMotion}>
-                  movie description larger random text
+               <motion.p
+                  style={{
+                     position: 'absolute',
+                     bottom: '20%',
+                     padding: '0 1rem',
+                  }}
+                  variants={overwiewMotion}
+                  title={overview}
+               >
+                  {overview}
                </motion.p>
             </Card.Body>
             <Card.Footer
@@ -164,7 +149,7 @@ const CardLgAnimated = ({
                   }}
                   title={'title'}
                >
-                  movie title
+                  {title ? title : name}
                </Text>
             </Card.Footer>
          </Card>
