@@ -72,7 +72,7 @@ const Nav = () => {
                   />
                </Navbar.Content>
             </Container>
-            <Navbar.Content className={styles.container_scrollbar}>
+            <Navbar.Content className={styles.container_scrollbar} gap={10}>
                {GENRES?.map(
                   (genre: { id: number; name: string }): JSX.Element => (
                      <NavLink
