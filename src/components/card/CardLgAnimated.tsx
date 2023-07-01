@@ -47,6 +47,15 @@ const overwiewMotion = {
    },
 };
 
+const overwiewBgMotion = {
+   rest: {
+      opacity: 0,
+   },
+   hover: {
+      opacity: 1,
+   },
+};
+
 const CardLgAnimated = ({
    id,
    overview,
@@ -113,17 +122,37 @@ const CardLgAnimated = ({
                      <FaImage style={{ fontSize: '2rem' }} />
                   </Col>
                )}
-               <motion.p
+               <motion.div
                   style={{
                      position: 'absolute',
-                     bottom: '20%',
-                     padding: '0 1rem',
+                     width: '100%',
+                     height: '100%',
+                     backgroundColor: `${
+                        isDark
+                           ? 'rgba(0, 0, 0, 0.8)'
+                           : 'rgba(241, 243, 254, 0.8)'
+                     }`,
+                     backdropFilter: 'blur(2px)',
                   }}
-                  variants={overwiewMotion}
-                  title={overview}
+                  variants={overwiewBgMotion}
                >
-                  {overview}
-               </motion.p>
+                  <motion.p
+                     style={{
+                        position: 'absolute',
+                        display: '-webkit-box',
+                        overflow: 'hidden',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: '3',
+                        textOverflow: 'ellipsis',
+                        bottom: '20%',
+                        padding: '0 1rem',
+                     }}
+                     variants={overwiewMotion}
+                     title={overview}
+                  >
+                     {overview}
+                  </motion.p>
+               </motion.div>
             </Card.Body>
             <Card.Footer
                isBlurred
@@ -147,7 +176,7 @@ const CardLgAnimated = ({
                         tdl: 'underline',
                      },
                   }}
-                  title={'title'}
+                  title={title ? title : name}
                >
                   {title ? title : name}
                </Text>
