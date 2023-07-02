@@ -37,6 +37,7 @@ const CardMd = ({
             allowTextSelectionOnPress={true}
             css={{ w: '12.3rem', h: '22.2rem', br: '.5rem' }}
             className={style.card}
+            title={title}
          >
             <Card.Header
                css={{
