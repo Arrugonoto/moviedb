@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
-import { Card, Text, Col, useTheme } from '@nextui-org/react';
+import { Card, Text, Col, Row, useTheme } from '@nextui-org/react';
 import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
 import { motion } from 'framer-motion';
+import { GENRES, SERIES_GENRES } from '../../data/genres';
 
 interface PropTypes {
    backdrop_path?: string;
@@ -18,7 +19,7 @@ interface PropTypes {
    title?: string;
    name?: string;
    origin_country: string[];
-   video: boolean;
+   video?: boolean;
    vote_average: number;
    vote_count: number;
 }
@@ -56,6 +57,16 @@ const overwiewBgMotion = {
    },
 };
 
+const lookupMovieGenre: { [id: number]: string } = {};
+GENRES.forEach(el => {
+   lookupMovieGenre[el.id] = el.name;
+});
+
+const lookupSeriesGenre: { [id: number]: string } = {};
+SERIES_GENRES.forEach(el => {
+   lookupSeriesGenre[el.id] = el.name;
+});
+
 const CardLgAnimated = ({
    id,
    overview,
@@ -67,6 +78,8 @@ const CardLgAnimated = ({
    title,
    vote_average,
    vote_count,
+   genre_ids,
+   origin_country,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
 
@@ -80,7 +93,7 @@ const CardLgAnimated = ({
          initial="rest"
          whileHover="hover"
          animate="initial"
-         transition={{ delay: 0.5 }}
+         transition={{ delay: 0.35 }}
          variants={containerMotion}
       >
          <Card
@@ -152,6 +165,41 @@ const CardLgAnimated = ({
                   >
                      {overview}
                   </motion.p>
+               </motion.div>
+
+               <motion.div
+                  style={{
+                     position: 'absolute',
+                     display: 'flex',
+                     bottom: '5rem',
+                     gap: '0.3rem',
+                     padding: '0 0.3rem',
+                     flexWrap: 'wrap',
+                  }}
+               >
+                  {genre_ids.map(id => (
+                     <p
+                        style={{
+                           color: `${isDark ? '#ffffff' : '#000000'}`,
+                           borderRadius: '0.4rem',
+                           border: '1px solid #9210a0',
+                           padding: '0 .4rem',
+                           backgroundColor: `${
+                              isDark
+                                 ? 'rgba(115, 11, 137, 0.7)'
+                                 : 'rgba(245, 157, 232, 0.7)'
+                           }`,
+                        }}
+                     >
+                        {title ? lookupMovieGenre[id] : lookupSeriesGenre[id]}
+                     </p>
+                  ))}
+                  <Row>
+                     <Text>
+                        {release_date ? release_date : first_air_date}{' '}
+                        {origin_country?.map(country => country)}
+                     </Text>
+                  </Row>
                </motion.div>
             </Card.Body>
             <Card.Footer
