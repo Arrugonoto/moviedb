@@ -8,13 +8,13 @@ const TopRated = () => {
 
    return (
       <section style={{ width: '100%' }}>
-         <Container fluid css={{ minHeight: '28rem' }}>
+         <Container fluid css={{ minHeight: '30rem' }}>
             <Row>
                <Text
                   h1
                   size={26}
                   css={{
-                     textGradient: '45deg, $primary 20%, $accent600 100%',
+                     textGradient: '45deg, $accent400 10%, $violet400 100%',
                      letterSpacing: '0.5px',
                   }}
                >
