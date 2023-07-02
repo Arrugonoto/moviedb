@@ -34,13 +34,26 @@ const Nav = () => {
          variant="sticky"
          shouldHideOnScroll
       >
-         <Container fluid css={{ fd: 'column', p: '0 .2rem' }}>
+         <Container
+            fluid
+            css={{ fd: 'column', p: '0 0.2rem', maxWidth: '1500px' }}
+         >
             <Container
-               css={{ d: 'flex', jc: 'space-between', ai: 'center', p: '0' }}
+               fluid
+               responsive
+               css={{
+                  d: 'flex',
+                  jc: 'space-between',
+                  ai: 'center',
+                  p: '0',
+                  m: '0',
+                  width: '100%',
+                  maxWidth: '1500px',
+               }}
             >
                <Navbar.Brand>
                   <Image
-                     width={130}
+                     width={140}
                      src={Logo}
                      alt="MovieDB - app logo"
                      style={{ cursor: 'pointer' }}
