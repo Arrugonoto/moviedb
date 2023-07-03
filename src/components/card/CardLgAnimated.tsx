@@ -4,6 +4,7 @@ import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
 import { motion } from 'framer-motion';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
+import { FaLocationDot } from 'react-icons/fa6';
 
 interface PropTypes {
    backdrop_path?: string;
@@ -176,40 +177,72 @@ const CardLgAnimated = ({
                      padding: '0 0.3rem',
                      flexWrap: 'wrap',
                   }}
+                  variants={{ rest: { opacity: 1 }, hover: { opacity: 0 } }}
                >
                   {genre_ids.map(id => (
                      <p
                         style={{
-                           color: `${isDark ? '#ffffff' : '#000000'}`,
+                           color: '#ffffff',
                            borderRadius: '0.4rem',
-                           border: '1px solid #9210a0',
+                           border: '1px solid #9210A0',
                            padding: '0 .4rem',
-                           backgroundColor: `${
-                              isDark
-                                 ? 'rgba(115, 11, 137, 0.7)'
-                                 : 'rgba(245, 157, 232, 0.7)'
-                           }`,
+                           backgroundColor: 'rgba(45, 3, 76, 0.7)',
+                           fontSize: '0.9rem',
+                           fontFamily: 'Roboto',
+                           letterSpacing: '0.1px',
                         }}
                      >
                         {title ? lookupMovieGenre[id] : lookupSeriesGenre[id]}
                      </p>
                   ))}
-                  <Row>
-                     <Text>
-                        {release_date ? release_date : first_air_date}{' '}
-                        {origin_country?.map(country => country)}
+                  <Row css={{ gap: '.3rem' }}>
+                     <Text
+                        css={{
+                           fontFamily: 'Roboto',
+                           color: '#F1F3FE',
+                           bc: '#141414cc',
+                           border: '1px solid #000000',
+                           p: '0 0.6rem',
+                           br: '0.5rem',
+                           fontSize: '0.9rem',
+                        }}
+                        title="Release date"
+                     >
+                        {release_date
+                           ? release_date?.slice(0, 4)
+                           : first_air_date?.slice(0, 4)}
                      </Text>
+                     {origin_country && (
+                        <Text
+                           css={{
+                              d: 'flex',
+                              ai: 'center',
+                              fontFamily: 'Roboto',
+                              color: '#F1F3FE',
+                              bc: '#141414cc',
+                              border: '1px solid #000000',
+                              p: '0 0.6rem',
+                              br: '0.5rem',
+                              fontSize: '0.9rem',
+                           }}
+                           title="Origin country"
+                        >
+                           <FaLocationDot style={{ marginRight: '0.2rem' }} />
+                           {origin_country?.map(country => country)}
+                        </Text>
+                     )}
                   </Row>
                </motion.div>
             </Card.Body>
             <Card.Footer
-               isBlurred
                css={{
                   position: 'absolute',
                   bottom: 0,
                   zIndex: 1,
                   br: '0',
                   h: '2rem',
+                  bc: `${isDark ? '#141414cc' : '#fafafacc'}`,
+                  bf: 'blur(6px)',
                }}
             >
                <Text
