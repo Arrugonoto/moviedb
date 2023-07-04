@@ -4,7 +4,7 @@ import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
 import { motion } from 'framer-motion';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
-import { FaLocationDot } from 'react-icons/fa6';
+import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
 
 interface PropTypes {
    backdrop_path?: string;
@@ -111,7 +111,7 @@ const CardLgAnimated = ({
                {poster_path ? (
                   <>
                      <Card.Image
-                        src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                         width="100%"
                         height="100%"
                         objectFit="cover"
@@ -208,6 +208,9 @@ const CardLgAnimated = ({
                         }}
                         title="Release date"
                      >
+                        <FaCalendar
+                           style={{ marginRight: '0.2rem', fontSize: '0.8rem' }}
+                        />
                         {release_date
                            ? release_date?.slice(0, 4)
                            : first_air_date?.slice(0, 4)}
@@ -227,7 +230,12 @@ const CardLgAnimated = ({
                            }}
                            title="Origin country"
                         >
-                           <FaLocationDot style={{ marginRight: '0.2rem' }} />
+                           <FaLocationDot
+                              style={{
+                                 marginRight: '0.2rem',
+                                 fontSize: '0.8rem',
+                              }}
+                           />
                            {origin_country?.map(country => country)}
                         </Text>
                      )}
@@ -241,7 +249,7 @@ const CardLgAnimated = ({
                   zIndex: 1,
                   br: '0',
                   h: '2rem',
-                  bc: `${isDark ? '#141414cc' : '#fafafacc'}`,
+                  bc: `${isDark ? '#141414e5' : '#fafafae5'}`,
                   bf: 'blur(6px)',
                }}
             >
