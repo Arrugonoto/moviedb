@@ -70,7 +70,6 @@ const CardLg = ({
    origin_country,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
-   console.log(backdrop_path);
    return (
       <motion.article
          style={{
