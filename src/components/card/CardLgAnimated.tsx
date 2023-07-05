@@ -141,12 +141,17 @@ const CardLgAnimated = ({
                      position: 'absolute',
                      width: '100%',
                      height: '100%',
-                     backgroundColor: `${
+                     background: `${
                         isDark
-                           ? 'rgba(0, 0, 0, 0.8)'
-                           : 'rgba(241, 243, 254, 0.8)'
+                           ? 'linear-gradient(0deg,#000000, transparent)'
+                           : 'linear-gradient(0deg,#ffffff, transparent)'
                      }`,
-                     backdropFilter: 'blur(2px)',
+                     // backgroundColor: `${
+                     //    isDark
+                     //       ? 'rgba(0, 0, 0, 0.8)'
+                     //       : 'rgba(241, 243, 254, 0.8)'
+                     // }`,
+                     backdropFilter: 'blur(6px)',
                   }}
                   variants={overwiewBgMotion}
                >

@@ -105,7 +105,6 @@ const CardLg = ({
                      height="100%"
                      objectFit="cover"
                      alt="Movie poster"
-                     loading="lazy"
                   />
                ) : (
                   <Col
@@ -129,12 +128,12 @@ const CardLg = ({
                      position: 'absolute',
                      width: '100%',
                      height: '100%',
-                     backgroundColor: `${
+                     background: `${
                         isDark
-                           ? 'rgba(0, 0, 0, 0.8)'
-                           : 'rgba(241, 243, 254, 0.8)'
+                           ? 'linear-gradient(0deg,#000000, transparent)'
+                           : 'linear-gradient(0deg,#ffffff, transparent)'
                      }`,
-                     backdropFilter: 'blur(2px)',
+                     backdropFilter: 'blur(4px)',
                   }}
                   variants={overwiewBgMotion}
                >
