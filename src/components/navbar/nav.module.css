@@ -22,7 +22,6 @@
 
 .container_scrollbar a:hover {
    color: #f59de8;
-   border-color: #f59de8;
 }
 
 .container_scrollbar a:active {
@@ -32,6 +31,18 @@
 .active {
    color: #fff !important;
    background-color: #9210a0;
-   border-color: #9210a0;
    box-shadow: 0 0 8px 0 #9210a0 !important;
+}
+
+.categoryLink {
+   padding: 0.5rem 0.2rem;
+   font-family: 'Roboto', sans-serif;
+   font-size: 0.9rem !important;
+   font-weight: 600 !important;
+   transition: all 0.2s linear;
+   cursor: pointer;
+}
+
+.categoryLink:hover {
+   color: #c340c5 !important;
 }

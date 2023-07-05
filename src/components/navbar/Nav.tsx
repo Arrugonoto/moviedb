@@ -36,13 +36,18 @@ const Nav = () => {
       >
          <Container
             fluid
-            css={{ fd: 'column', p: '0 0.2rem', maxWidth: '1500px' }}
+            css={{
+               fd: 'column',
+               p: '0 0.2rem',
+               maxWidth: '1500px',
+            }}
          >
             <Container
                fluid
                responsive
                css={{
                   d: 'flex',
+                  flexDirection: 'row',
                   jc: 'space-between',
                   ai: 'center',
                   p: '0',
@@ -51,15 +56,59 @@ const Nav = () => {
                   maxWidth: '1500px',
                }}
             >
-               <Navbar.Brand>
-                  <Image
-                     width={140}
-                     src={Logo}
-                     alt="MovieDB - app logo"
-                     style={{ cursor: 'pointer' }}
-                     onClick={() => navigate(`${ROUTES.HOME}`)}
-                  />
-               </Navbar.Brand>
+               <div
+                  style={{
+                     display: 'flex',
+                     gap: '.5rem',
+                     alignItems: 'center',
+                  }}
+               >
+                  <Navbar.Brand>
+                     <Image
+                        width={140}
+                        src={Logo}
+                        alt="MovieDB - app logo"
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigate(`${ROUTES.HOME}`)}
+                     />
+                  </Navbar.Brand>
+                  <Navbar.Content gap={20}>
+                     <Navbar.Item>
+                        <NavLink
+                           to={''}
+                           style={{
+                              color: `${isDark ? '#fafafa' : '#000000'}`,
+                           }}
+                           className={styles.categoryLink}
+                        >
+                           Movies
+                        </NavLink>
+                     </Navbar.Item>
+                     <Navbar.Item>
+                        <NavLink
+                           to={''}
+                           style={{
+                              color: `${isDark ? '#fafafa' : '#000000'}`,
+                           }}
+                           className={styles.categoryLink}
+                        >
+                           TV Series
+                        </NavLink>
+                     </Navbar.Item>
+                     <Navbar.Item>
+                        <NavLink
+                           to={''}
+                           style={{
+                              color: `${isDark ? '#fafafa' : '#000000'}`,
+                           }}
+                           className={styles.categoryLink}
+                        >
+                           People
+                        </NavLink>
+                     </Navbar.Item>
+                  </Navbar.Content>
+               </div>
+
                <Navbar.Content>
                   <Input
                      type="search"
