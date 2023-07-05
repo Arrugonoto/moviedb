@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Genre from './pages/Genre';
 import Details from './pages/Details';
-import TopRated from './pages/TopRated';
+import TopRatedMovies from './pages/TopRatedMovies';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import ROUTES from './routes/routes';
@@ -64,8 +64,8 @@ function App() {
                            element={<Genre />}
                         ></Route>
                         <Route
-                           path={ROUTES.TOP_RATED}
-                           element={<TopRated />}
+                           path={ROUTES.TOP_RATED_MOVIES}
+                           element={<TopRatedMovies />}
                         ></Route>
                         <Route
                            path={ROUTES.MOVIE_DETAILS}
