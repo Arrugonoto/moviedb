@@ -74,7 +74,7 @@ export const darkTheme = createTheme({
          background: '#080808',
          backgroundAlpha: 'rgba(8, 8, 8, 0.8)',
          foreground: '#fafafa',
-         backgroundContrast: 'rgba(245, 157, 232, .2)',
+         backgroundContrast: '#fafafa33',
 
          // primary
          violet100: '#FACDF0',
