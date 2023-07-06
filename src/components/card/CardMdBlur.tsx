@@ -59,13 +59,19 @@ const CardMdBlur = ({
                   <Tooltip content={'Rating'} shadow={true}>
                      <FaStar style={{ fontSize: '1.2rem', color: '#9210A0' }} />
                   </Tooltip>
-                  <Text>{rating}</Text>
+                  <Text title={vote_average > 0 ? 'Average rating' : 'Unrated'}>
+                     {vote_average > 0 ? rating : 'UN'}
+                  </Text>
                </Row>
                <Row align="center" justify="center" css={{ gap: '.4rem;' }}>
                   <Tooltip content={'Vote count'} shadow={true}>
                      <FaUser style={{ fontSize: '1.2rem', color: '#9210A0' }} />
                   </Tooltip>
-                  <Text>{vote_count}</Text>
+                  <Text
+                     title={vote_count > 0 ? 'Number of votes' : 'Not rated'}
+                  >
+                     {vote_count > 0 ? vote_count : 'NR'}
+                  </Text>
                </Row>
             </Card.Header>
             <Card.Body css={{ p: '0', ov: 'hidden' }}>
