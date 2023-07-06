@@ -1,5 +1,6 @@
 import {
    Navbar,
+   Text,
    Switch,
    changeTheme,
    useTheme,
@@ -72,7 +73,14 @@ const Nav = () => {
                         onClick={() => navigate(`${ROUTES.HOME}`)}
                      />
                   </Navbar.Brand>
-                  <Navbar.Content gap={20}>
+                  <Navbar.Content
+                     gap={20}
+                     css={{
+                        br: '0.3rem',
+                        p: '0 .5rem',
+                        bc: 'rgba(40, 127, 184, 0.6)',
+                     }}
+                  >
                      <Navbar.Item>
                         <NavLink
                            to={''}
@@ -134,21 +142,44 @@ const Nav = () => {
                   />
                </Navbar.Content>
             </Container>
-            <Navbar.Content className={styles.container_scrollbar} gap={10}>
-               {GENRES?.map(
-                  (genre: { id: number; name: string }): JSX.Element => (
-                     <NavLink
-                        key={genre.id}
-                        to={`${ROUTES.GENRE}/${genre.id}`}
-                        className={({ isActive, isPending }) =>
-                           isPending ? 'pending' : isActive ? styles.active : ''
-                        }
-                        style={{ textTransform: 'uppercase' }}
-                     >
-                        {genre.name}
-                     </NavLink>
-                  )
-               )}
+            <Navbar.Content
+               gap={10}
+               css={{
+                  d: 'flex',
+                  fd: 'row',
+                  jc: 'center',
+                  margin: '0 0.5rem',
+               }}
+            >
+               <Text
+                  css={{
+                     fontFamily: 'Roboto',
+                     fontSize: '0.9rem',
+                     letterSpacing: '0.05px',
+                  }}
+               >
+                  movie:
+               </Text>
+               <div className={styles.container_scrollbar}>
+                  {GENRES?.map(
+                     (genre: { id: number; name: string }): JSX.Element => (
+                        <NavLink
+                           key={genre.id}
+                           to={`${ROUTES.GENRE}/${genre.id}`}
+                           className={({ isActive, isPending }) =>
+                              isPending
+                                 ? 'pending'
+                                 : isActive
+                                 ? styles.active
+                                 : ''
+                           }
+                           style={{ textTransform: 'uppercase' }}
+                        >
+                           {genre.name}
+                        </NavLink>
+                     )
+                  )}
+               </div>
             </Navbar.Content>
          </Container>
       </Navbar>

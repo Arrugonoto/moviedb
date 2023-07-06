@@ -1,8 +1,8 @@
 .container_scrollbar {
    scrollbar-width: none;
    overflow-x: auto;
-   padding: 0.8rem 0.5rem 0.4rem 0.5rem;
-   margin: 0 0.5rem;
+   padding: 0.6rem 0.3rem;
+   margin: 0;
 }
 
 .container_scrollbar::-webkit-scrollbar {
@@ -11,10 +11,10 @@
 
 .container_scrollbar a {
    color: #c340c5;
-   padding: 0.3rem 1rem;
+   padding: 0.15rem 1rem;
    border-radius: 0.8rem;
-   font-size: 0.9rem;
-   font-weight: 700;
+   font-size: 0.8rem;
+   font-weight: 600;
    white-space: nowrap;
    box-shadow: 0 0 10px 0 transparent;
    transition: all 0.2s linear;
