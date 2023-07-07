@@ -60,11 +60,11 @@ function App() {
                         ></Route>
                         <Route path={ROUTES.HOME} element={<Home />}></Route>
                         <Route
-                           path={`${ROUTES.GENRE}/:genreId`}
+                           path={`${ROUTES.MOVIE_GENRE}/:genreId`}
                            element={<Genre />}
                         ></Route>
                         <Route
-                           path={ROUTES.TOP_RATED_MOVIES}
+                           path={ROUTES.MOVIES_TOP_RATED}
                            element={<TopRatedMovies />}
                         ></Route>
                         <Route
