@@ -73,7 +73,7 @@ const CardMd = ({
                {poster_path ? (
                   <Col css={{ h: '18rem', ov: 'hidden' }}>
                      <Card.Image
-                        src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                         width="100%"
                         height="100%"
                         objectFit="cover"

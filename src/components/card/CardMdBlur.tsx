@@ -77,7 +77,7 @@ const CardMdBlur = ({
             <Card.Body css={{ p: '0', ov: 'hidden' }}>
                {poster_path ? (
                   <Card.Image
-                     src={`https://image.tmdb.org/t/p/w400${poster_path}`}
+                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                      width="100%"
                      objectFit="cover"
                      alt="Movie poster"

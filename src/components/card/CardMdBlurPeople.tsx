@@ -38,7 +38,7 @@ const CardMdBlurPeople = ({
             <Card.Body css={{ p: '0', ov: 'hidden' }}>
                {profile_path ? (
                   <Card.Image
-                     src={`https://image.tmdb.org/t/p/w400${profile_path}`}
+                     src={`https://image.tmdb.org/t/p/w500${profile_path}`}
                      width="100%"
                      objectFit="cover"
                      alt="Movie poster"
