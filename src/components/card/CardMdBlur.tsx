@@ -90,6 +90,7 @@ const CardMdBlur = ({
                         d: 'flex',
                         fd: ' column',
                         w: '100%',
+                        height: '100%',
                         jc: 'center',
                         ai: 'center',
                         bc: 'rgba(176, 240, 251, .2)',
