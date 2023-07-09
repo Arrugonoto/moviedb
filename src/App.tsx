@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Genre from './pages/Genre';
-import Details from './pages/Details';
+import MovieDetails from './pages/MovieDetails';
 import TopRatedMovies from './pages/TopRatedMovies';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -69,7 +69,7 @@ function App() {
                         ></Route>
                         <Route
                            path={ROUTES.MOVIE_DETAILS}
-                           element={<Details />}
+                           element={<MovieDetails />}
                         ></Route>
                      </Routes>
                   </main>
