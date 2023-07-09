@@ -1,5 +1,5 @@
 const TopRated = () => {
-   return <section>top rated</section>;
+   return <section style={{ minHeight: '100dvh' }}>top rated</section>;
 };
 
 export default TopRated;

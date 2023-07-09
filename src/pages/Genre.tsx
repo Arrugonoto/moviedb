@@ -1,7 +1,7 @@
 import GenreSection from '../components/genres/GenreSection';
 const Genre = () => {
    return (
-      <section>
+      <section style={{ minHeight: '100dvh' }}>
          <GenreSection />
       </section>
    );
