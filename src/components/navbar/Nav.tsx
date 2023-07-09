@@ -16,6 +16,8 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdSunny } from 'react-icons/io';
 import Logo from '../../assets/logo.svg';
 import ROUTES from '../../routes/routes';
+import Dropdown from './Dropdown';
+import { MOVIES, SERIES } from '../../data/subMenu';
 
 const Nav = () => {
    const { isDark } = useTheme();
@@ -77,35 +79,41 @@ const Nav = () => {
                      gap={20}
                      css={{
                         br: '0.3rem',
-                        p: '0 .5rem',
+                        // p: '0 .5rem',
                         bc: 'rgba(40, 127, 184, 0.6)',
                      }}
                   >
                      <Navbar.Item>
-                        <NavLink
-                           to={''}
-                           style={{
-                              color: `${isDark ? '#fafafa' : '#000000'}`,
-                           }}
-                           className={styles.categoryLink}
-                        >
-                           Movies
-                        </NavLink>
+                        <div className={styles.categoryLinkWrapper}>
+                           <NavLink
+                              to={ROUTES.MOVIES}
+                              style={{
+                                 color: `${isDark ? '#fafafa' : '#000000'}`,
+                              }}
+                              className={styles.categoryLink}
+                           >
+                              Movies
+                           </NavLink>
+                           <Dropdown data={MOVIES} />
+                        </div>
+                     </Navbar.Item>
+                     <Navbar.Item>
+                        <div className={styles.categoryLinkWrapper}>
+                           <NavLink
+                              to={ROUTES.SERIES}
+                              style={{
+                                 color: `${isDark ? '#fafafa' : '#000000'}`,
+                              }}
+                              className={styles.categoryLink}
+                           >
+                              TV Series
+                           </NavLink>
+                           <Dropdown data={SERIES} />
+                        </div>
                      </Navbar.Item>
                      <Navbar.Item>
                         <NavLink
-                           to={''}
-                           style={{
-                              color: `${isDark ? '#fafafa' : '#000000'}`,
-                           }}
-                           className={styles.categoryLink}
-                        >
-                           TV Series
-                        </NavLink>
-                     </Navbar.Item>
-                     <Navbar.Item>
-                        <NavLink
-                           to={''}
+                           to={ROUTES.PEOPLE}
                            style={{
                               color: `${isDark ? '#fafafa' : '#000000'}`,
                            }}
@@ -145,10 +153,8 @@ const Nav = () => {
             <Navbar.Content
                gap={10}
                css={{
-                  d: 'flex',
-                  fd: 'row',
-                  jc: 'center',
                   margin: '0 0.5rem',
+                  oy: 'visible',
                }}
             >
                <Text
@@ -157,6 +163,7 @@ const Nav = () => {
                      fontSize: '0.9rem',
                      letterSpacing: '0.05px',
                   }}
+                  title="Genre"
                >
                   movie:
                </Text>
@@ -165,7 +172,7 @@ const Nav = () => {
                      (genre: { id: number; name: string }): JSX.Element => (
                         <NavLink
                            key={genre.id}
-                           to={`${ROUTES.GENRE}/${genre.id}`}
+                           to={`${ROUTES.MOVIE_GENRE}/${genre.id}`}
                            className={({ isActive, isPending }) =>
                               isPending
                                  ? 'pending'
