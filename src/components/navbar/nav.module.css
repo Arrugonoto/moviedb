@@ -1,8 +1,9 @@
 .container_scrollbar {
+   display: flex;
+   gap: 0.2rem;
    scrollbar-width: none;
    overflow-x: auto;
-   padding: 0.6rem 0.3rem;
-   margin: 0;
+   padding: 0.6rem 0.3rem 0.5rem 0.3rem;
 }
 
 .container_scrollbar::-webkit-scrollbar {
@@ -11,12 +12,11 @@
 
 .container_scrollbar a {
    color: #c340c5;
-   padding: 0.15rem 1rem;
+   padding: 0.2rem 1rem;
    border-radius: 0.8rem;
    font-size: 0.8rem;
    font-weight: 600;
    white-space: nowrap;
-   box-shadow: 0 0 10px 0 transparent;
    transition: all 0.2s linear;
 }
 
@@ -31,7 +31,26 @@
 .active {
    color: #fff !important;
    background-color: #9210a0;
-   box-shadow: 0 0 8px 0 #9210a0 !important;
+}
+
+.dropdownContainer li {
+   margin: 0;
+}
+
+.dropdownContainer a {
+   font-family: 'Roboto';
+   font-size: 0.9rem;
+   padding: 0.2rem 4rem 0.2rem 1rem;
+   width: 100%;
+   transition: background-color 0.1s linear;
+}
+
+.dropdownContainer li:hover {
+   background-color: rgba(200, 200, 200, 0.15);
+}
+
+.categoryLinkWrapper:hover .dropdownContainer {
+   display: flex;
 }
 
 .categoryLink {
