@@ -70,6 +70,7 @@ const CardLg = ({
    origin_country,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
+
    return (
       <motion.article
          style={{
