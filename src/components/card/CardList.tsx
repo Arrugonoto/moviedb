@@ -1,5 +1,9 @@
 import { ReactElement } from 'react';
-import { Col, Text, Row, Image } from '@nextui-org/react';
+import { Col, Text, Row, Image, useTheme } from '@nextui-org/react';
+import style from './cardList.module.css';
+import { GENRES, SERIES_GENRES } from '../../data/genres';
+import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
+import { FaStar } from 'react-icons/fa';
 
 interface PropTypes {
    backdrop_path?: string;
@@ -20,6 +24,16 @@ interface PropTypes {
    vote_count: number;
 }
 
+const lookupMovieGenre: { [id: number]: string } = {};
+GENRES.forEach(el => {
+   lookupMovieGenre[el.id] = el.name;
+});
+
+const lookupSeriesGenre: { [id: number]: string } = {};
+SERIES_GENRES.forEach(el => {
+   lookupSeriesGenre[el.id] = el.name;
+});
+
 const CardList = ({
    id,
    overview,
@@ -27,6 +41,7 @@ const CardList = ({
    poster_path,
    backdrop_path,
    release_date,
+   first_air_date,
    name,
    title,
    vote_average,
@@ -34,47 +49,112 @@ const CardList = ({
    genre_ids,
    origin_country,
 }: PropTypes): ReactElement => {
+   const { isDark } = useTheme();
+
    return (
-      <article
-         style={{
-            width: '100%',
-            borderRadius: '.5rem',
-            overflow: 'hidden',
-            padding: '0',
-         }}
-      >
-         <Row css={{ w: '100%' }}>
-            <Col css={{ w: 'min-content' }}>
+      <article className={style.cardContainer}>
+         <Row css={{ w: '100%', height: '10rem' }}>
+            <Col css={{ w: 'min-content', cursor: 'pointer' }}>
                <Image
                   src={`https://image.tmdb.org/t/p/w300${
                      poster_path ?? backdrop_path
                   }`}
                   objectFit="cover"
                   alt="Movie poster"
-                  width="8rem"
+                  width="7rem"
                   title={title ? title : name}
                />
             </Col>
-            <Col css={{ w: '100%', paddingLeft: '1rem' }}>
-               <Row>
+            <Col
+               css={{
+                  d: 'flex',
+                  fd: 'column',
+                  w: '100%',
+                  height: '100%',
+                  justifyContent: 'space-between',
+                  p: '0 0 0 1rem',
+               }}
+            >
+               <Row css={{ fd: 'column' }}>
                   <Text
-                     size={15}
+                     size={17}
                      css={{
-                        ta: 'center',
                         fontWeight: '600',
                         letterSpacing: '0.05px',
                         truncateText: '100%',
+                        cursor: 'pointer',
                         '&:hover': {
                            tdl: 'underline',
+                           color: '#9210a0',
                         },
                      }}
                      title={title ? title : name}
                   >
                      {title ? title : name}
                   </Text>
+                  <div>
+                     <Text
+                        css={{
+                           fontFamily: 'Roboto',
+                           bc: `${
+                              isDark
+                                 ? 'rgba(80, 80, 80, 0.5)'
+                                 : 'rgba(40, 40, 40, 0.1)'
+                           }`,
+                           border: '1px solid #000000',
+                           p: '0 0.4rem',
+                           br: '0.5rem',
+                           fontSize: '0.8rem',
+                        }}
+                        title="Release date"
+                     >
+                        <FaCalendar
+                           style={{ marginRight: '0.2rem', fontSize: '0.7rem' }}
+                        />
+                        {release_date
+                           ? release_date?.slice(0, 4)
+                           : first_air_date?.slice(0, 4)}
+                     </Text>
+                  </div>
                </Row>
-               <Row align="flex-start">rating</Row>
-               <Row align="flex-start">genres</Row>
+               <Row
+                  align="flex-start"
+                  title={vote_average > 0 ? 'Average rating' : 'Unrated'}
+               >
+                  <div
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '.3rem',
+                     }}
+                  >
+                     <FaStar style={{ fontSize: '1.6rem', color: '#9210A0' }} />
+                     <Text>{vote_average > 0 ? vote_average : 'UN'}</Text>
+                  </div>
+               </Row>
+               <Row align="flex-start" css={{ gap: '0.4rem' }}>
+                  {genre_ids.map(id => (
+                     <p
+                        style={{
+                           color: '#ffffff',
+                           borderRadius: '0.4rem',
+                           border: '1px solid #9210A0',
+                           padding: '0 .4rem',
+                           backgroundColor: `${
+                              isDark
+                                 ? 'rgba(146, 16, 160, 0.5)'
+                                 : 'rgba(115, 11, 137, 0.8)'
+                           }`,
+                           fontSize: '0.8rem',
+                           fontFamily: 'Roboto',
+                           letterSpacing: '0.1px',
+                           cursor: 'pointer',
+                        }}
+                     >
+                        {title ? lookupMovieGenre[id] : lookupSeriesGenre[id]}
+                     </p>
+                  ))}
+               </Row>
             </Col>
          </Row>
       </article>
