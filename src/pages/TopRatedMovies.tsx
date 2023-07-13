@@ -30,7 +30,6 @@ interface MovieProps {
    vote_average: number;
    vote_count: number;
    origin_country: string[];
-   index?: number;
 }
 
 const TopRated = () => {
