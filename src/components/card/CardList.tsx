@@ -22,6 +22,7 @@ interface PropTypes {
    video?: boolean;
    vote_average: number;
    vote_count: number;
+   index: number;
 }
 
 const lookupMovieGenre: { [id: number]: string } = {};
@@ -48,20 +49,21 @@ const CardList = ({
    vote_count,
    genre_ids,
    origin_country,
+   index,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
 
    return (
       <article className={style.cardContainer}>
-         <Row css={{ w: '100%', height: '10rem' }}>
+         <Row css={{ w: '100%', height: '9rem' }}>
             <Col css={{ w: 'min-content', cursor: 'pointer' }}>
                <Image
-                  src={`https://image.tmdb.org/t/p/w300${
+                  src={`https://image.tmdb.org/t/p/w400${
                      poster_path ?? backdrop_path
                   }`}
                   objectFit="cover"
                   alt="Movie poster"
-                  width="7rem"
+                  width="6rem"
                   title={title ? title : name}
                />
             </Col>
@@ -71,8 +73,9 @@ const CardList = ({
                   fd: 'column',
                   w: '100%',
                   height: '100%',
-                  justifyContent: 'space-between',
+                  justifyContent: 'center',
                   p: '0 0 0 1rem',
+                  gap: '2rem',
                }}
             >
                <Row css={{ fd: 'column' }}>
@@ -90,7 +93,9 @@ const CardList = ({
                      }}
                      title={title ? title : name}
                   >
-                     {title ? title : name}
+                     {title
+                        ? `${index + 1}. ${title}`
+                        : `${index + 1}. ${name}`}
                   </Text>
                   <div>
                      <Text
@@ -117,23 +122,8 @@ const CardList = ({
                      </Text>
                   </div>
                </Row>
-               <Row
-                  align="flex-start"
-                  title={vote_average > 0 ? 'Average rating' : 'Unrated'}
-               >
-                  <div
-                     style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '.3rem',
-                     }}
-                  >
-                     <FaStar style={{ fontSize: '1.6rem', color: '#9210A0' }} />
-                     <Text>{vote_average > 0 ? vote_average : 'UN'}</Text>
-                  </div>
-               </Row>
-               <Row align="flex-start" css={{ gap: '0.4rem' }}>
-                  {genre_ids.map(id => (
+               <Row align="flex-start" wrap="wrap" css={{ gap: '0.4rem' }}>
+                  {genre_ids?.map(id => (
                      <p
                         style={{
                            color: '#ffffff',
@@ -155,6 +145,39 @@ const CardList = ({
                      </p>
                   ))}
                </Row>
+            </Col>
+            <Col
+               css={{
+                  d: 'flex',
+                  width: '30%',
+                  height: '100%',
+                  jc: 'center',
+                  ai: 'center',
+               }}
+               title={vote_average > 0 ? 'Average rating' : 'Unrated'}
+            >
+               <div
+                  style={{
+                     display: 'flex',
+                     gap: '.3rem',
+                  }}
+               >
+                  <FaStar
+                     style={{
+                        fontSize: '2rem',
+                        color: `${index === 0 ? '#f1ee13' : '#9210A0'}`,
+                     }}
+                  />
+                  <Text
+                     size={20}
+                     css={{
+                        fontFamily: 'Roboto, sans-serif',
+                        fontWeight: '500',
+                     }}
+                  >
+                     {vote_average > 0 ? vote_average : 'UN'}
+                  </Text>
+               </div>
             </Col>
          </Row>
       </article>
