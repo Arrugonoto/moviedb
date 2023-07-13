@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container, Row, Text } from '@nextui-org/react';
 import { METHODS } from '../services/api';
 import { API_KEY } from '../services/api-key';
 import useFetch from '../hooks/useFetch';
 import CardList from '../components/card/CardList';
+import { useIntersection } from '@mantine/hooks';
 
 interface OptionsTypes {
    method: string;
@@ -29,10 +30,13 @@ interface MovieProps {
    vote_average: number;
    vote_count: number;
    origin_country: string[];
+   index?: number;
 }
 
 const TopRated = () => {
+   const [page, setPage] = useState<number>(1);
    const { handleFetch, data } = useFetch<MovieProps[]>([]);
+   const intersectionElRef = useRef<HTMLElement>(null);
 
    const fetchMovies = async (): Promise<void> => {
       const options: OptionsTypes = {
@@ -42,15 +46,32 @@ const TopRated = () => {
             Authorization: `Bearer ${API_KEY.access_token}`,
          },
       };
-      const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1`;
+      const url = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
 
       handleFetch({ url, options });
    };
+
+   const { ref, entry } = useIntersection({
+      root: intersectionElRef.current,
+      threshold: 0.7,
+   });
 
    useEffect(() => {
       fetchMovies();
       // eslint-disable-next-line
    }, []);
+
+   useEffect(() => {
+      if (page !== 1) {
+         fetchMovies();
+      }
+      // eslint-disable-next-line
+   }, [page]);
+
+   useEffect(() => {
+      if (entry?.isIntersecting && page < 5) setPage(prev => prev + 1);
+      // eslint-disable-next-line
+   }, [entry]);
 
    return (
       <section style={{ minHeight: '100dvh' }}>
@@ -68,22 +89,45 @@ const TopRated = () => {
                </Text>
             </Row>
             <Row css={{ d: 'flex', fd: 'column', gap: '1rem' }}>
-               {data.map(movie => (
-                  <CardList
-                     key={movie.id}
-                     id={movie.id}
-                     overview={movie.overview}
-                     popularity={movie.popularity}
-                     poster_path={movie.poster_path}
-                     release_date={movie.release_date}
-                     title={movie.title}
-                     vote_average={movie.vote_average}
-                     vote_count={movie.vote_count}
-                     genre_ids={movie.genre_ids}
-                     origin_country={movie.origin_country}
-                     video={movie.video}
-                  />
-               ))}
+               {data?.map((movie, i) => {
+                  if (i === data.length - 3)
+                     return (
+                        <div ref={ref} style={{ width: '100%' }}>
+                           <CardList
+                              key={movie.id}
+                              id={movie.id}
+                              overview={movie.overview}
+                              popularity={movie.popularity}
+                              poster_path={movie.poster_path}
+                              release_date={movie.release_date}
+                              title={movie.title}
+                              vote_average={movie.vote_average}
+                              vote_count={movie.vote_count}
+                              genre_ids={movie.genre_ids}
+                              origin_country={movie.origin_country}
+                              video={movie.video}
+                              index={i}
+                           />
+                        </div>
+                     );
+                  return (
+                     <CardList
+                        key={movie.id}
+                        id={movie.id}
+                        overview={movie.overview}
+                        popularity={movie.popularity}
+                        poster_path={movie.poster_path}
+                        release_date={movie.release_date}
+                        title={movie.title}
+                        vote_average={movie.vote_average}
+                        vote_count={movie.vote_count}
+                        genre_ids={movie.genre_ids}
+                        origin_country={movie.origin_country}
+                        video={movie.video}
+                        index={i}
+                     />
+                  );
+               })}
             </Row>
          </Container>
       </section>
