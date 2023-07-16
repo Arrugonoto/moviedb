@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Container, Row, Text } from '@nextui-org/react';
 import { METHODS } from '../services/api';
 import { API_KEY } from '../services/api-key';
-import useFetch from '../hooks/useFetch';
+import useInfiniteFetch from '../hooks/useInfiniteFetch';
 import CardList from '../components/card/CardList';
 import { useIntersection } from '@mantine/hooks';
 
@@ -34,7 +34,7 @@ interface MovieProps {
 
 const TopRated = () => {
    const [page, setPage] = useState<number>(1);
-   const { handleFetch, data } = useFetch<MovieProps[]>([]);
+   const { handleFetch, data } = useInfiniteFetch<MovieProps[]>([]);
    const intersectionElRef = useRef<HTMLElement>(null);
 
    const fetchMovies = async (): Promise<void> => {
@@ -91,10 +91,9 @@ const TopRated = () => {
                {data?.map((movie, i) => {
                   if (i === data.length - 3)
                      return (
-                        <div ref={ref} style={{ width: '100%' }}>
+                        <div key={movie.id} ref={ref} style={{ width: '100%' }}>
                            <CardList
-                              key={movie.id}
-                              id={movie.id}
+                              production_id={movie.id}
                               overview={movie.overview}
                               popularity={movie.popularity}
                               poster_path={movie.poster_path}
@@ -112,7 +111,7 @@ const TopRated = () => {
                   return (
                      <CardList
                         key={movie.id}
-                        id={movie.id}
+                        production_id={movie.id}
                         overview={movie.overview}
                         popularity={movie.popularity}
                         poster_path={movie.poster_path}
