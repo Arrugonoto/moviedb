@@ -2,13 +2,13 @@ import { ReactElement } from 'react';
 import { Col, Text, Row, Image, useTheme } from '@nextui-org/react';
 import style from './cardList.module.css';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
-import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
+import { FaCalendar } from 'react-icons/fa6';
 import { FaStar } from 'react-icons/fa';
 
 interface PropTypes {
    backdrop_path?: string;
    genre_ids: number[];
-   id: number;
+   production_id: number;
    original_title?: string;
    original_name?: string;
    overview: string;
@@ -36,9 +36,6 @@ SERIES_GENRES.forEach(el => {
 });
 
 const CardList = ({
-   id,
-   overview,
-   popularity,
    poster_path,
    backdrop_path,
    release_date,
@@ -46,9 +43,7 @@ const CardList = ({
    name,
    title,
    vote_average,
-   vote_count,
    genre_ids,
-   origin_country,
    index,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
@@ -125,6 +120,7 @@ const CardList = ({
                <Row align="flex-start" wrap="wrap" css={{ gap: '0.4rem' }}>
                   {genre_ids?.map(id => (
                      <p
+                        key={id}
                         style={{
                            color: '#ffffff',
                            borderRadius: '0.4rem',
@@ -141,7 +137,7 @@ const CardList = ({
                            cursor: 'pointer',
                         }}
                      >
-                        {title ? lookupMovieGenre[id] : lookupSeriesGenre[id]}
+                        {name ? lookupSeriesGenre[id] : lookupMovieGenre[id]}
                      </p>
                   ))}
                </Row>
