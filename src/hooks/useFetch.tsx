@@ -22,17 +22,7 @@ const useFetch = <T,>(initialData: T) => {
          setError(result);
          throw new Error(`Couldn't fetch source`);
       }
-      setData(
-         (prev: T): T =>
-            [
-               ...Array.from(
-                  new Map(
-                     [...(prev as T[]), ...result.results].map(m => [m.id, m])
-                  ).values()
-               ),
-            ] as T
-      );
-      // setData(result.results);
+      setData(result.results);
       setLastPage(result.total_pages);
 
       setLoading(false);
