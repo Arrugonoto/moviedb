@@ -13,6 +13,7 @@ import TopRatedMovies from './pages/TopRatedMovies';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import ROUTES from './routes/routes';
+import TopRatedSeries from './pages/TopRatedSeries';
 import { lightTheme, darkTheme } from './theme/theme';
 
 function App() {
@@ -57,20 +58,24 @@ function App() {
                         <Route
                            path="/"
                            element={<Navigate replace to={`/${ROUTES.HOME}`} />}
-                        ></Route>
-                        <Route path={ROUTES.HOME} element={<Home />}></Route>
+                        />
+                        <Route path={ROUTES.HOME} element={<Home />} />
                         <Route
                            path={`${ROUTES.MOVIE_GENRE}/:genreId`}
                            element={<Genre />}
-                        ></Route>
+                        />
                         <Route
                            path={ROUTES.MOVIES_TOP_RATED}
                            element={<TopRatedMovies />}
-                        ></Route>
+                        />
+                        <Route
+                           path={ROUTES.SERIES_TOP_RATED}
+                           element={<TopRatedSeries />}
+                        />
                         <Route
                            path={ROUTES.MOVIE_DETAILS}
                            element={<MovieDetails />}
-                        ></Route>
+                        />
                      </Routes>
                   </main>
                   <Spacer y={1} />
