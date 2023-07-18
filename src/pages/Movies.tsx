@@ -33,7 +33,7 @@ interface MovieProps {
 
 const Movies = () => {
    const [page, setPage] = useState<number>(1);
-   const { handleFetch, data, lastPage } = useFetch<MovieProps[]>([]);
+   const { handleFetch, data } = useFetch<MovieProps[]>([]);
 
    const fetchData = async (): Promise<void> => {
       const options: OptionsTypes = {
