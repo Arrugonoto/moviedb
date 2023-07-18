@@ -96,7 +96,6 @@ const Upcoming = () => {
                               id={movie.id}
                               overview={movie.overview}
                               popularity={movie.popularity}
-                              poster_path={movie.poster_path}
                               release_date={movie.release_date}
                               title={movie.title}
                               vote_average={movie.vote_average}
@@ -104,7 +103,7 @@ const Upcoming = () => {
                               genre_ids={movie.genre_ids}
                               origin_country={movie.origin_country}
                               video={movie.video}
-                              backdrop_path={movie.backdrop_path}
+                              image_source={`w780${movie.backdrop_path}`}
                            />
                         ))}
                      </motion.div>
