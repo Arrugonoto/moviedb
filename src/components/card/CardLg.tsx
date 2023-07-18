@@ -8,14 +8,12 @@ import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
 import { format } from 'date-fns';
 
 interface PropTypes {
-   backdrop_path?: string;
    genre_ids: number[];
    id: number;
    original_title?: string;
    original_name?: string;
    overview: string;
    popularity: number;
-   poster_path: string;
    release_date: string;
    first_air_date?: string;
    title?: string;
@@ -24,6 +22,7 @@ interface PropTypes {
    video?: boolean;
    vote_average: number;
    vote_count: number;
+   image_source?: string;
 }
 
 const overwiewMotion = {
@@ -59,8 +58,6 @@ const CardLg = ({
    id,
    overview,
    popularity,
-   poster_path,
-   backdrop_path,
    release_date,
    name,
    title,
@@ -68,6 +65,7 @@ const CardLg = ({
    vote_count,
    genre_ids,
    origin_country,
+   image_source,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
 
@@ -97,11 +95,9 @@ const CardLg = ({
             className={style.card}
          >
             <Card.Body css={{ p: '0', ov: 'hidden' }}>
-               {poster_path || backdrop_path ? (
+               {image_source ? (
                   <Card.Image
-                     src={`https://image.tmdb.org/t/p/w500${
-                        poster_path ?? backdrop_path
-                     }`}
+                     src={`https://image.tmdb.org/t/p/${image_source}`}
                      width="100%"
                      height="100%"
                      objectFit="cover"
@@ -169,6 +165,7 @@ const CardLg = ({
                >
                   {genre_ids.map(id => (
                      <p
+                        key={id}
                         style={{
                            color: '#ffffff',
                            borderRadius: '0.4rem',
