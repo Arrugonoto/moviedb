@@ -186,6 +186,7 @@ const CardLgAnimated = ({
                >
                   {genre_ids.map(id => (
                      <p
+                        key={id}
                         style={{
                            color: '#ffffff',
                            borderRadius: '0.4rem',
