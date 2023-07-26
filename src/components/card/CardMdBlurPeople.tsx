@@ -2,6 +2,8 @@ import { ReactElement } from 'react';
 import { Card, Text, Col } from '@nextui-org/react';
 import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
 
 interface PropTypes {
    adult?: boolean;
@@ -22,6 +24,14 @@ const CardMdBlurPeople = ({
    original_name,
    profile_path,
 }: PropTypes): ReactElement => {
+   const navigate = useNavigate();
+   const titleRegex = /:|,|\./g;
+   const personFullname: string = name
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
+
    return (
       <article>
          <Card
@@ -86,6 +96,11 @@ const CardMdBlurPeople = ({
                         },
                      }}
                      title={name}
+                     onClick={() =>
+                        navigate(
+                           `/${ROUTES.PERSON_DETAILS}/${personFullname}/${id}`
+                        )
+                     }
                   >
                      {name}
                   </Text>
