@@ -2,6 +2,8 @@ import { ReactElement } from 'react';
 import { Card, Text, Col, Row, Tooltip, useTheme } from '@nextui-org/react';
 import { FaImage, FaStar, FaUser } from 'react-icons/fa';
 import style from './movieCard.module.css';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
 
 interface PropTypes {
    id: number;
@@ -10,8 +12,8 @@ interface PropTypes {
    poster_path: string;
    release_date?: string;
    first_air_date?: string;
-   title?: string;
-   name?: string;
+   title: string;
+   name: string;
    vote_average: number;
    vote_count: number;
 }
@@ -30,6 +32,22 @@ const CardMdBlur = ({
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
    const rating = vote_average.toFixed(1);
+   const navigate = useNavigate();
+   const titleRegex = /:|,|\./g;
+   const movieTitle: string = name ?? title;
+   const replacedTitle: string = movieTitle
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
+
+   const handleRedirect = () => {
+      if (name) {
+         navigate(`/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${id}`);
+      } else {
+         navigate(`/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${id}`);
+      }
+   };
 
    return (
       <article title={title ? title : name}>
@@ -125,6 +143,7 @@ const CardMdBlur = ({
                      },
                   }}
                   title={title ? title : name}
+                  onClick={() => handleRedirect()}
                >
                   {title ? title : name}
                </Text>

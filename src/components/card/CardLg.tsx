@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
 import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
 
 interface PropTypes {
    genre_ids: number[];
@@ -16,8 +18,8 @@ interface PropTypes {
    popularity: number;
    release_date: string;
    first_air_date?: string;
-   title?: string;
-   name?: string;
+   title: string;
+   name: string;
    origin_country: string[];
    video?: boolean;
    vote_average: number;
@@ -68,6 +70,22 @@ const CardLg = ({
    image_source,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
+   const navigate = useNavigate();
+   const titleRegex = /:|,|\./g;
+   const movieTitle: string = name ?? title;
+   const replacedTitle: string = movieTitle
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
+
+   const handleRedirect = () => {
+      if (name) {
+         navigate(`/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${id}`);
+      } else {
+         navigate(`/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${id}`);
+      }
+   };
 
    return (
       <motion.article
@@ -244,6 +262,7 @@ const CardLg = ({
                      },
                   }}
                   title={title ? title : name}
+                  onClick={() => handleRedirect()}
                >
                   {title ? title : name}
                </Text>

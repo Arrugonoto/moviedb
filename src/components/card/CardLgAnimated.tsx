@@ -5,6 +5,8 @@ import style from './movieCard.module.css';
 import { motion } from 'framer-motion';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
 import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
 
 interface PropTypes {
    backdrop_path?: string;
@@ -17,8 +19,8 @@ interface PropTypes {
    poster_path: string;
    release_date?: string;
    first_air_date?: string;
-   title?: string;
-   name?: string;
+   title: string;
+   name: string;
    origin_country: string[];
    video?: boolean;
    vote_average: number;
@@ -83,6 +85,22 @@ const CardLgAnimated = ({
    origin_country,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
+   const navigate = useNavigate();
+   const titleRegex = /:|,|\./g;
+   const movieTitle: string = name ?? title;
+   const replacedTitle: string = movieTitle
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
+
+   const handleRedirect = () => {
+      if (name) {
+         navigate(`/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${id}`);
+      } else {
+         navigate(`/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${id}`);
+      }
+   };
 
    return (
       <motion.article
@@ -272,6 +290,7 @@ const CardLgAnimated = ({
                      },
                   }}
                   title={title ? title : name}
+                  onClick={() => handleRedirect()}
                >
                   {title ? title : name}
                </Text>

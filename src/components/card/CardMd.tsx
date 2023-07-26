@@ -2,6 +2,8 @@ import { ReactElement } from 'react';
 import { Card, Text, Col, Row, Tooltip, useTheme } from '@nextui-org/react';
 import { FaImage, FaStar, FaUser } from 'react-icons/fa';
 import style from './movieCard.module.css';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
 
 interface PropTypes {
    backdrop_path: string;
@@ -29,9 +31,20 @@ const CardMd = ({
    vote_count,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
+   const navigate = useNavigate();
+   const titleRegex = /:|,|\./g;
+   const movieTitle: string = title
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
 
    return (
-      <article>
+      <article
+         onClick={() =>
+            navigate(`/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${id}`)
+         }
+      >
          <Card
             isPressable
             allowTextSelectionOnPress={true}

@@ -4,6 +4,8 @@ import style from './cardList.module.css';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
 import { FaCalendar } from 'react-icons/fa6';
 import { FaStar } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
 
 interface PropTypes {
    backdrop_path?: string;
@@ -16,8 +18,8 @@ interface PropTypes {
    poster_path: string;
    release_date: string;
    first_air_date?: string;
-   title?: string;
-   name?: string;
+   title: string;
+   name: string;
    origin_country: string[];
    video?: boolean;
    vote_average: number;
@@ -39,6 +41,7 @@ const CardList = ({
    poster_path,
    backdrop_path,
    release_date,
+   production_id,
    first_air_date,
    name,
    title,
@@ -47,9 +50,27 @@ const CardList = ({
    index,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
+   const navigate = useNavigate();
+   const titleRegex = /:|,|\./g;
+   const movieTitle: string = name ?? title;
+   const replacedTitle: string = movieTitle
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
+
+   const handleRedirect = () => {
+      if (name) {
+         navigate(
+            `/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${production_id}`
+         );
+      } else {
+         navigate(`/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${production_id}`);
+      }
+   };
 
    return (
-      <article className={style.cardContainer}>
+      <article className={style.cardContainer} onClick={() => handleRedirect()}>
          <Row css={{ w: '100%', height: '9rem' }}>
             <Col css={{ w: 'min-content', cursor: 'pointer' }}>
                <Image
