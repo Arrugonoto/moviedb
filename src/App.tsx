@@ -25,6 +25,7 @@ import Series from './pages/Series';
 import PopularSeries from './pages/PopularSeries';
 import People from './pages/People';
 import PersonDetails from './pages/PersonDetails';
+import TvShowDetails from './pages/TvShowDetails';
 import NotFound from './pages/NotFound';
 import SearchResults from './pages/SearchResults';
 // routes
@@ -104,8 +105,16 @@ function App() {
                         />
                         <Route path={ROUTES.PEOPLE} element={<People />} />
                         <Route
-                           path={ROUTES.MOVIE_DETAILS}
+                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId`}
                            element={<MovieDetails />}
+                        />
+                        <Route
+                           path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId`}
+                           element={<TvShowDetails />}
+                        />
+                        <Route
+                           path={`${ROUTES.PERSON_DETAILS}/:personName/:personId`}
+                           element={<PersonDetails />}
                         />
                      </Routes>
                   </main>
