@@ -19,8 +19,8 @@ interface PropTypes {
    poster_path: string;
    release_date?: string;
    first_air_date?: string;
-   title: string;
-   name: string;
+   title?: string;
+   name?: string;
    origin_country: string[];
    video?: boolean;
    vote_average: number;
@@ -87,7 +87,7 @@ const CardLgAnimated = ({
    const { isDark } = useTheme();
    const navigate = useNavigate();
    const titleRegex = /:|,|\./g;
-   const movieTitle: string = name ?? title;
+   const movieTitle: string = (name ?? title) as string;
    const replacedTitle: string = movieTitle
       .toLowerCase()
       .split(' ')

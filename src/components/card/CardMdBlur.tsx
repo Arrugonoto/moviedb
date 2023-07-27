@@ -12,8 +12,8 @@ interface PropTypes {
    poster_path: string;
    release_date?: string;
    first_air_date?: string;
-   title: string;
-   name: string;
+   title?: string;
+   name?: string;
    vote_average: number;
    vote_count: number;
 }
@@ -34,7 +34,7 @@ const CardMdBlur = ({
    const rating = vote_average.toFixed(1);
    const navigate = useNavigate();
    const titleRegex = /:|,|\./g;
-   const movieTitle: string = name ?? title;
+   const movieTitle: string = (name ?? title) as string;
    const replacedTitle: string = movieTitle
       .toLowerCase()
       .split(' ')
