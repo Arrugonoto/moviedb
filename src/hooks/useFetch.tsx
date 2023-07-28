@@ -22,8 +22,15 @@ const useFetch = <T,>(initialData: T) => {
          setError(result);
          throw new Error(`Couldn't fetch source`);
       }
-      setData(result.results);
-      setLastPage(result.total_pages);
+      if (result.results) {
+         setData(result.results);
+      } else {
+         setData(result);
+      }
+
+      if (result.total_pages) {
+         setLastPage(result.total_pages);
+      }
 
       setLoading(false);
    };
