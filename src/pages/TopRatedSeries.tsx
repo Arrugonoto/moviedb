@@ -63,7 +63,6 @@ const TopRatedSeries = () => {
    useEffect(() => {
       if (page !== 1) {
          fetchSeries();
-         console.log(data);
       }
       // eslint-disable-next-line
    }, [page]);
