@@ -128,6 +128,9 @@ const CardMdBlur = ({
                   zIndex: 1,
                   br: '0',
                   h: '2rem',
+                  bc: `${
+                     isDark ? 'rgba(8, 8, 8, .8)' : 'rgba(250, 250, 250, .8)'
+                  }`,
                }}
             >
                <Text

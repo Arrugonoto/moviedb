@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Card, Text, Col } from '@nextui-org/react';
+import { Card, Text, Col, useTheme } from '@nextui-org/react';
 import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +25,7 @@ const CardMdBlurPeople = ({
    profile_path,
 }: PropTypes): ReactElement => {
    const navigate = useNavigate();
+   const { isDark } = useTheme();
    const titleRegex = /:|,|\./g;
    const personFullname: string = name
       .toLowerCase()
@@ -81,6 +82,9 @@ const CardMdBlurPeople = ({
                      zIndex: 1,
                      br: '0',
                      h: '2rem',
+                     bc: `${
+                        isDark ? 'rgba(8, 8, 8, .8)' : 'rgba(250, 250, 250, .8)'
+                     }`,
                   }}
                >
                   <Text
