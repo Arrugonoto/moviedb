@@ -46,7 +46,6 @@ const TrendingPeople = () => {
 
    useEffect(() => {
       fetchSeries();
-      console.log(data);
       // eslint-disable-next-line
    }, []);
 
@@ -58,7 +57,8 @@ const TrendingPeople = () => {
                display: 'flex',
                overflowX: 'hidden',
                gap: '1.2rem',
-               padding: '.5rem 1rem',
+               padding: '2rem 1.4rem',
+               borderRadius: '.2rem',
             }}
          >
             <motion.div

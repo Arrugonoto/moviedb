@@ -62,7 +62,9 @@ const PopularSeries = () => {
                display: 'flex',
                overflowX: 'hidden',
                gap: '1.2rem',
-               padding: '.5rem 1rem',
+               padding: '2rem 1.4rem',
+               background: 'rgba(146, 16, 160, 0.8)',
+               borderRadius: '.2rem',
             }}
          >
             <motion.div

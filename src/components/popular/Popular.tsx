@@ -41,7 +41,7 @@ const Popular = () => {
                   </Button>
                </Button.Group>
             </Row>
-            <Row css={{ br: '0.3rem' }}>
+            <Row css={{ br: '0.3rem', minHeight: '24rem' }}>
                {displayPopular === 'movies' && <PopularMovies />}
                {displayPopular === 'series' && <PopularSeries />}
             </Row>
