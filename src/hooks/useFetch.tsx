@@ -22,6 +22,7 @@ const useFetch = <T,>(initialData: T) => {
          setError(result);
          throw new Error(`Couldn't fetch source`);
       }
+
       if (result.results) {
          setData(result.results);
       } else {
