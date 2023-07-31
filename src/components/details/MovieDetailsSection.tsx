@@ -5,7 +5,7 @@ import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
 import { format } from 'date-fns';
-import { BiSolidStar } from 'react-icons/bi';
+import DetailsHeader from './moviedetails/DetailsHeader';
 
 interface OptionsTypes {
    method: string;
@@ -15,7 +15,37 @@ interface OptionsTypes {
    };
 }
 
-interface MovieDetailsProps {
+interface CreditsTypes {
+   cast: {
+      adult: boolean;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number;
+      profile_path: string;
+      cast_id: number;
+      character: string;
+      credit_id: string;
+      order: number;
+   }[];
+   crew: {
+      adult: boolean;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number;
+      profile_path: string;
+      credit_id: string;
+      department: string;
+      job: string;
+   }[];
+}
+
+interface MovieDetailsTypes {
    adult: boolean;
    backdrop_path: string;
    belongs_to_collection: unknown;
@@ -50,13 +80,19 @@ interface MovieDetailsProps {
    video: boolean;
    vote_average: number;
    vote_count: number;
+   credits: CreditsTypes;
 }
 
 const MovieDetailsSection = () => {
    const { movieId } = useParams();
    const { isDark } = useTheme();
-   const { handleFetch, data } = useFetch<MovieDetailsProps>(
-      {} as MovieDetailsProps
+   const { handleFetch, data } = useFetch<MovieDetailsTypes>(
+      {} as MovieDetailsTypes
+   );
+   const { credits } = data;
+   const director = credits?.crew?.filter(person => person.job === 'Director');
+   const screenplay = credits?.crew?.filter(
+      person => person.job === 'Screenplay'
    );
 
    const fetchDetails = async (): Promise<void> => {
@@ -68,7 +104,7 @@ const MovieDetailsSection = () => {
          },
       };
 
-      const url = `https://api.themoviedb.org/3/movie/${movieId}`;
+      const url = `https://api.themoviedb.org/3/movie/${movieId}?append_to_response=credits`;
 
       handleFetch({ url, options });
    };
@@ -80,144 +116,7 @@ const MovieDetailsSection = () => {
 
    return (
       <Container fluid>
-         <Row
-            css={{
-               position: 'relative',
-               h: '30rem',
-               background: `url("https://image.tmdb.org/t/p/w1280${data?.backdrop_path}") no-repeat`,
-               backgroundSize: 'cover',
-               '&:after': {
-                  content: '',
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  w: '100%',
-                  h: '100%',
-                  background:
-                     'linear-gradient(0deg, rgba(2, 7, 4, 0.9), rgba(146, 16, 160, 0.5))',
-                  opacity: 1,
-                  backdropFilter: 'blur(0.5px)',
-                  transition:
-                     'opacity 0.2s linear, backdrop-filter 0.2s linear',
-               },
-               '&:hover:after': {
-                  opacity: 0.8,
-                  backdropFilter: 'blur(0)',
-               },
-            }}
-         >
-            <Col
-               css={{
-                  w: '18rem',
-                  position: 'absolute',
-                  zIndex: 10,
-                  left: '50%',
-                  translate: '-50% 24%',
-                  bottom: '0',
-               }}
-            >
-               <div
-                  style={{
-                     display: 'flex',
-                     justifyContent: 'center',
-                     padding: '0 0 .5rem 0',
-                  }}
-               >
-                  <BiSolidStar
-                     style={{ fontSize: '2.3rem', color: '#FFCA28' }}
-                  />
-                  <Col span={3}>
-                     <Row
-                        css={{
-                           d: 'flex',
-                           fd: 'column',
-                        }}
-                     >
-                        <Text
-                           size={22}
-                           css={{
-                              fontWeight: '600',
-                              fontFamily: 'Roboto',
-                              color: '#fafafa',
-                           }}
-                           title="Rating"
-                        >
-                           {data?.vote_average?.toFixed(1)}
-                        </Text>
-                        <Text
-                           size={12}
-                           css={{
-                              fontFamily: 'Roboto',
-                              color: 'rgb(202, 202, 202)',
-                              letterSpacing: '0.1px',
-                              lineHeight: '1px',
-                           }}
-                           title="Votes"
-                        >
-                           {data?.vote_count}
-                        </Text>
-                     </Row>
-                  </Col>
-               </div>
-               <div
-                  style={{
-                     boxShadow: '0 0 1rem 0 #000',
-                     borderRadius: '0.2rem',
-                     overflow: 'hidden',
-                  }}
-               >
-                  <Image
-                     src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
-                     objectFit="cover"
-                     alt="Movie Poster"
-                  />
-               </div>
-               <Text
-                  size={22}
-                  css={{
-                     fontFamily: 'Roboto',
-                     textAlign: 'center',
-                     fontWeight: '600',
-                     letterSpacing: '0.3px',
-                  }}
-               >
-                  {data?.title}
-               </Text>
-               <div
-                  style={{
-                     display: 'flex',
-                     justifyContent: 'center',
-                     gap: '1rem',
-                  }}
-               >
-                  <Text
-                     size={15}
-                     css={{
-                        color: `${
-                           isDark ? 'rgb(170, 170, 170)' : 'rgb(130, 130, 130)'
-                        }`,
-                        letterSpacing: '0.05px',
-                     }}
-                  >
-                     {data?.release_date &&
-                        format(new Date(data?.release_date), 'yyyy')}
-                  </Text>
-                  <Text
-                     size={15}
-                     css={{
-                        color: `${
-                           isDark ? 'rgb(170, 170, 170)' : 'rgb(130, 130, 130)'
-                        }`,
-                        letterSpacing: '0.05px',
-                     }}
-                  >
-                     {`${Math.floor(data?.runtime / 60)}h ${
-                        data?.runtime % 60
-                     }m`}
-                  </Text>
-               </div>
-            </Col>
-         </Row>
+         <DetailsHeader />
          <Row
             css={{
                d: 'flex',
@@ -251,53 +150,150 @@ const MovieDetailsSection = () => {
                   paddingBottom: '1rem',
                }}
             >
-               <Col span={1} css={{ minWidth: '6rem' }}>
-                  <Text
-                     css={{
-                        fontWeight: '600',
-                        color: `${
-                           isDark ? 'rgb(170, 170, 170)' : 'rgb(130, 130, 130)'
-                        }`,
-                     }}
-                  >
-                     Director
-                  </Text>
-                  <Text
-                     css={{
-                        fontWeight: '600',
-                        color: `${
-                           isDark ? 'rgb(170, 170, 170)' : 'rgb(130, 130, 130)'
-                        }`,
-                     }}
-                  >
-                     Writers
-                  </Text>
-                  <Text
-                     css={{
-                        fontWeight: '600',
-                        color: `${
-                           isDark ? 'rgb(170, 170, 170)' : 'rgb(130, 130, 130)'
-                        }`,
-                     }}
-                  >
-                     Production
-                  </Text>
-                  <Text
-                     css={{
-                        fontWeight: '600',
-                        color: `${
-                           isDark ? 'rgb(170, 170, 170)' : 'rgb(130, 130, 130)'
-                        }`,
-                     }}
-                  >
-                     Release
-                  </Text>
-               </Col>
-               <Col>
-                  <Text>lalala</Text>
-                  <Text>lalala</Text>
-                  <Text>lalala</Text>
-                  <Text>lalala</Text>
+               <Col span={12}>
+                  <Row>
+                     <Text
+                        css={{
+                           minWidth: '8rem',
+                           fontWeight: '600',
+                           color: `${
+                              isDark
+                                 ? 'rgb(170, 170, 170)'
+                                 : 'rgb(130, 130, 130)'
+                           }`,
+                        }}
+                     >
+                        Director
+                     </Text>
+                     <div>
+                        {director?.map(person => (
+                           <Text
+                              key={person?.id}
+                              css={{
+                                 fontFamily: 'Roboto',
+                                 cursor: 'pointer',
+                                 letterSpacing: '0.01px',
+                                 '&:hover': {
+                                    textDecoration: 'underline',
+                                    color: '#C340C5',
+                                 },
+                              }}
+                           >
+                              {person.name}
+                           </Text>
+                        ))}
+                     </div>
+                  </Row>
+                  <Row>
+                     <Text
+                        css={{
+                           minWidth: '8rem',
+                           fontWeight: '600',
+                           color: `${
+                              isDark
+                                 ? 'rgb(170, 170, 170)'
+                                 : 'rgb(130, 130, 130)'
+                           }`,
+                        }}
+                     >
+                        Screenplay
+                     </Text>
+                     <div style={{ display: 'flex', gap: '.5rem' }}>
+                        {screenplay?.map(person => (
+                           <Text
+                              key={person?.id}
+                              css={{
+                                 fontFamily: 'Roboto',
+                                 cursor: 'pointer',
+                                 letterSpacing: '0.01px',
+                                 '&:hover': {
+                                    textDecoration: 'underline',
+                                    color: '#C340C5',
+                                 },
+                              }}
+                           >
+                              {person.name}
+                              {screenplay.indexOf(person) !==
+                              screenplay.length - 1
+                                 ? ','
+                                 : ''}
+                           </Text>
+                        ))}
+                     </div>
+                  </Row>
+                  <Row>
+                     <Text
+                        css={{
+                           minWidth: '8rem',
+                           fontWeight: '600',
+                           color: `${
+                              isDark
+                                 ? 'rgb(170, 170, 170)'
+                                 : 'rgb(130, 130, 130)'
+                           }`,
+                        }}
+                     >
+                        Production
+                     </Text>
+                     <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        {data?.production_countries.map((country, i) => {
+                           if (country.iso_3166_1 === 'US') {
+                              return (
+                                 <Text
+                                    key={i}
+                                    css={{
+                                       fontFamily: 'Roboto',
+                                       letterSpacing: '0.01px',
+                                    }}
+                                 >
+                                    USA
+                                    {data?.production_countries?.indexOf(
+                                       country
+                                    ) !==
+                                    data?.production_countries.length - 1
+                                       ? ','
+                                       : ''}
+                                 </Text>
+                              );
+                           } else
+                              return (
+                                 <Text
+                                    key={i}
+                                    css={{
+                                       fontFamily: 'Roboto',
+                                       letterSpacing: '0.01px',
+                                    }}
+                                 >
+                                    {country.name}
+                                    {data?.production_countries?.indexOf(
+                                       country
+                                    ) !==
+                                    data?.production_countries.length - 1
+                                       ? ','
+                                       : ''}
+                                 </Text>
+                              );
+                        })}
+                     </div>
+                  </Row>
+                  <Row>
+                     <Text
+                        css={{
+                           minWidth: '8rem',
+                           fontWeight: '600',
+                           color: `${
+                              isDark
+                                 ? 'rgb(170, 170, 170)'
+                                 : 'rgb(130, 130, 130)'
+                           }`,
+                        }}
+                     >
+                        Release
+                     </Text>
+                     <Text css={{ fontFamily: 'Roboto' }}>
+                        {format(new Date(data?.release_date), 'd MMMM y')}
+                     </Text>
+                  </Row>
                </Col>
             </Row>
          </Row>
