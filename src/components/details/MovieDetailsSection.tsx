@@ -1,11 +1,20 @@
 import { useEffect } from 'react';
-import { Container, Row, Col, Image, Text, useTheme } from '@nextui-org/react';
+import {
+   Container,
+   Row,
+   Col,
+   Image,
+   Text,
+   useTheme,
+   Button,
+} from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
 import { format } from 'date-fns';
 import DetailsHeader from './moviedetails/DetailsHeader';
+import MainCrew from './moviedetails/MainCrew';
 
 interface OptionsTypes {
    method: string;
@@ -116,186 +125,77 @@ const MovieDetailsSection = () => {
 
    return (
       <Container fluid>
-         <DetailsHeader />
-         <Row
-            css={{
-               d: 'flex',
-               fd: 'column',
-               marginTop: '8rem',
-               p: '2rem 0.5rem',
-               fontFamily: 'Roboto',
-            }}
-         >
-            <Row css={{ d: 'flex', gap: '.6rem' }}>
-               {data?.genres?.map(genre => (
-                  <p
-                     key={genre.id}
-                     style={{
-                        color: '#9210a0',
-                        border: '1px solid #9210a0',
-                        padding: '1px 1rem',
-                        borderRadius: '2rem',
-                        fontWeight: '600',
-                     }}
-                  >
-                     {genre.name}
-                  </p>
-               ))}
-            </Row>
-            <Text css={{ padding: '1rem 0', maxWidth: '80%' }}>
-               {data?.overview}
-            </Text>
-            <Row
-               css={{
-                  paddingBottom: '1rem',
-               }}
+         <DetailsHeader
+            backdropPath={data?.backdrop_path}
+            voteAverage={data?.vote_average}
+            voteCount={data?.vote_count}
+            posterPath={data?.poster_path}
+            title={data?.title}
+            releaseDate={data?.release_date}
+            runtime={data?.runtime}
+         />
+         <MainCrew
+            genres={data?.genres}
+            overview={data?.overview}
+            director={director}
+            screenplay={screenplay}
+            productionCountries={data?.production_countries}
+            releaseDate={data?.release_date}
+         />
+         <Row css={{ d: 'flex', fd: 'column', p: '2rem 0' }}>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
             >
-               <Col span={12}>
-                  <Row>
-                     <Text
-                        css={{
-                           minWidth: '8rem',
-                           fontWeight: '600',
-                           color: `${
-                              isDark
-                                 ? 'rgb(170, 170, 170)'
-                                 : 'rgb(130, 130, 130)'
-                           }`,
-                        }}
-                     >
-                        Director
-                     </Text>
-                     <div>
-                        {director?.map(person => (
-                           <Text
-                              key={person?.id}
-                              css={{
-                                 fontFamily: 'Roboto',
-                                 cursor: 'pointer',
-                                 letterSpacing: '0.01px',
-                                 '&:hover': {
-                                    textDecoration: 'underline',
-                                    color: '#C340C5',
-                                 },
-                              }}
-                           >
-                              {person.name}
-                           </Text>
-                        ))}
-                     </div>
-                  </Row>
-                  <Row>
-                     <Text
-                        css={{
-                           minWidth: '8rem',
-                           fontWeight: '600',
-                           color: `${
-                              isDark
-                                 ? 'rgb(170, 170, 170)'
-                                 : 'rgb(130, 130, 130)'
-                           }`,
-                        }}
-                     >
-                        Screenplay
-                     </Text>
-                     <div style={{ display: 'flex', gap: '.5rem' }}>
-                        {screenplay?.map(person => (
-                           <Text
-                              key={person?.id}
-                              css={{
-                                 fontFamily: 'Roboto',
-                                 cursor: 'pointer',
-                                 letterSpacing: '0.01px',
-                                 '&:hover': {
-                                    textDecoration: 'underline',
-                                    color: '#C340C5',
-                                 },
-                              }}
-                           >
-                              {person.name}
-                              {screenplay.indexOf(person) !==
-                              screenplay.length - 1
-                                 ? ','
-                                 : ''}
-                           </Text>
-                        ))}
-                     </div>
-                  </Row>
-                  <Row>
-                     <Text
-                        css={{
-                           minWidth: '8rem',
-                           fontWeight: '600',
-                           color: `${
-                              isDark
-                                 ? 'rgb(170, 170, 170)'
-                                 : 'rgb(130, 130, 130)'
-                           }`,
-                        }}
-                     >
-                        Production
-                     </Text>
-                     <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        {data?.production_countries.map((country, i) => {
-                           if (country.iso_3166_1 === 'US') {
-                              return (
-                                 <Text
-                                    key={i}
-                                    css={{
-                                       fontFamily: 'Roboto',
-                                       letterSpacing: '0.01px',
-                                    }}
-                                 >
-                                    USA
-                                    {data?.production_countries?.indexOf(
-                                       country
-                                    ) !==
-                                    data?.production_countries.length - 1
-                                       ? ','
-                                       : ''}
-                                 </Text>
-                              );
-                           } else
-                              return (
-                                 <Text
-                                    key={i}
-                                    css={{
-                                       fontFamily: 'Roboto',
-                                       letterSpacing: '0.01px',
-                                    }}
-                                 >
-                                    {country.name}
-                                    {data?.production_countries?.indexOf(
-                                       country
-                                    ) !==
-                                    data?.production_countries.length - 1
-                                       ? ','
-                                       : ''}
-                                 </Text>
-                              );
-                        })}
-                     </div>
-                  </Row>
-                  <Row>
-                     <Text
-                        css={{
-                           minWidth: '8rem',
-                           fontWeight: '600',
-                           color: `${
-                              isDark
-                                 ? 'rgb(170, 170, 170)'
-                                 : 'rgb(130, 130, 130)'
-                           }`,
-                        }}
-                     >
-                        Release
-                     </Text>
-                     <Text css={{ fontFamily: 'Roboto' }}>
-                        {format(new Date(data?.release_date), 'd MMMM y')}
-                     </Text>
-                  </Row>
-               </Col>
+               Cast
+            </Text>
+            <Row css={{ overflowX: 'scroll', p: '1rem' }}>
+               <div style={{ display: 'flex', gap: '1rem' }}>
+                  {data?.credits?.cast.map(person => {
+                     if (data.credits.cast.indexOf(person) < 12)
+                        return (
+                           <Text css={{ w: '10rem' }}>{`${person.name}`} </Text>
+                        );
+                  })}
+               </div>
             </Row>
+            <Button>Show entire Cast & Crew</Button>
+         </Row>
+         <Row css={{ p: '2rem 0' }}>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
+            >
+               Photos
+            </Text>
+            <Row></Row>
+         </Row>
+         <Row css={{ p: '2rem 0' }}>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
+            >
+               Review
+            </Text>
+            <Row></Row>
+         </Row>
+         <Row css={{ p: '2rem 0' }}>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
+            >
+               Information
+            </Text>
+            <Row></Row>
+         </Row>
+         <Row css={{ p: '2rem 0' }}>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
+            >
+               Recommendations
+            </Text>
+            <Row></Row>
          </Row>
       </Container>
    );
