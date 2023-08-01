@@ -1,89 +1,34 @@
-import { useEffect } from 'react';
 import { Container, Row, Col, Text, Image, useTheme } from '@nextui-org/react';
-import { useParams } from 'react-router-dom';
-import { METHODS } from '../../../services/api';
-import { API_KEY } from '../../../services/api-key';
-import useFetch from '../../../hooks/useFetch';
 import { format } from 'date-fns';
 import { BiSolidStar } from 'react-icons/bi';
 
-interface OptionsTypes {
-   method: string;
-   headers: {
-      accept: string;
-      Authorization: string;
-   };
-}
-
-interface MovieDetailsTypes {
-   adult: boolean;
-   backdrop_path: string;
-   belongs_to_collection: unknown;
-   budget: number;
-   genres: { id: number; name: string }[];
-   homepage: string;
-   id: number;
-   imdb_id: string;
-   original_language: string;
-   original_title: string;
-   overview: string;
-   popularity: number;
-   poster_path: string;
-   production_companies: {
-      id: number;
-      logo_path: string;
-      name: string;
-      origin_country: string;
-   }[];
-   production_countries: { iso_3166_1: string; name: string }[];
-   release_date: string;
-   revenue: number;
+interface MovieDetailsProps {
+   backdropPath: string;
+   posterPath: string;
+   releaseDate: string;
    runtime: number;
-   spoken_languages: {
-      english_name: string;
-      iso_639_1: string;
-      name: string;
-   }[];
-   status: string;
-   tagline: string;
    title: string;
-   video: boolean;
-   vote_average: number;
-   vote_count: number;
+   voteAverage: number;
+   voteCount: number;
 }
 
-const DetailsHeader = () => {
-   const { movieId } = useParams();
+const DetailsHeader = ({
+   backdropPath,
+   voteAverage,
+   voteCount,
+   posterPath,
+   title,
+   releaseDate,
+   runtime,
+}: MovieDetailsProps) => {
    const { isDark } = useTheme();
-   const { handleFetch, data } = useFetch<MovieDetailsTypes>(
-      {} as MovieDetailsTypes
-   );
-
-   const fetchDetails = async (): Promise<void> => {
-      const options: OptionsTypes = {
-         method: METHODS.GET,
-         headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${API_KEY.access_token}`,
-         },
-      };
-
-      const url = `https://api.themoviedb.org/3/movie/${movieId}`;
-
-      handleFetch({ url, options });
-   };
-
-   useEffect(() => {
-      fetchDetails();
-      // eslint-disable-next-line
-   }, []);
 
    return (
       <Container
          css={{
             position: 'relative',
             h: '30rem',
-            background: `url("https://image.tmdb.org/t/p/w1280${data?.backdrop_path}") no-repeat`,
+            background: `url("https://image.tmdb.org/t/p/w1280${backdropPath}") no-repeat`,
             backgroundSize: 'cover',
             '&:after': {
                content: '',
@@ -138,7 +83,7 @@ const DetailsHeader = () => {
                         }}
                         title="Rating"
                      >
-                        {data?.vote_average?.toFixed(1)}
+                        {voteAverage?.toFixed(1)}
                      </Text>
                      <Text
                         size={12}
@@ -150,7 +95,7 @@ const DetailsHeader = () => {
                         }}
                         title="Votes"
                      >
-                        {data?.vote_count}
+                        {voteCount}
                      </Text>
                   </Row>
                </Col>
@@ -163,7 +108,7 @@ const DetailsHeader = () => {
                }}
             >
                <Image
-                  src={`https://image.tmdb.org/t/p/w780${data?.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w780${posterPath}`}
                   objectFit="cover"
                   alt="Movie Poster"
                />
@@ -177,7 +122,7 @@ const DetailsHeader = () => {
                   letterSpacing: '0.3px',
                }}
             >
-               {data?.title}
+               {title}
             </Text>
             <div
                style={{
@@ -195,8 +140,7 @@ const DetailsHeader = () => {
                      letterSpacing: '0.05px',
                   }}
                >
-                  {data?.release_date &&
-                     format(new Date(data?.release_date), 'yyyy')}
+                  {releaseDate && format(new Date(releaseDate), 'yyyy')}
                </Text>
                <Text
                   size={15}
@@ -207,7 +151,7 @@ const DetailsHeader = () => {
                      letterSpacing: '0.05px',
                   }}
                >
-                  {`${Math.floor(data?.runtime / 60)}h ${data?.runtime % 60}m`}
+                  {`${Math.floor(runtime / 60)}h ${runtime % 60}m`}
                </Text>
             </div>
          </Col>
