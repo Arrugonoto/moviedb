@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
    Container,
    Row,
@@ -15,6 +15,8 @@ import useFetch from '../../hooks/useFetch';
 import { format } from 'date-fns';
 import DetailsHeader from './moviedetails/DetailsHeader';
 import MainCrew from './moviedetails/MainCrew';
+import { motion } from 'framer-motion';
+import Cast from './moviedetails/Cast';
 
 interface OptionsTypes {
    method: string;
@@ -99,6 +101,7 @@ const MovieDetailsSection = () => {
       {} as MovieDetailsTypes
    );
    const { credits } = data;
+   const castContainerRef = useRef<HTMLDivElement>(null);
    const director = credits?.crew?.filter(person => person.job === 'Director');
    const screenplay = credits?.crew?.filter(
       person => person.job === 'Screenplay'
@@ -120,6 +123,9 @@ const MovieDetailsSection = () => {
 
    useEffect(() => {
       fetchDetails();
+      window.scrollTo({
+         top: 0,
+      });
       // eslint-disable-next-line
    }, []);
 
@@ -142,25 +148,7 @@ const MovieDetailsSection = () => {
             productionCountries={data?.production_countries}
             releaseDate={data?.release_date}
          />
-         <Row css={{ d: 'flex', fd: 'column', p: '2rem 0' }}>
-            <Text
-               h3
-               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
-            >
-               Cast
-            </Text>
-            <Row css={{ overflowX: 'scroll', p: '1rem' }}>
-               <div style={{ display: 'flex', gap: '1rem' }}>
-                  {data?.credits?.cast.map(person => {
-                     if (data.credits.cast.indexOf(person) < 12)
-                        return (
-                           <Text css={{ w: '10rem' }}>{`${person.name}`} </Text>
-                        );
-                  })}
-               </div>
-            </Row>
-            <Button>Show entire Cast & Crew</Button>
-         </Row>
+         <Cast cast={data?.credits?.cast} />
          <Row css={{ p: '2rem 0' }}>
             <Text
                h3
