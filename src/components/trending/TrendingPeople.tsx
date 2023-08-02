@@ -57,14 +57,18 @@ const TrendingPeople = () => {
                display: 'flex',
                overflowX: 'hidden',
                gap: '1.2rem',
-               padding: '2rem 1.4rem',
+
                borderRadius: '.2rem',
             }}
          >
             <motion.div
                drag="x"
                dragConstraints={constraintsRef}
-               style={{ display: 'flex', gap: '1.2rem' }}
+               style={{
+                  display: 'flex',
+                  gap: '1.2rem',
+                  padding: '2rem 1.4rem',
+               }}
                dragElastic={0.1}
             >
                {data?.map(person => (
