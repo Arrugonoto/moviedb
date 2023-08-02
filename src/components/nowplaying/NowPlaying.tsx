@@ -78,7 +78,6 @@ const NowPlaying = () => {
                         display: 'flex',
                         overflowX: 'hidden',
                         gap: '1.2rem',
-                        padding: '.5rem 1rem',
                      }}
                   >
                      <motion.div
@@ -87,6 +86,7 @@ const NowPlaying = () => {
                         style={{
                            display: 'flex',
                            gap: '1.2rem',
+                           padding: '.5rem 1rem',
                         }}
                         dragElastic={0.1}
                      >
