@@ -62,7 +62,6 @@ const TopRatedSeries = () => {
                display: 'flex',
                overflowX: 'hidden',
                gap: '1.2rem',
-               padding: '.5rem 1rem',
             }}
          >
             <motion.div
@@ -72,6 +71,7 @@ const TopRatedSeries = () => {
                   display: 'flex',
                   gap: '1.2rem',
                   width: '300rem',
+                  padding: '.5rem 1rem',
                }}
                dragElastic={0.1}
             >
