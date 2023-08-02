@@ -19,4 +19,10 @@ export const IMAGE_SIZE: { [key: string]: { [key: string]: string } } = {
       W780: 'w780',
       ORIGINAL: 'original',
    },
+   PROFILE: {
+      W45: 'w45',
+      W185: 'w185',
+      W632: 'h632',
+      ORIGINAL: 'original',
+   },
 };
