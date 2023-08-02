@@ -26,12 +26,12 @@ const CardMdBlurPeople = ({
 }: PropTypes): ReactElement => {
    const navigate = useNavigate();
    const { isDark } = useTheme();
-   const titleRegex = /:|,|\./g;
+   const nameRegex = /:|,|\./g;
    const personFullname: string = name
       .toLowerCase()
       .split(' ')
       .join('-')
-      .replaceAll(titleRegex, '');
+      .replaceAll(nameRegex, '');
 
    return (
       <article>
