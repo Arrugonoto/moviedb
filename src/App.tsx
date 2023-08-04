@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // react-router-dom
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // nextui
+
 import {
    NextUIProvider,
    getDocumentTheme,
@@ -10,8 +11,10 @@ import {
    Spacer,
 } from '@nextui-org/react';
 
+// components
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+
 // pages
 import Home from './pages/Home';
 import Genre from './pages/Genre';
@@ -26,10 +29,13 @@ import PopularSeries from './pages/PopularSeries';
 import People from './pages/People';
 import PersonDetails from './pages/PersonDetails';
 import TvShowDetails from './pages/TvShowDetails';
+import MovieCredits from './pages/castandcrew/MovieCredits';
 import NotFound from './pages/NotFound';
 import SearchResults from './pages/SearchResults';
+
 // routes
 import ROUTES from './routes/routes';
+
 // theme
 import { lightTheme, darkTheme } from './theme/theme';
 
@@ -105,8 +111,12 @@ function App() {
                         />
                         <Route path={ROUTES.PEOPLE} element={<People />} />
                         <Route
-                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId`}
+                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId/*`}
                            element={<MovieDetails />}
+                        />
+                        <Route
+                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId/cast-and-crew`}
+                           element={<MovieCredits />}
                         />
                         <Route
                            path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId`}
