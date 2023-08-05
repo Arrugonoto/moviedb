@@ -1,21 +1,11 @@
 import { useEffect, useRef } from 'react';
-import {
-   Container,
-   Row,
-   Col,
-   Image,
-   Text,
-   useTheme,
-   Button,
-} from '@nextui-org/react';
+import { Container, Row, Col, Text, useTheme } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import { format } from 'date-fns';
 import DetailsHeader from './moviedetails/DetailsHeader';
 import MainCrew from './moviedetails/MainCrew';
-import { motion } from 'framer-motion';
 import Cast from './moviedetails/Cast';
 
 interface OptionsTypes {
