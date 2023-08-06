@@ -7,6 +7,7 @@ import {
    Container,
    Input,
    Image,
+   Link,
 } from '@nextui-org/react';
 import styles from './nav.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -66,14 +67,15 @@ const Nav = () => {
                      alignItems: 'center',
                   }}
                >
-                  <Navbar.Brand>
-                     <Image
-                        width={140}
-                        src={Logo}
-                        alt="MovieDB - app logo"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => navigate(`${ROUTES.HOME}`)}
-                     />
+                  <Navbar.Brand onClick={() => navigate(`/${ROUTES.HOME}`)}>
+                     <NavLink to={ROUTES.HOME}>
+                        <Image
+                           width={140}
+                           src={Logo}
+                           alt="MovieDB - app logo"
+                           style={{ cursor: 'pointer' }}
+                        />
+                     </NavLink>
                   </Navbar.Brand>
                   <Navbar.Content
                      gap={20}
