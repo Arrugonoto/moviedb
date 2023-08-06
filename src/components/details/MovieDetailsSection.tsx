@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { Container, Row, Col, Text, useTheme } from '@nextui-org/react';
+import { useEffect } from 'react';
+import { Container, Row, Text } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
@@ -7,6 +7,9 @@ import useFetch from '../../hooks/useFetch';
 import DetailsHeader from './moviedetails/DetailsHeader';
 import MainCrew from './moviedetails/MainCrew';
 import Cast from './moviedetails/Cast';
+import Recommendations from './recommendations/Recommendations';
+import Similar from './similar/Similar';
+import Information from './moviedetails/Information';
 
 interface OptionsTypes {
    method: string;
@@ -86,12 +89,10 @@ interface MovieDetailsTypes {
 
 const MovieDetailsSection = () => {
    const { movieId } = useParams();
-   const { isDark } = useTheme();
    const { handleFetch, data } = useFetch<MovieDetailsTypes>(
       {} as MovieDetailsTypes
    );
    const { credits } = data;
-   const castContainerRef = useRef<HTMLDivElement>(null);
    const director = credits?.crew?.filter(person => person.job === 'Director');
    const screenplay = credits?.crew?.filter(
       person => person.job === 'Screenplay'
@@ -113,11 +114,8 @@ const MovieDetailsSection = () => {
 
    useEffect(() => {
       fetchDetails();
-      window.scrollTo({
-         top: 0,
-      });
       // eslint-disable-next-line
-   }, []);
+   }, [movieId]);
 
    return (
       <Container fluid>
@@ -139,7 +137,7 @@ const MovieDetailsSection = () => {
             releaseDate={data?.release_date}
          />
          <Cast cast={data?.credits?.cast} />
-         <Row css={{ p: '2rem 0' }}>
+         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
             <Text
                h3
                css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
@@ -148,7 +146,7 @@ const MovieDetailsSection = () => {
             </Text>
             <Row></Row>
          </Row>
-         <Row css={{ p: '2rem 0' }}>
+         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
             <Text
                h3
                css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
@@ -157,23 +155,38 @@ const MovieDetailsSection = () => {
             </Text>
             <Row></Row>
          </Row>
-         <Row css={{ p: '2rem 0' }}>
+         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
             <Text
                h3
                css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
             >
                Information
             </Text>
-            <Row></Row>
+            <Row>
+               <Information />
+            </Row>
          </Row>
-         <Row css={{ p: '2rem 0' }}>
+         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
             <Text
                h3
                css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
             >
                Recommendations
             </Text>
-            <Row></Row>
+            <Row>
+               <Recommendations />
+            </Row>
+         </Row>
+         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
+            >
+               Similar
+            </Text>
+            <Row>
+               <Similar />
+            </Row>
          </Row>
       </Container>
    );
