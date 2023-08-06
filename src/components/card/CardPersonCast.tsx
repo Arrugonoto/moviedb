@@ -1,6 +1,7 @@
 import { Text, Card } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 interface PersonProps {
    person: {
@@ -33,17 +34,39 @@ const CardPersonCast = ({ person }: PersonProps) => {
          style={{ width: '10rem', cursor: 'pointer' }}
          title={`${person.name}`}
       >
-         <Card isPressable disableRipple disableAnimation>
-            <Card.Image
-               src={`https://image.tmdb.org/t/p/w1280${person.profile_path}`}
-               objectFit="cover"
-               alt="Person Profile"
-               css={{
-                  transition: 'all 0.2s linear',
-                  '&:hover': { scale: 1.2 },
-                  cursor: 'grab',
-               }}
-            />
+         <Card
+            isPressable
+            disableRipple
+            disableAnimation
+            css={{ w: '100%', height: '15rem' }}
+         >
+            {person?.profile_path ? (
+               <Card.Image
+                  src={`https://image.tmdb.org/t/p/w1280${person.profile_path}`}
+                  objectFit="cover"
+                  alt="Person Profile"
+                  css={{
+                     transition: 'all 0.2s linear',
+                     '&:hover': { scale: 1.2 },
+                     cursor: 'grab',
+                  }}
+               />
+            ) : (
+               <div
+                  style={{
+                     display: 'flex',
+                     width: ' 100%',
+                     height: '100%',
+                     alignItems: 'center',
+                     justifyContent: 'center',
+                     backgroundColor: 'rgba(146, 16, 160, 0.3)',
+                  }}
+               >
+                  <BsFillPersonFill
+                     style={{ fontSize: '6rem', opacity: 0.4 }}
+                  />
+               </div>
+            )}
          </Card>
          <Text
             css={{
