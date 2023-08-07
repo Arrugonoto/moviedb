@@ -128,6 +128,7 @@ const MovieCredits = () => {
                >
                   <Image
                      src={`${BASE_URL}${IMAGE_SIZE.POSTER.W342}${data?.poster_path}`}
+                     loading="lazy"
                      objectFit="cover"
                      alt="Movie poster"
                      css={{ borderRadius: '0.1rem' }}
