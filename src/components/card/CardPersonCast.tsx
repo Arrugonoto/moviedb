@@ -43,6 +43,7 @@ const CardPersonCast = ({ person }: PersonProps) => {
             {person?.profile_path ? (
                <Card.Image
                   src={`https://image.tmdb.org/t/p/w1280${person.profile_path}`}
+                  loading="lazy"
                   objectFit="cover"
                   alt="Person Profile"
                   css={{

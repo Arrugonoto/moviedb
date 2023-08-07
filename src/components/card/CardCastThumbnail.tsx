@@ -56,6 +56,7 @@ const CardCastThumbnail = ({ person }: PersonProps) => {
                         IMAGE_SIZE.PROFILE.W185 +
                         person?.profile_path
                      }`}
+                     loading="lazy"
                      objectFit="cover"
                      alt="Person profile"
                      css={{ cursor: 'pointer' }}

@@ -109,6 +109,7 @@ const DetailsHeader = ({
             >
                <Image
                   src={`https://image.tmdb.org/t/p/w780${posterPath}`}
+                  loading="lazy"
                   objectFit="cover"
                   alt="Movie Poster"
                />

@@ -116,6 +116,7 @@ const CardLg = ({
                {image_source ? (
                   <Card.Image
                      src={`https://image.tmdb.org/t/p/${image_source}`}
+                     loading="lazy"
                      width="100%"
                      height="100%"
                      objectFit="cover"

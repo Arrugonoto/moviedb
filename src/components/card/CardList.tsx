@@ -77,6 +77,7 @@ const CardList = ({
                   src={`https://image.tmdb.org/t/p/w400${
                      poster_path ?? backdrop_path
                   }`}
+                  loading="lazy"
                   objectFit="cover"
                   alt="Movie poster"
                   width="6rem"
