@@ -31,14 +31,14 @@ const CardPersonCast = ({ person }: PersonProps) => {
 
    return (
       <article
-         style={{ width: '10rem', cursor: 'pointer' }}
+         style={{ width: '9rem', cursor: 'pointer' }}
          title={`${person.name}`}
       >
          <Card
             isPressable
             disableRipple
             disableAnimation
-            css={{ w: '100%', height: '15rem' }}
+            css={{ w: '100%', height: '12rem' }}
          >
             {person?.profile_path ? (
                <Card.Image
