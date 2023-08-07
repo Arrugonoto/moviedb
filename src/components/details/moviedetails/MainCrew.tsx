@@ -1,5 +1,7 @@
 import { Container, Row, Text, Col, useTheme } from '@nextui-org/react';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import ROUTES from '../../../routes/routes';
 
 interface MovieDetailsProps {
    genres: { id: number; name: string }[];
@@ -43,6 +45,8 @@ const MainCrew = ({
    releaseDate,
 }: MovieDetailsProps) => {
    const { isDark } = useTheme();
+   const nameRegex = /:|,|\./g;
+   const navigate = useNavigate();
 
    return (
       <Container
@@ -102,8 +106,17 @@ const MainCrew = ({
                                  color: '#C340C5',
                               },
                            }}
+                           onClick={() =>
+                              navigate(
+                                 `/${ROUTES.PERSON_DETAILS}/${person?.name
+                                    .toLowerCase()
+                                    .split(' ')
+                                    .join('-')
+                                    .replaceAll(nameRegex, '')}/${person?.id}`
+                              )
+                           }
                         >
-                           {person.name}
+                           {person?.name}
                         </Text>
                      ))}
                   </div>
@@ -133,6 +146,15 @@ const MainCrew = ({
                                  color: '#C340C5',
                               },
                            }}
+                           onClick={() =>
+                              navigate(
+                                 `/${ROUTES.PERSON_DETAILS}/${person?.name
+                                    .toLowerCase()
+                                    .split(' ')
+                                    .join('-')
+                                    .replaceAll(nameRegex, '')}/${person?.id}`
+                              )
+                           }
                         >
                            {person.name}
                            {screenplay?.indexOf(person) !==
