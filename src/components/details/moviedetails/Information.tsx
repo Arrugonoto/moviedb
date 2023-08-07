@@ -81,7 +81,14 @@ const Information = () => {
             <Col span={3} css={{ minWidth: '14rem' }}>
                <Row css={{ gap: '1rem' }}>
                   <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text>Budget</Text>
+                     <Text
+                        css={{
+                           fontWeight: '600',
+                           opacity: '0.7',
+                        }}
+                     >
+                        Budget
+                     </Text>
                   </Col>
                   <Col>
                      <Text>${data?.budget}</Text>
@@ -89,7 +96,14 @@ const Information = () => {
                </Row>
                <Row css={{ gap: '1rem' }}>
                   <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text>Boxoffice</Text>
+                     <Text
+                        css={{
+                           fontWeight: '600',
+                           opacity: '0.7',
+                        }}
+                     >
+                        Boxoffice
+                     </Text>
                   </Col>
                   <Col>
                      <Text>${data?.revenue}</Text>
@@ -97,7 +111,14 @@ const Information = () => {
                </Row>
                <Row css={{ gap: '1rem' }}>
                   <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text>Original Title</Text>
+                     <Text
+                        css={{
+                           fontWeight: '600',
+                           opacity: '0.7',
+                        }}
+                     >
+                        Original Title
+                     </Text>
                   </Col>
                   <Col>
                      <Text>{data?.original_title}</Text>
@@ -105,7 +126,14 @@ const Information = () => {
                </Row>
                <Row css={{ gap: '1rem' }}>
                   <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text>Title</Text>
+                     <Text
+                        css={{
+                           fontWeight: '600',
+                           opacity: '0.7',
+                        }}
+                     >
+                        Title
+                     </Text>
                   </Col>
                   <Col>
                      <Text>{data?.title}</Text>
@@ -115,7 +143,14 @@ const Information = () => {
             <Col span={3} css={{ minWidth: '14rem' }}>
                <Row css={{ gap: '.5rem' }}>
                   <Col span={2} css={{ minWidth: '6rem' }}>
-                     <Text>Studio</Text>
+                     <Text
+                        css={{
+                           fontWeight: '600',
+                           opacity: '0.7',
+                        }}
+                     >
+                        Studio
+                     </Text>
                   </Col>
                   <Col>
                      {data?.production_companies?.map(company => (
@@ -125,7 +160,14 @@ const Information = () => {
                </Row>
                <Row css={{ gap: '.5rem' }}>
                   <Col span={2} css={{ minWidth: '6rem' }}>
-                     <Text>Release</Text>
+                     <Text
+                        css={{
+                           fontWeight: '600',
+                           opacity: '0.7',
+                        }}
+                     >
+                        Release
+                     </Text>
                   </Col>
                   <Col>
                      <Text>
