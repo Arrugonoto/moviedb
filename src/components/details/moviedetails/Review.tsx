@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Container, Row, Text, Avatar } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
+import { Container, Row, Text, Avatar, Button } from '@nextui-org/react';
 import useFetch from '../../../hooks/useFetch';
 import { METHODS } from '../../../services/api';
 import { API_KEY } from '../../../services/api-key';
@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { BASE_URL, IMAGE_SIZE } from '../../../data/imageConfig';
 import { BsPersonCircle } from 'react-icons/bs';
 import format from 'date-fns/format';
+import parse from 'html-react-parser';
 
 interface OptionsTypes {
    method: string;
@@ -35,10 +36,7 @@ const Review = () => {
    const { movieId } = useParams();
    const { handleFetch, data } = useFetch<ReviewsTypes[]>([]);
    const reviewIndex: number = Math.floor(Math.random() * data.length);
-   const reviewDate: string = format(
-      new Date(data[reviewIndex]?.updated_at),
-      'dd MMM y'
-   );
+   const [showMore, setShowMore] = useState<boolean>(false);
 
    const fetchData = async (): Promise<void> => {
       const options: OptionsTypes = {
@@ -75,10 +73,10 @@ const Review = () => {
             }}
          >
             <Row css={{ ai: 'center', gap: '0.7rem', padding: '0.5rem 0' }}>
-               {data[reviewIndex]?.author_details?.avatar_path ? (
+               {data[0]?.author_details?.avatar_path ? (
                   <Avatar
                      size="lg"
-                     src={`${BASE_URL}${IMAGE_SIZE.PROFILE.W185}${data[reviewIndex]?.author_details?.avatar_path}`}
+                     src={`${BASE_URL}${IMAGE_SIZE.PROFILE.W185}${data[0]?.author_details?.avatar_path}`}
                      alt="User profile"
                      zoomed
                   />
@@ -91,18 +89,39 @@ const Review = () => {
                )}
                <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <Text h4 size={18} css={{ m: '0' }}>
-                     {data[reviewIndex]?.author}
+                     {data[0]?.author}
                   </Text>
-                  <Text size={14} css={{ m: '0' }}>
-                     Written on {reviewDate}
+                  <Text size={13} css={{ m: '0' }}>
+                     Written on{' '}
+                     {data[0]?.updated_at &&
+                        format(new Date(data[0]?.updated_at), 'dd MMM y')}
                   </Text>
                </div>
-               <div>{data[reviewIndex]?.author_details?.rating}</div>
+               <div>{data[0]?.author_details?.rating}</div>
             </Row>
-            <Row css={{ padding: '1rem 0' }}>
-               <Text>{data[reviewIndex]?.content}</Text>
+            <Row css={{ fd: 'column', padding: '1rem 0' }}>
+               <Text>
+                  {showMore
+                     ? parse(`${data[0]?.content}`)
+                     : parse(`${data[0]?.content?.slice(0, 700)}`)}
+
+                  {showMore && data[0]?.content.length > 700 ? '' : '. . .'}
+               </Text>
+               <Button
+                  light
+                  color="primary"
+                  onPress={() => setShowMore(prev => !prev)}
+                  css={{
+                     d: 'flex',
+                     minWidth: 'auto',
+                     p: '0',
+                     fontSize: '0.9rem',
+                     '&:hover': { textDecoration: 'underline' },
+                  }}
+               >
+                  {showMore ? 'Show less' : 'Show more'}
+               </Button>
             </Row>
-            <Row></Row>
          </article>
       </Container>
    );
