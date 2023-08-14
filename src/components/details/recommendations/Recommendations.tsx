@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Container } from '@nextui-org/react';
+import { Container, Text } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { METHODS } from '../../../services/api';
 import { API_KEY } from '../../../services/api-key';
@@ -56,44 +56,62 @@ const Recommendations = () => {
    }, [movieId]);
 
    return (
-      <Container>
-         <motion.div
-            ref={containerRef}
-            style={{
-               display: 'flex',
-               overflowX: 'hidden',
-               gap: '1.2rem',
-               borderRadius: '.2rem',
-            }}
-         >
+      <Container css={{ p: '0' }}>
+         {data?.length > 0 ? (
             <motion.div
-               drag="x"
-               dragConstraints={containerRef}
+               ref={containerRef}
                style={{
                   display: 'flex',
+                  overflowX: 'hidden',
                   gap: '1.2rem',
-                  padding: '2rem 1.4rem',
+                  borderRadius: '.2rem',
+                  padding: '0 1rem',
                }}
-               dragElastic={0.1}
             >
-               {data?.map((movie, i) => {
-                  if (i < 10)
-                     return (
-                        <CardMdBlur
-                           key={movie.id}
-                           id={movie.id}
-                           overview={movie.overview}
-                           popularity={movie.popularity}
-                           poster_path={movie.poster_path}
-                           release_date={movie.release_date}
-                           title={movie.title}
-                           vote_average={movie.vote_average}
-                           vote_count={movie.vote_count}
-                        />
-                     );
-               })}
+               <motion.div
+                  drag="x"
+                  dragConstraints={containerRef}
+                  style={{
+                     display: 'flex',
+                     gap: '1.2rem',
+                     padding: '2rem 1.4rem',
+                  }}
+                  dragElastic={0.1}
+               >
+                  {data?.map((movie, i) => {
+                     if (i < 10)
+                        return (
+                           <CardMdBlur
+                              key={movie.id}
+                              id={movie.id}
+                              overview={movie.overview}
+                              popularity={movie.popularity}
+                              poster_path={movie.poster_path}
+                              release_date={movie.release_date}
+                              title={movie.title}
+                              vote_average={movie.vote_average}
+                              vote_count={movie.vote_count}
+                           />
+                        );
+                  })}
+               </motion.div>
             </motion.div>
-         </motion.div>
+         ) : (
+            <div
+               style={{
+                  background:
+                     'linear-gradient(175deg, #9210a04c, transparent 60%)',
+                  width: '80%',
+                  padding: '1rem 2rem',
+                  borderRadius: '0.5rem',
+                  boxShadow: '0 0 0.8rem 0 rgba(0, 0, 0, 0.2)',
+               }}
+            >
+               <Text>
+                  There aren't any recommendations for watched Title for now.
+               </Text>
+            </div>
+         )}
       </Container>
    );
 };
