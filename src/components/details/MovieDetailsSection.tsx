@@ -10,6 +10,7 @@ import Cast from './moviedetails/Cast';
 import Recommendations from './recommendations/Recommendations';
 import Similar from './similar/Similar';
 import Information from './moviedetails/Information';
+import MovieReview from './moviedetails/MovieReview';
 
 interface OptionsTypes {
    method: string;
@@ -142,18 +143,11 @@ const MovieDetailsSection = () => {
                h3
                css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
             >
-               Photos
-            </Text>
-            <Row></Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
-            <Text
-               h3
-               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
-            >
                Review
             </Text>
-            <Row></Row>
+            <Row>
+               <MovieReview />
+            </Row>
          </Row>
          <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
             <Text
