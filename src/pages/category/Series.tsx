@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import { Container, Row, Text, Pagination } from '@nextui-org/react';
-import { API_KEY } from '../services/api-key';
-import { METHODS } from '../services/api';
-import CardMdBlur from '../components/card/CardMdBlur';
+import { API_KEY } from '../../services/api-key';
+import { METHODS } from '../../services/api';
+import CardMdBlur from '../../components/card/CardMdBlur';
 
 interface OptionsTypes {
    method: string;
@@ -31,7 +31,7 @@ interface SeriesProps {
    origin_country: string[];
 }
 
-const PopularSeries = () => {
+const Series = () => {
    const [page, setPage] = useState<number>(1);
    const { handleFetch, data } = useFetch<SeriesProps[]>([]);
 
@@ -43,7 +43,7 @@ const PopularSeries = () => {
             Authorization: `Bearer ${API_KEY.access_token}`,
          },
       };
-      const url = `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`;
+      const url = `https://api.themoviedb.org/3/discover/tv?page=${page}`;
 
       handleFetch({ url, options });
    };
@@ -74,7 +74,7 @@ const PopularSeries = () => {
                      letterSpacing: '0.5px',
                   }}
                >
-                  Popular Shows
+                  TV Shows
                </Text>
             </Row>
             <Row css={{ jc: 'center', p: '2rem 0' }}>
@@ -115,4 +115,4 @@ const PopularSeries = () => {
    );
 };
 
-export default PopularSeries;
+export default Series;

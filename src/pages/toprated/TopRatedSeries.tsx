@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Container, Row, Text } from '@nextui-org/react';
-import { METHODS } from '../services/api';
-import { API_KEY } from '../services/api-key';
-import useInfiniteFetch from '../hooks/useInfiniteFetch';
-import CardList from '../components/card/CardList';
+import { METHODS } from '../../services/api';
+import { API_KEY } from '../../services/api-key';
+import useInfiniteFetch from '../../hooks/useInfiniteFetch';
+import CardList from '../../components/card/CardList';
 import { useIntersection } from '@mantine/hooks';
 
 interface OptionsTypes {

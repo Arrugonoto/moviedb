@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import MovieDetailsSection from '../components/details/MovieDetailsSection';
+import MovieDetailsSection from '../../components/details/MovieDetailsSection';
 
 const MovieDetails = () => {
    const { movieId } = useParams();

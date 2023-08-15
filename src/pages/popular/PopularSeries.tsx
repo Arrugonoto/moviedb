@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import { Container, Row, Text, Pagination } from '@nextui-org/react';
-import { API_KEY } from '../services/api-key';
-import { METHODS } from '../services/api';
-import CardMdBlur from '../components/card/CardMdBlur';
+import { API_KEY } from '../../services/api-key';
+import { METHODS } from '../../services/api';
+import CardMdBlur from '../../components/card/CardMdBlur';
 
 interface OptionsTypes {
    method: string;
@@ -13,27 +13,27 @@ interface OptionsTypes {
    };
 }
 
-interface MovieProps {
+interface SeriesProps {
    adult: boolean;
    backdrop_path: string;
    genre_ids: number[];
    id: number;
    original_language: string;
-   original_title: string;
+   original_name: string;
    overview: string;
    popularity: number;
    poster_path: string;
-   release_date: string;
-   title: string;
-   video: boolean;
+   first_air_date: string;
+   name: string;
    vote_average: number;
    vote_count: number;
+   media_type: string;
    origin_country: string[];
 }
 
-const PopularMovies = () => {
+const PopularSeries = () => {
    const [page, setPage] = useState<number>(1);
-   const { handleFetch, data } = useFetch<MovieProps[]>([]);
+   const { handleFetch, data } = useFetch<SeriesProps[]>([]);
 
    const fetchData = async (): Promise<void> => {
       const options: OptionsTypes = {
@@ -43,7 +43,7 @@ const PopularMovies = () => {
             Authorization: `Bearer ${API_KEY.access_token}`,
          },
       };
-      const url = `https://api.themoviedb.org/3/movie/popular?page=${page}`;
+      const url = `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`;
 
       handleFetch({ url, options });
    };
@@ -74,7 +74,7 @@ const PopularMovies = () => {
                      letterSpacing: '0.5px',
                   }}
                >
-                  Popular Movies
+                  Popular Shows
                </Text>
             </Row>
             <Row css={{ jc: 'center', p: '2rem 0' }}>
@@ -88,17 +88,17 @@ const PopularMovies = () => {
                      gap: '2rem',
                   }}
                >
-                  {data?.map(movie => (
+                  {data?.map(series => (
                      <CardMdBlur
-                        key={movie.id}
-                        id={movie.id}
-                        overview={movie.overview}
-                        popularity={movie.popularity}
-                        poster_path={movie.poster_path}
-                        release_date={movie.release_date}
-                        title={movie.title}
-                        vote_average={movie.vote_average}
-                        vote_count={movie.vote_count}
+                        key={series.id}
+                        id={series.id}
+                        overview={series.overview}
+                        popularity={series.popularity}
+                        poster_path={series.poster_path}
+                        release_date={series.first_air_date}
+                        name={series.name}
+                        vote_average={series.vote_average}
+                        vote_count={series.vote_count}
                      />
                   ))}
                </div>
@@ -115,4 +115,4 @@ const PopularMovies = () => {
    );
 };
 
-export default PopularMovies;
+export default PopularSeries;
