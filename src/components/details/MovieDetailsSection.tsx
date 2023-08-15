@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Container, Row, Text } from '@nextui-org/react';
-import { useParams } from 'react-router-dom';
+import { Container, Row, Text, Button } from '@nextui-org/react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
@@ -11,6 +11,7 @@ import Recommendations from './recommendations/Recommendations';
 import Similar from './similar/Similar';
 import Information from './moviedetails/Information';
 import MovieReview from './moviedetails/MovieReview';
+import ROUTES from '../../routes/routes';
 
 interface OptionsTypes {
    method: string;
@@ -89,10 +90,11 @@ interface MovieDetailsTypes {
 }
 
 const MovieDetailsSection = () => {
-   const { movieId } = useParams();
+   const { movieId, movieTitle } = useParams();
    const { handleFetch, data } = useFetch<MovieDetailsTypes>(
       {} as MovieDetailsTypes
    );
+   const navigate = useNavigate();
    const { credits } = data;
    const director = credits?.crew?.filter(person => person.job === 'Director');
    const screenplay = credits?.crew?.filter(
@@ -139,12 +141,35 @@ const MovieDetailsSection = () => {
          />
          <Cast cast={data?.credits?.cast} />
          <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
-            <Text
-               h3
-               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
-            >
-               Review
-            </Text>
+            <Row css={{ ai: 'center', gap: '1rem' }}>
+               <Text
+                  h3
+                  css={{
+                     borderLeft: '5px solid #9210a0',
+                     paddingLeft: '0.4rem',
+                  }}
+               >
+                  Review
+               </Text>
+               <Button
+                  light
+                  color="primary"
+                  onPress={() =>
+                     navigate(
+                        `/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/reviews`
+                     )
+                  }
+                  css={{
+                     d: 'flex',
+                     minWidth: 'auto',
+                     p: '0',
+                     fontSize: '0.8rem',
+                     '&:hover': { textDecoration: 'underline' },
+                  }}
+               >
+                  See reviews
+               </Button>
+            </Row>
             <Row>
                <MovieReview />
             </Row>
