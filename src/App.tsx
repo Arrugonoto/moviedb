@@ -30,6 +30,7 @@ import People from './pages/category/People';
 import PersonDetails from './pages/details/PersonDetails';
 import TvShowDetails from './pages/details/TvShowDetails';
 import MovieCredits from './pages/castandcrew/MovieCredits';
+import MovieReviews from './pages/reviews/MovieReviews';
 import NotFound from './pages/NotFound';
 import SearchResults from './pages/SearchResults';
 
@@ -111,12 +112,16 @@ function App() {
                         />
                         <Route path={ROUTES.PEOPLE} element={<People />} />
                         <Route
-                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId/*`}
+                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId/`}
                            element={<MovieDetails />}
                         />
                         <Route
                            path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId/cast-and-crew`}
                            element={<MovieCredits />}
+                        />
+                        <Route
+                           path={`${ROUTES.MOVIE_DETAILS}/:movieTitle/:movieId/reviews`}
+                           element={<MovieReviews />}
                         />
                         <Route
                            path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId`}
