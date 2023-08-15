@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Text, Image } from '@nextui-org/react';
 import { BASE_URL, IMAGE_SIZE } from '../../data/imageConfig';
 import MovieFullCast from '../../components/details/moviedetails/MovieFullCast';
 import MovieFullCrew from '../../components/details/moviedetails/MovieFullCrew';
+import ROUTES from '../../routes/routes';
 
 interface OptionsTypes {
    method: string;
@@ -85,7 +86,8 @@ interface MovieDetailsTypes {
 }
 
 const MovieCredits = () => {
-   const { movieId } = useParams();
+   const { movieId, movieTitle } = useParams();
+   const navigate = useNavigate();
    const { handleFetch, data } = useFetch<MovieDetailsTypes>(
       {} as MovieDetailsTypes
    );
@@ -146,7 +148,20 @@ const MovieCredits = () => {
                      <Text
                         h1
                         size={30}
-                        css={{ fontFamily: 'Roboto', letterSpacing: '0.1px' }}
+                        css={{
+                           fontFamily: 'Roboto',
+                           letterSpacing: '0.1px',
+                           cursor: 'pointer',
+                           '&:hover': {
+                              textDecoration: 'underline',
+                              color: '#9210A0',
+                           },
+                        }}
+                        onClick={() =>
+                           navigate(
+                              `/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}`
+                           )
+                        }
                      >
                         {data?.title}
                      </Text>

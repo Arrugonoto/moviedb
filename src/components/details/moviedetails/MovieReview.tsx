@@ -58,7 +58,6 @@ const MovieReview = () => {
             p: '0',
          }}
       >
-         {' '}
          {data.length > 0 ? (
             <Review
                author={data[0]?.author}
