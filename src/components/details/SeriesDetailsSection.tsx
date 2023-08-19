@@ -21,6 +21,36 @@ interface OptionsTypes {
    };
 }
 
+interface ImagesTypes {
+   backdrops: {
+      aspect_ratio: number;
+      height: number;
+      iso_639_1: string;
+      file_path: string;
+      vote_average: number;
+      vote_count: number;
+      width: number;
+   }[];
+   logos: {
+      aspect_ratio: number;
+      height: number;
+      iso_639_1: string;
+      file_path: string;
+      vote_average: number;
+      vote_count: number;
+      width: number;
+   }[];
+   posters: {
+      aspect_ratio: number;
+      height: number;
+      iso_639_1: string;
+      file_path: string;
+      vote_average: number;
+      vote_count: number;
+      width: number;
+   }[];
+}
+
 interface SeriesDetailsTypes {
    adult: boolean;
    backdrop_path: string;
@@ -104,6 +134,7 @@ interface SeriesDetailsTypes {
    type: string;
    vote_average: number;
    vote_count: number;
+   images: ImagesTypes;
 }
 
 const SeriesDetailsSection = () => {
@@ -122,7 +153,7 @@ const SeriesDetailsSection = () => {
          },
       };
 
-      const url = `https://api.themoviedb.org/3/tv/${tvShowId}?language=en-US`;
+      const url = `https://api.themoviedb.org/3/tv/${tvShowId}?append_to_response=images&?language=en-US`;
 
       handleFetch({ url, options });
    };
@@ -136,11 +167,12 @@ const SeriesDetailsSection = () => {
       <Container fluid css={{ minHeight: '100dvh' }}>
          <DetailsHeader
             backdropPath={data?.backdrop_path}
-            seasons={data?.seasons}
             firstAirDate={data?.first_air_date}
             name={data?.name}
             voteAverage={data?.vote_average}
             voteCount={data?.vote_count}
+            tagline={data?.tagline}
+            posters={data?.images?.posters}
          />
       </Container>
    );

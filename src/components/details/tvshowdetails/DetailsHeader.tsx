@@ -4,34 +4,34 @@ import { BiSolidStar } from 'react-icons/bi';
 
 interface TvShowDetailsProps {
    backdropPath: string;
-   seasons: {
-      air_date: string;
-      episode_count: number;
-      id: number;
-      name: string;
-      overview: string;
-      poster_path: string;
-      season_number: number;
-      vote_average: number;
-   }[];
    firstAirDate: string;
    name: string;
    voteAverage: number;
    voteCount: number;
    tagline: string;
+   posters: {
+      aspect_ratio: number;
+      height: number;
+      iso_639_1: string;
+      file_path: string;
+      vote_average: number;
+      vote_count: number;
+      width: number;
+   }[];
 }
 
 const DetailsHeader = ({
    backdropPath,
-   seasons,
    firstAirDate,
    name,
    voteAverage,
    voteCount,
    tagline,
+   posters,
 }: TvShowDetailsProps) => {
    const { isDark } = useTheme();
-   const posterPath: string = seasons[seasons.length - 1]?.poster_path;
+   const firstPoster = posters?.at(0);
+   const posterPath: string = firstPoster?.file_path as string;
 
    return (
       <Container
@@ -115,7 +115,7 @@ const DetailsHeader = ({
                   boxShadow: '0 0 1rem 0 #000',
                   borderRadius: '0.2rem',
                   overflow: 'hidden',
-                  width: '20rem',
+                  width: '19rem',
                }}
             >
                <Image
@@ -149,23 +149,25 @@ const DetailsHeader = ({
                   {firstAirDate && format(new Date(firstAirDate), 'yyyy')}
                </Text>
             </Row>
-            <Row css={{ placeContent: 'center' }}>
-               <Text
-                  size={16}
-                  css={{
-                     fontFamily: 'Roboto',
-                     fontStyle: 'italic',
-                     color: '#9210A0',
-                     opacity: 0.7,
-                     transition: 'opacity 0.2s linear',
-                     '&:hover': {
-                        opacity: 1,
-                     },
-                  }}
-               >
-                  {tagline}
-               </Text>
-            </Row>
+            {tagline && (
+               <Row css={{ placeContent: 'center' }}>
+                  <Text
+                     size={16}
+                     css={{
+                        fontFamily: 'Roboto',
+                        fontStyle: 'italic',
+                        color: '#9210A0',
+                        opacity: 0.7,
+                        transition: 'opacity 0.2s linear',
+                        '&:hover': {
+                           opacity: 1,
+                        },
+                     }}
+                  >
+                     {tagline}
+                  </Text>
+               </Row>
+            )}
          </Col>
       </Container>
    );
