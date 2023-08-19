@@ -5,7 +5,7 @@ import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
 import DetailsHeader from './moviedetails/DetailsHeader';
-import MainCrew from './moviedetails/MainCrew';
+import MainInfoAndCrew from './moviedetails/MainInfoAndCrew';
 import Cast from './moviedetails/Cast';
 import Recommendations from './recommendations/Recommendations';
 import Similar from './similar/Similar';
@@ -131,7 +131,7 @@ const MovieDetailsSection = () => {
             releaseDate={data?.release_date}
             runtime={data?.runtime}
          />
-         <MainCrew
+         <MainInfoAndCrew
             genres={data?.genres}
             overview={data?.overview}
             director={director}
