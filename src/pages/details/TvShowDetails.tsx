@@ -1,7 +1,21 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import SeriesDetailsSection from '../../components/details/SeriesDetailsSection';
 
 const TvShowDetails = () => {
-   return <section style={{ minHeight: '100dvh' }}>TvShow Details</section>;
+   const { tvShowId } = useParams();
+
+   useEffect(() => {
+      window.scrollTo({
+         top: 0,
+      });
+   }, [tvShowId]);
+
+   return (
+      <section>
+         <SeriesDetailsSection />
+      </section>
+   );
 };
 
 export default TvShowDetails;
