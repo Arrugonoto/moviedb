@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
-interface MovieDetailsProps {
+interface PropsTypes {
    genres: { id: number; name: string }[];
    overview: string;
    director: {
@@ -36,14 +36,14 @@ interface MovieDetailsProps {
    releaseDate: string;
 }
 
-const MainCrew = ({
+const MainInfoAndCrew = ({
    genres,
    overview,
    director,
    screenplay,
    productionCountries,
    releaseDate,
-}: MovieDetailsProps) => {
+}: PropsTypes) => {
    const { isDark } = useTheme();
    const nameRegex = /:|,|\./g;
    const navigate = useNavigate();
@@ -236,4 +236,4 @@ const MainCrew = ({
    );
 };
 
-export default MainCrew;
+export default MainInfoAndCrew;
