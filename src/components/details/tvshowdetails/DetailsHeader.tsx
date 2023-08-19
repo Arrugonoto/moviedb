@@ -1,8 +1,9 @@
 import { Container, Row, Col, Text, Image, useTheme } from '@nextui-org/react';
 import { format } from 'date-fns';
 import { BiSolidStar } from 'react-icons/bi';
+import { FaImage } from 'react-icons/fa';
 
-interface TvShowDetailsProps {
+interface PropsTypes {
    backdropPath: string;
    firstAirDate: string;
    name: string;
@@ -28,7 +29,7 @@ const DetailsHeader = ({
    voteCount,
    tagline,
    posters,
-}: TvShowDetailsProps) => {
+}: PropsTypes) => {
    const { isDark } = useTheme();
    const firstPoster = posters?.at(0);
    const posterPath: string = firstPoster?.file_path as string;
@@ -118,12 +119,29 @@ const DetailsHeader = ({
                   width: '19rem',
                }}
             >
-               <Image
-                  src={`https://image.tmdb.org/t/p/w780${posterPath}`}
-                  loading="lazy"
-                  objectFit="cover"
-                  alt="Movie Poster"
-               />
+               {posterPath ? (
+                  <Image
+                     src={`https://image.tmdb.org/t/p/w780${posterPath}`}
+                     loading="lazy"
+                     objectFit="cover"
+                     alt="Movie Poster"
+                  />
+               ) : (
+                  <div
+                     style={{
+                        display: 'flex',
+                        justifyContent: ' center',
+                        alignItems: 'center',
+                        width: '100%',
+                        height: '26rem',
+                        backgroundColor: `${
+                           isDark ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)'
+                        }`,
+                     }}
+                  >
+                     <FaImage style={{ fontSize: '4rem' }} />
+                  </div>
+               )}
             </div>
             <Text
                size={22}
