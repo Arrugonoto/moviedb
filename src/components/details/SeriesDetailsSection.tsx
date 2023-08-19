@@ -5,11 +5,11 @@ import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
 import DetailsHeader from './tvshowdetails/DetailsHeader';
-import MainCrew from './moviedetails/MainCrew';
-import Cast from './moviedetails/Cast';
+import MainInfoAndCrew from './tvshowdetails/MainInfoAndCrew';
+import Seasons from './tvshowdetails/Seasons';
+import Cast from './tvshowdetails/Cast';
 import Recommendations from './recommendations/Recommendations';
 import Similar from './similar/Similar';
-import Information from './moviedetails/Information';
 import MovieReview from './moviedetails/MovieReview';
 import ROUTES from '../../routes/routes';
 
@@ -174,6 +174,16 @@ const SeriesDetailsSection = () => {
             tagline={data?.tagline}
             posters={data?.images?.posters}
          />
+         <MainInfoAndCrew
+            genres={data?.genres}
+            overview={data?.overview}
+            creators={data?.created_by}
+            productionCountries={data?.production_countries}
+            episodeRuntime={data?.episode_run_time}
+            firstAirDate={data?.first_air_date}
+         />
+         <Seasons />
+         <Cast />
       </Container>
    );
 };
