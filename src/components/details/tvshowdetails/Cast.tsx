@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Container, Row, Text, Button } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CardPersonCast from '../../card/CardPersonCast';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 import { METHODS } from '../../../services/api';
 import { API_KEY } from '../../../services/api-key';
@@ -48,7 +48,6 @@ interface CreditsTypes {
 const Cast = () => {
    const castContainerRef = useRef<HTMLDivElement>(null);
    const { tvShowId, tvShowTitle } = useParams();
-   const navigate = useNavigate();
    const { handleFetch, data } = useFetch<CreditsTypes>({} as CreditsTypes);
 
    const fetchData = async (): Promise<void> => {
@@ -109,40 +108,38 @@ const Cast = () => {
                         cursor: 'default',
                      }}
                   >
-                     <Button
-                        onPress={() =>
-                           navigate(
-                              `/${ROUTES.SERIES_DETAILS}/${tvShowTitle}/${tvShowId}/cast-and-crew`
-                           )
-                        }
-                        css={{
-                           bc: 'transparent',
-                        }}
+                     <Link
+                        to={`/${ROUTES.SERIES_DETAILS}/${tvShowTitle}/${tvShowId}/cast-and-crew`}
                      >
-                        <Text
+                        <Button
                            css={{
-                              '&:hover': { color: '#9210a0', tdl: 'underline' },
+                              bc: 'transparent',
                            }}
                         >
-                           Show entire Cast & Crew
-                        </Text>
-                     </Button>
+                           <Text
+                              css={{
+                                 '&:hover': {
+                                    color: '#9210a0',
+                                    tdl: 'underline',
+                                 },
+                              }}
+                           >
+                              Show entire Cast & Crew
+                           </Text>
+                        </Button>
+                     </Link>
                   </div>
                </motion.div>
             </motion.div>
          </Row>
          <Row css={{ d: 'flex', jc: 'center' }}>
-            <Button
-               ghost
-               color="primary"
-               onPress={() =>
-                  navigate(
-                     `/${ROUTES.SERIES_DETAILS}/${tvShowTitle}/${tvShowId}/cast-and-crew`
-                  )
-               }
+            <Link
+               to={`/${ROUTES.SERIES_DETAILS}/${tvShowTitle}/${tvShowId}/cast-and-crew`}
             >
-               Show entire Cast & Crew
-            </Button>
+               <Button ghost color="primary">
+                  Show entire Cast & Crew
+               </Button>
+            </Link>
          </Row>
       </Container>
    );
