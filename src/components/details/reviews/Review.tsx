@@ -56,8 +56,9 @@ const Review = ({
                   {author}
                </Text>
                <Text size={13} css={{ m: '0' }}>
-                  Written on{' '}
-                  {updated_at && format(new Date(updated_at), 'dd MMM y')}
+                  {`Written on ${
+                     updated_at && format(new Date(updated_at), 'dd MMM y')
+                  }`}
                </Text>
             </div>
             <div
