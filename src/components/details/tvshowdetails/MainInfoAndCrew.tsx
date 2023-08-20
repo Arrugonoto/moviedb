@@ -290,7 +290,7 @@ const MainInfoAndCrew = ({
                      })}
                   </div>
                </Row>
-               {episodeRuntime && (
+               {episodeRuntime?.length > 0 && (
                   <Row>
                      <Text
                         css={{
