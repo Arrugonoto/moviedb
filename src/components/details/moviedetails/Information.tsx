@@ -76,107 +76,117 @@ const Information = () => {
    }, [movieId]);
 
    return (
-      <Container css={{ d: 'flex', fd: 'row' }}>
-         <Row css={{ gap: '3rem' }}>
-            <Col span={3} css={{ minWidth: '14rem' }}>
-               <Row css={{ gap: '1rem' }}>
-                  <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text
-                        css={{
-                           fontWeight: '600',
-                           opacity: '0.7',
-                        }}
-                     >
-                        Budget
-                     </Text>
-                  </Col>
-                  <Col>
-                     <Text>${data?.budget}</Text>
-                  </Col>
-               </Row>
-               <Row css={{ gap: '1rem' }}>
-                  <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text
-                        css={{
-                           fontWeight: '600',
-                           opacity: '0.7',
-                        }}
-                     >
-                        Boxoffice
-                     </Text>
-                  </Col>
-                  <Col>
-                     <Text>${data?.revenue}</Text>
-                  </Col>
-               </Row>
-               <Row css={{ gap: '1rem' }}>
-                  <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text
-                        css={{
-                           fontWeight: '600',
-                           opacity: '0.7',
-                        }}
-                     >
-                        Original Title
-                     </Text>
-                  </Col>
-                  <Col>
-                     <Text>{data?.original_title}</Text>
-                  </Col>
-               </Row>
-               <Row css={{ gap: '1rem' }}>
-                  <Col span={6} css={{ minWidth: '6rem' }}>
-                     <Text
-                        css={{
-                           fontWeight: '600',
-                           opacity: '0.7',
-                        }}
-                     >
-                        Title
-                     </Text>
-                  </Col>
-                  <Col>
-                     <Text>{data?.title}</Text>
-                  </Col>
-               </Row>
-            </Col>
-            <Col span={3} css={{ minWidth: '14rem' }}>
-               <Row css={{ gap: '.5rem' }}>
-                  <Col span={2} css={{ minWidth: '6rem' }}>
-                     <Text
-                        css={{
-                           fontWeight: '600',
-                           opacity: '0.7',
-                        }}
-                     >
-                        Studio
-                     </Text>
-                  </Col>
-                  <Col>
-                     {data?.production_companies?.map(company => (
-                        <Text key={company?.id}>{company?.name}</Text>
-                     ))}
-                  </Col>
-               </Row>
-               <Row css={{ gap: '.5rem' }}>
-                  <Col span={2} css={{ minWidth: '6rem' }}>
-                     <Text
-                        css={{
-                           fontWeight: '600',
-                           opacity: '0.7',
-                        }}
-                     >
-                        Release
-                     </Text>
-                  </Col>
-                  <Col>
-                     <Text>
-                        {data?.release_date &&
-                           format(new Date(data?.release_date), 'dd MMM y')}
-                     </Text>
-                  </Col>
-               </Row>
-            </Col>
+      <Container css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
+         <Row>
+            <Text
+               h3
+               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
+            >
+               Information
+            </Text>
+         </Row>
+         <Row css={{ d: 'flex', fd: 'row' }}>
+            <Row css={{ gap: '3rem' }}>
+               <Col span={3} css={{ minWidth: '14rem' }}>
+                  <Row css={{ gap: '1rem' }}>
+                     <Col span={6} css={{ minWidth: '6rem' }}>
+                        <Text
+                           css={{
+                              fontWeight: '600',
+                              opacity: '0.7',
+                           }}
+                        >
+                           Budget
+                        </Text>
+                     </Col>
+                     <Col>
+                        <Text>${data?.budget}</Text>
+                     </Col>
+                  </Row>
+                  <Row css={{ gap: '1rem' }}>
+                     <Col span={6} css={{ minWidth: '6rem' }}>
+                        <Text
+                           css={{
+                              fontWeight: '600',
+                              opacity: '0.7',
+                           }}
+                        >
+                           Boxoffice
+                        </Text>
+                     </Col>
+                     <Col>
+                        <Text>${data?.revenue}</Text>
+                     </Col>
+                  </Row>
+                  <Row css={{ gap: '1rem' }}>
+                     <Col span={6} css={{ minWidth: '6rem' }}>
+                        <Text
+                           css={{
+                              fontWeight: '600',
+                              opacity: '0.7',
+                           }}
+                        >
+                           Original Title
+                        </Text>
+                     </Col>
+                     <Col>
+                        <Text>{data?.original_title}</Text>
+                     </Col>
+                  </Row>
+                  <Row css={{ gap: '1rem' }}>
+                     <Col span={6} css={{ minWidth: '6rem' }}>
+                        <Text
+                           css={{
+                              fontWeight: '600',
+                              opacity: '0.7',
+                           }}
+                        >
+                           Title
+                        </Text>
+                     </Col>
+                     <Col>
+                        <Text>{data?.title}</Text>
+                     </Col>
+                  </Row>
+               </Col>
+               <Col span={3} css={{ minWidth: '14rem' }}>
+                  <Row css={{ gap: '.5rem' }}>
+                     <Col span={2} css={{ minWidth: '6rem' }}>
+                        <Text
+                           css={{
+                              fontWeight: '600',
+                              opacity: '0.7',
+                           }}
+                        >
+                           Studio
+                        </Text>
+                     </Col>
+                     <Col>
+                        {data?.production_companies?.map(company => (
+                           <Text key={company?.id}>{company?.name}</Text>
+                        ))}
+                     </Col>
+                  </Row>
+                  <Row css={{ gap: '.5rem' }}>
+                     <Col span={2} css={{ minWidth: '6rem' }}>
+                        <Text
+                           css={{
+                              fontWeight: '600',
+                              opacity: '0.7',
+                           }}
+                        >
+                           Release
+                        </Text>
+                     </Col>
+                     <Col>
+                        <Text>
+                           {data?.release_date &&
+                              format(new Date(data?.release_date), 'dd MMM y')}
+                        </Text>
+                     </Col>
+                  </Row>
+               </Col>
+            </Row>
          </Row>
       </Container>
    );

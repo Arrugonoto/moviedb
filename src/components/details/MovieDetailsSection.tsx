@@ -140,72 +140,17 @@ const MovieDetailsSection = () => {
             releaseDate={data?.release_date}
          />
          <Cast cast={data?.credits?.cast} />
-         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
-            <Row css={{ ai: 'center', gap: '1rem' }}>
-               <Text
-                  h3
-                  css={{
-                     borderLeft: '5px solid #9210a0',
-                     paddingLeft: '0.4rem',
-                  }}
-               >
-                  Review
-               </Text>
-               <Button
-                  light
-                  color="primary"
-                  onPress={() =>
-                     navigate(
-                        `/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/reviews`
-                     )
-                  }
-                  css={{
-                     d: 'flex',
-                     minWidth: 'auto',
-                     p: '0',
-                     fontSize: '0.8rem',
-                     '&:hover': { textDecoration: 'underline' },
-                  }}
-               >
-                  See reviews
-               </Button>
-            </Row>
-            <Row>
-               <MovieReview />
-            </Row>
+         <Row>
+            <MovieReview />
          </Row>
-         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
-            <Text
-               h3
-               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
-            >
-               Information
-            </Text>
-            <Row>
-               <Information />
-            </Row>
+         <Row>
+            <Information />
          </Row>
-         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
-            <Text
-               h3
-               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
-            >
-               Recommendations
-            </Text>
-            <Row>
-               <Recommendations />
-            </Row>
+         <Row>
+            <Recommendations />
          </Row>
-         <Row css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
-            <Text
-               h3
-               css={{ borderLeft: '5px solid #9210a0', paddingLeft: '0.4rem' }}
-            >
-               Similar
-            </Text>
-            <Row>
-               <Similar />
-            </Row>
+         <Row>
+            <Similar />
          </Row>
       </Container>
    );

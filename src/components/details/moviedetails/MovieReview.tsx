@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { Container, Text } from '@nextui-org/react';
+import { Container, Text, Row, Button } from '@nextui-org/react';
 import useFetch from '../../../hooks/useFetch';
 import { METHODS } from '../../../services/api';
 import { API_KEY } from '../../../services/api-key';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Review from '../reviews/Review';
+import ROUTES from '../../../routes/routes';
 
 interface OptionsTypes {
    method: string;
@@ -30,7 +31,7 @@ interface ReviewsTypes {
 }
 
 const MovieReview = () => {
-   const { movieId } = useParams();
+   const { movieId, movieTitle } = useParams();
    const { handleFetch, data } = useFetch<ReviewsTypes[]>([]);
 
    const fetchData = async (): Promise<void> => {
@@ -52,38 +53,68 @@ const MovieReview = () => {
    }, [movieId]);
 
    return (
-      <Container
-         css={{
-            jc: 'start',
-            p: '0',
-         }}
-      >
-         {data.length > 0 ? (
-            <Review
-               author={data[0]?.author}
-               avatar_path={data[0]?.author_details?.avatar_path}
-               rating={data[0]?.author_details?.rating}
-               content={data[0]?.content}
-               created_at={data[0]?.created_at}
-               id={data[0]?.id}
-               updated_at={data[0]?.updated_at}
-            />
-         ) : (
-            <div
-               style={{
-                  background:
-                     'linear-gradient(175deg, #9210a04c, transparent 60%)',
-                  width: '80%',
-                  padding: '1rem 2rem',
-                  borderRadius: '0.5rem',
-                  boxShadow: '0 0 0.8rem 0 rgba(0, 0, 0, 0.2)',
+      <Container css={{ d: 'flex', fd: 'column', p: '1rem 0' }}>
+         <Row css={{ ai: 'center', gap: '1rem' }}>
+            <Text
+               h3
+               css={{
+                  borderLeft: '5px solid #9210a0',
+                  paddingLeft: '0.4rem',
                }}
             >
-               <Text>
-                  Currently watched Title doesn't contain any reviews yet.
-               </Text>
-            </div>
-         )}
+               Review
+            </Text>
+            <Link
+               to={`/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/reviews`}
+            >
+               <Button
+                  light
+                  color="primary"
+                  css={{
+                     d: 'flex',
+                     minWidth: 'auto',
+                     p: '0',
+                     fontSize: '0.8rem',
+                     '&:hover': { textDecoration: 'underline' },
+                  }}
+               >
+                  See reviews
+               </Button>
+            </Link>
+         </Row>
+         <Row
+            css={{
+               jc: 'start',
+               p: '0',
+            }}
+         >
+            {data?.length > 0 ? (
+               <Review
+                  author={data[0]?.author}
+                  avatar_path={data[0]?.author_details?.avatar_path}
+                  rating={data[0]?.author_details?.rating}
+                  content={data[0]?.content}
+                  created_at={data[0]?.created_at}
+                  id={data[0]?.id}
+                  updated_at={data[0]?.updated_at}
+               />
+            ) : (
+               <div
+                  style={{
+                     background:
+                        'linear-gradient(175deg, #9210a04c, transparent 60%)',
+                     width: '80%',
+                     padding: '1rem 2rem',
+                     borderRadius: '0.5rem',
+                     boxShadow: '0 0 0.8rem 0 rgba(0, 0, 0, 0.2)',
+                  }}
+               >
+                  <Text>
+                     Currently watched Title doesn't contain any reviews yet.
+                  </Text>
+               </div>
+            )}
+         </Row>
       </Container>
    );
 };
