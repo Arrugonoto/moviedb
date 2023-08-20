@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Container, Row, Text, Button } from '@nextui-org/react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Container, Row } from '@nextui-org/react';
+import { useParams } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
@@ -8,10 +8,9 @@ import DetailsHeader from './tvshowdetails/DetailsHeader';
 import MainInfoAndCrew from './tvshowdetails/MainInfoAndCrew';
 import Seasons from './tvshowdetails/Seasons';
 import Cast from './tvshowdetails/Cast';
-import Recommendations from './recommendations/Recommendations';
-import Similar from './similar/Similar';
-import MovieReview from './moviedetails/MovieReview';
-import ROUTES from '../../routes/routes';
+import SeriesReview from './tvshowdetails/SeriesReview';
+import SeriesRecommendations from './recommendations/SeriesRecommendations';
+import SeriesSimilar from './similar/SeriesSimilar';
 
 interface OptionsTypes {
    method: string;
@@ -138,8 +137,7 @@ interface SeriesDetailsTypes {
 }
 
 const SeriesDetailsSection = () => {
-   const { tvShowId, tvShowTitle } = useParams();
-   const navigate = useNavigate();
+   const { tvShowId } = useParams();
    const { handleFetch, data } = useFetch<SeriesDetailsTypes>(
       {} as SeriesDetailsTypes
    );
@@ -165,25 +163,42 @@ const SeriesDetailsSection = () => {
 
    return (
       <Container fluid css={{ minHeight: '100dvh' }}>
-         <DetailsHeader
-            backdropPath={data?.backdrop_path}
-            firstAirDate={data?.first_air_date}
-            name={data?.name}
-            voteAverage={data?.vote_average}
-            voteCount={data?.vote_count}
-            tagline={data?.tagline}
-            posters={data?.images?.posters}
-         />
-         <MainInfoAndCrew
-            genres={data?.genres}
-            overview={data?.overview}
-            creators={data?.created_by}
-            productionCountries={data?.production_countries}
-            episodeRuntime={data?.episode_run_time}
-            firstAirDate={data?.first_air_date}
-         />
-         <Seasons />
-         <Cast />
+         <Row>
+            <DetailsHeader
+               backdropPath={data?.backdrop_path}
+               firstAirDate={data?.first_air_date}
+               name={data?.name}
+               voteAverage={data?.vote_average}
+               voteCount={data?.vote_count}
+               tagline={data?.tagline}
+               posters={data?.images?.posters}
+            />
+         </Row>
+         <Row>
+            <MainInfoAndCrew
+               genres={data?.genres}
+               overview={data?.overview}
+               creators={data?.created_by}
+               productionCountries={data?.production_countries}
+               episodeRuntime={data?.episode_run_time}
+               firstAirDate={data?.first_air_date}
+            />
+         </Row>
+         <Row>
+            <Seasons />
+         </Row>
+         <Row>
+            <Cast />
+         </Row>
+         <Row>
+            <SeriesReview />
+         </Row>
+         <Row>
+            <SeriesRecommendations />
+         </Row>
+         <Row>
+            <SeriesSimilar />
+         </Row>
       </Container>
    );
 };
