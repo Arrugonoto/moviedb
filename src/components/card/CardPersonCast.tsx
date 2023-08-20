@@ -1,5 +1,5 @@
 import { Text, Card } from '@nextui-org/react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 import { BsFillPersonFill } from 'react-icons/bs';
 
@@ -21,7 +21,6 @@ interface PersonProps {
 }
 
 const CardPersonCast = ({ person }: PersonProps) => {
-   const navigate = useNavigate();
    const nameRegex = /:|,|\./g;
    const personFullname: string = person.name
       .toLowerCase()
@@ -69,20 +68,17 @@ const CardPersonCast = ({ person }: PersonProps) => {
                </div>
             )}
          </Card>
-         <Text
-            css={{
-               textAlign: 'center',
-               fontWeight: '600',
-               '&:hover': { textDecoration: 'underline', color: '#9210a0' },
-            }}
-            onClick={() =>
-               navigate(
-                  `/${ROUTES.PERSON_DETAILS}/${personFullname}/${person.id}`
-               )
-            }
-         >
-            {person.name}
-         </Text>
+         <Link to={`/${ROUTES.PERSON_DETAILS}/${personFullname}/${person.id}`}>
+            <Text
+               css={{
+                  textAlign: 'center',
+                  fontWeight: '600',
+                  '&:hover': { textDecoration: 'underline', color: '#9210a0' },
+               }}
+            >
+               {person.name}
+            </Text>
+         </Link>
          <Text css={{ color: '#9210a0', textAlign: 'center' }}>
             {person.character}
          </Text>
