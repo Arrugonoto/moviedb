@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import useFetch from '../hooks/useFetch';
+import useFetch from '../../hooks/useFetch';
 import { Container, Row, Text, Pagination } from '@nextui-org/react';
-import { API_KEY } from '../services/api-key';
-import { METHODS } from '../services/api';
-import CardLg from '../components/card/CardLg';
+import { API_KEY } from '../../services/api-key';
+import { METHODS } from '../../services/api';
+import CardLg from '../../components/card/CardLg';
 
 interface OptionsTypes {
    method: string;
