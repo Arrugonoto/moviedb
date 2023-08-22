@@ -4,7 +4,7 @@ import style from './cardList.module.css';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
 import { FaCalendar } from 'react-icons/fa6';
 import { FaStar } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 
 interface PropTypes {
@@ -73,17 +73,26 @@ const CardList = ({
       <article className={style.cardContainer} onClick={() => handleRedirect()}>
          <Row css={{ w: '100%', height: '9rem' }}>
             <Col css={{ w: 'min-content', cursor: 'pointer' }}>
-               <Image
-                  src={`https://image.tmdb.org/t/p/w400${
-                     poster_path ?? backdrop_path
+               <Link
+                  to={`${
+                     name
+                        ? `/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${production_id}`
+                        : `/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${production_id}`
                   }`}
-                  loading="lazy"
-                  objectFit="cover"
-                  alt="Movie poster"
-                  width="6rem"
-                  title={title ? title : name}
-               />
+               >
+                  <Image
+                     src={`https://image.tmdb.org/t/p/w400${
+                        poster_path ?? backdrop_path
+                     }`}
+                     loading="lazy"
+                     objectFit="cover"
+                     alt="Movie poster"
+                     width="6rem"
+                     title={title ? title : name}
+                  />
+               </Link>
             </Col>
+
             <Col
                css={{
                   d: 'flex',
@@ -96,24 +105,32 @@ const CardList = ({
                }}
             >
                <Row css={{ fd: 'column' }}>
-                  <Text
-                     size={17}
-                     css={{
-                        fontWeight: '600',
-                        letterSpacing: '0.05px',
-                        truncateText: '100%',
-                        cursor: 'pointer',
-                        '&:hover': {
-                           tdl: 'underline',
-                           color: '#9210a0',
-                        },
-                     }}
-                     title={title ? title : name}
+                  <Link
+                     to={`${
+                        name
+                           ? `/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${production_id}`
+                           : `/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${production_id}`
+                     }`}
                   >
-                     {title
-                        ? `${index + 1}. ${title}`
-                        : `${index + 1}. ${name}`}
-                  </Text>
+                     <Text
+                        size={17}
+                        css={{
+                           fontWeight: '600',
+                           letterSpacing: '0.05px',
+                           truncateText: '100%',
+                           cursor: 'pointer',
+                           '&:hover': {
+                              tdl: 'underline',
+                              color: '#9210a0',
+                           },
+                        }}
+                        title={title ? title : name}
+                     >
+                        {title
+                           ? `${index + 1}. ${title}`
+                           : `${index + 1}. ${name}`}
+                     </Text>
+                  </Link>
                   <div>
                      <Text
                         css={{
