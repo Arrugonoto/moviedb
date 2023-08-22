@@ -31,7 +31,7 @@ interface SeriesProps {
    origin_country: string[];
 }
 
-const Series = () => {
+const TvShows = () => {
    const [page, setPage] = useState<number>(1);
    const { handleFetch, data } = useFetch<SeriesProps[]>([]);
 
@@ -115,4 +115,4 @@ const Series = () => {
    );
 };
 
-export default Series;
+export default TvShows;
