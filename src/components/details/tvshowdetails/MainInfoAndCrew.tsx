@@ -45,7 +45,6 @@ interface CreditsTypes {
          character: string;
          episode_count: number;
       }[];
-
       total_episode_count: number;
       order: number;
    }[];
