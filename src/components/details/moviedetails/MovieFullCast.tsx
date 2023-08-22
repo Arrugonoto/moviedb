@@ -1,7 +1,7 @@
 import { Container, Row, Text } from '@nextui-org/react';
 import CardCastThumbnail from '../../card/CardCastThumbnail';
 
-interface CastProps {
+interface PropTypes {
    cast: {
       adult: boolean;
       gender: number;
@@ -18,7 +18,7 @@ interface CastProps {
    }[];
 }
 
-const MovieFullCast = ({ cast }: CastProps) => {
+const MovieFullCast = ({ cast }: PropTypes) => {
    return (
       <Container css={{ p: '1rem 0', fd: 'column' }}>
          <Text h3 size={20}>

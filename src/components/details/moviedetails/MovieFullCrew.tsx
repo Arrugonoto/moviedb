@@ -1,7 +1,7 @@
 import { Container, Text, Row } from '@nextui-org/react';
 import CardCastThumbnail from '../../card/CardCastThumbnail';
 
-interface CrewProps {
+interface PropTypes {
    crew: {
       adult: boolean;
       gender: number;
@@ -17,7 +17,7 @@ interface CrewProps {
    }[];
 }
 
-const MovieFullCrew = ({ crew }: CrewProps) => {
+const MovieFullCrew = ({ crew }: PropTypes) => {
    const directing = crew?.filter(person => person.department === 'Directing');
    const writing = crew?.filter(person => person.department === 'Writing');
    const production = crew?.filter(
