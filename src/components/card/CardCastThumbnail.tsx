@@ -14,8 +14,18 @@ interface PersonProps {
       cast_id?: number;
       department?: string;
       character?: string;
-      credit_id: string;
+      credit_id?: string;
       job?: string;
+      roles?: {
+         credit_id: string;
+         character: string;
+         episode_count: number;
+      }[];
+      jobs?: {
+         credit_id: string;
+         job: string;
+         episode_count: number;
+      }[];
    };
 }
 
@@ -121,6 +131,48 @@ const CardCastThumbnail = ({ person }: PersonProps) => {
                      css={{ fontFamily: 'Roboto', letterSpacing: '0.05px' }}
                   >
                      {person?.cast_id ? person?.character : person?.job}
+
+                     {person?.roles?.map((role, i) => (
+                        <>
+                           {`${role.character}`}
+                           <span
+                              style={{
+                                 fontSize: '0.8rem',
+                                 fontWeight: '300',
+                                 color: 'rgb(110,110,110)',
+                              }}
+                           >
+                              {` (${role.episode_count}`}
+                              {role?.episode_count > 1
+                                 ? ' episodes)'
+                                 : ' episode)'}
+                           </span>
+                           {i === (person?.roles?.length as number) - 1
+                              ? ''
+                              : ', '}
+                        </>
+                     ))}
+
+                     {person?.jobs?.map((position, i) => (
+                        <>
+                           {`${position?.job}`}
+                           <span
+                              style={{
+                                 fontSize: '0.8rem',
+                                 fontWeight: '300',
+                                 color: 'rgb(110,110,110)',
+                              }}
+                           >
+                              {` (${position?.episode_count}`}
+                              {position?.episode_count > 1
+                                 ? ' episodes)'
+                                 : ' episode)'}
+                           </span>
+                           {i === (person?.jobs?.length as number) - 1
+                              ? ''
+                              : ', '}
+                        </>
+                     ))}
                   </Text>
                </Row>
             </Col>
