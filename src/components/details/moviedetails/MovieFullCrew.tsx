@@ -37,7 +37,11 @@ const MovieFullCrew = ({ crew }: PropTypes) => {
 
    return (
       <Container css={{ p: '1rem 0' }}>
-         <Text h3 size={20}>
+         <Text
+            h3
+            size={20}
+            css={{ borderBottom: '1px solid rgb(100, 100, 100)' }}
+         >
             Crew
          </Text>
          <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
