@@ -108,7 +108,6 @@ interface SeriesDetailsTypes {
       name: string;
       origin_country: string;
    }[];
-
    production_countries: {
       iso_3166_1: string;
       name: string;
@@ -185,7 +184,7 @@ const SeriesDetailsSection = () => {
             />
          </Row>
          <Row>
-            <Seasons />
+            <Seasons seasons={data?.seasons} />
          </Row>
          <Row>
             <Cast />
