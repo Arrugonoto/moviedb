@@ -116,7 +116,6 @@ const DetailsHeader = ({
                   boxShadow: '0 0 1rem 0 #000',
                   borderRadius: '0.2rem',
                   overflow: 'hidden',
-                  width: '19rem',
                }}
             >
                {posterPath ? (
