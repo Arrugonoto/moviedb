@@ -23,14 +23,17 @@ import TopRatedSeries from './pages/toprated/TopRatedSeries';
 import TopRatedMovies from './pages/toprated/TopRatedMovies';
 import Movies from './pages/category/Movies';
 import PopularMovies from './pages/popular/PopularMovies';
-import UpcomingMovies from './pages/UpcomingMovies';
-import Series from './pages/category/Series';
+import UpcomingMovies from './pages/upcoming/UpcomingMovies';
+import TvShows from './pages/category/TvShows';
 import PopularSeries from './pages/popular/PopularSeries';
 import People from './pages/category/People';
 import PersonDetails from './pages/details/PersonDetails';
 import TvShowDetails from './pages/details/TvShowDetails';
 import MovieCredits from './pages/castandcrew/MovieCredits';
 import MovieReviews from './pages/reviews/MovieReviews';
+import TvShowCredits from './pages/castandcrew/TvShowCredits';
+import TvShowReviews from './pages/reviews/TvShowReviews';
+import TvShowSeason from './pages/tvshow/TvShowSeason';
 import NotFound from './pages/NotFound';
 import SearchResults from './pages/SearchResults';
 
@@ -101,7 +104,7 @@ function App() {
                            path={ROUTES.MOVIES_TOP_RATED}
                            element={<TopRatedMovies />}
                         />
-                        <Route path={ROUTES.SERIES} element={<Series />} />
+                        <Route path={ROUTES.SERIES} element={<TvShows />} />
                         <Route
                            path={ROUTES.SERIES_POPULAR}
                            element={<PopularSeries />}
@@ -126,6 +129,18 @@ function App() {
                         <Route
                            path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId`}
                            element={<TvShowDetails />}
+                        />
+                        <Route
+                           path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId/cast-and-crew`}
+                           element={<TvShowCredits />}
+                        />
+                        <Route
+                           path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId/reviews`}
+                           element={<TvShowReviews />}
+                        />
+                        <Route
+                           path={`${ROUTES.SERIES_DETAILS}/:tvShowTitle/:tvShowId/season/:tvShowSeason`}
+                           element={<TvShowSeason />}
                         />
                         <Route
                            path={`${ROUTES.PERSON_DETAILS}/:personName/:personId`}
