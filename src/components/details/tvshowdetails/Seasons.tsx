@@ -2,7 +2,6 @@ import { Container, Text, Row, Image } from '@nextui-org/react';
 import { BASE_URL, IMAGE_SIZE } from '../../../data/imageConfig';
 import { Link } from 'react-router-dom';
 import { BiSolidMovie, BiSolidStar, BiMovie } from 'react-icons/bi';
-import { FaImage } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
@@ -38,12 +37,13 @@ const Seasons = ({ seasons }: PropTypes) => {
                   style={{
                      display: 'flex',
                      flexDirection: 'column',
+                     width: '11rem',
+                     gap: '0.5rem',
                   }}
                >
                   <Row
                      css={{
-                        width: '10rem',
-                        height: '15rem',
+                        height: '16rem',
                         borderRadius: '.4rem',
                         overflow: 'hidden',
                      }}
@@ -63,7 +63,6 @@ const Seasons = ({ seasons }: PropTypes) => {
                                  },
                               }}
                            />
-                           )
                         </Link>
                      ) : (
                         <div
@@ -72,7 +71,7 @@ const Seasons = ({ seasons }: PropTypes) => {
                               justifyContent: 'center',
                               alignItems: 'center',
                               width: '100%',
-                              height: '100%',
+                              minHeight: '100%',
                               backgroundColor: 'rgba(150, 150, 150, 0.3)',
                            }}
                         >
@@ -85,8 +84,10 @@ const Seasons = ({ seasons }: PropTypes) => {
                         </div>
                      )}
                   </Row>
+
                   <Link
                      to={`/${ROUTES.SERIES_DETAILS}/${tvShowTitle}/${tvShowId}/season/${season?.season_number}`}
+                     title={season?.name}
                   >
                      <Text
                         css={{
@@ -95,6 +96,7 @@ const Seasons = ({ seasons }: PropTypes) => {
                            fontWeight: '500',
                            letterSpacing: '0.1px',
                            textAlign: ' center',
+                           truncateText: '100%',
                            '&:hover': {
                               textDecoration: 'underline',
                               color: '#9210A0',
