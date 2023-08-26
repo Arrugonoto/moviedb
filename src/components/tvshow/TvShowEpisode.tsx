@@ -73,8 +73,11 @@ const TvShowEpisode = ({ episode }: PropTypes) => {
             <Row css={{ ai: 'center' }}>
                <BiSolidStar style={{ fontSize: '1.2rem', color: '#9210A0' }} />
                <Text title="Average score" css={{ fontSize: '1rem' }}>
-                  {episode?.vote_average}
-                  <span title="Number of votes">{` (${episode?.vote_count})`}</span>
+                  {`${episode?.vote_average}`.slice(0, 3)}
+                  <span
+                     title="Number of votes"
+                     style={{ fontSize: '0.8rem', opacity: 0.6 }}
+                  >{` ( ${episode?.vote_count} )`}</span>
                </Text>
             </Row>
             <Row>
