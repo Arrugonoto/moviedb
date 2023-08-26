@@ -37,12 +37,13 @@ const Seasons = ({ seasons }: PropTypes) => {
                   style={{
                      display: 'flex',
                      flexDirection: 'column',
-                     width: '11rem',
+                     width: '12rem',
                      gap: '0.5rem',
                   }}
                >
                   <Row
                      css={{
+                        width: '11rem',
                         height: '16rem',
                         borderRadius: '.4rem',
                         overflow: 'hidden',
@@ -71,7 +72,7 @@ const Seasons = ({ seasons }: PropTypes) => {
                               justifyContent: 'center',
                               alignItems: 'center',
                               width: '100%',
-                              minHeight: '100%',
+                              height: '100%',
                               backgroundColor: 'rgba(150, 150, 150, 0.3)',
                            }}
                         >
