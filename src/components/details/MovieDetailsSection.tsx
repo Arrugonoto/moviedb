@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Container, Row, Text, Button } from '@nextui-org/react';
+import { Container, Row } from '@nextui-org/react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
@@ -11,7 +11,6 @@ import Recommendations from './recommendations/Recommendations';
 import Similar from './similar/Similar';
 import Information from './moviedetails/Information';
 import MovieReview from './moviedetails/MovieReview';
-import ROUTES from '../../routes/routes';
 
 interface OptionsTypes {
    method: string;
