@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Container, Row } from '@nextui-org/react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
@@ -89,11 +89,10 @@ interface MovieDetailsTypes {
 }
 
 const MovieDetailsSection = () => {
-   const { movieId, movieTitle } = useParams();
+   const { movieId } = useParams();
    const { handleFetch, data } = useFetch<MovieDetailsTypes>(
       {} as MovieDetailsTypes
    );
-   const navigate = useNavigate();
    const { credits } = data;
    const director = credits?.crew?.filter(person => person.job === 'Director');
    const screenplay = credits?.crew?.filter(
