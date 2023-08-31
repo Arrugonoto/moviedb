@@ -94,7 +94,14 @@ const Filmography = () => {
    }, [personId]);
 
    return (
-      <Container css={{ d: 'flex', fd: 'column', p: '0', gap: '1rem' }}>
+      <Container
+         css={{
+            d: 'flex',
+            fd: 'column',
+            p: '0',
+            gap: '1rem',
+         }}
+      >
          <Row>
             <Text
                h2
@@ -108,8 +115,12 @@ const Filmography = () => {
                Filmography
             </Text>
          </Row>
-         <Cast cast={data?.cast} />
-         <Crew crew={data?.crew} />
+         <Row>
+            <Cast cast={data?.cast} />
+         </Row>
+         <Row>
+            <Crew crew={data?.crew} />
+         </Row>
       </Container>
    );
 };
