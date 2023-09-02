@@ -1,6 +1,9 @@
 import { Row, Text, Image } from '@nextui-org/react';
 import { BASE_URL, IMAGE_SIZE } from '../../data/imageConfig';
 import { BiSolidStar } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+import ROUTES from '../../routes/routes';
+import { MdLocalMovies } from 'react-icons/md';
 
 interface PropTypes {
    production: {
@@ -34,16 +37,23 @@ interface PropTypes {
 }
 
 const CardFilmography = ({ production, lastElement }: PropTypes) => {
+   const titleRegex = /:|,|\./g;
+   const movieTitle: string = (production?.name ?? production?.title) as string;
+   const productionTitle: string = movieTitle
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(titleRegex, '');
+
    return (
       <article
-         key={production?.credit_id}
          style={{
             display: 'flex',
             gap: '1rem',
             minHeight: '7rem',
             paddingBottom: '1rem',
             borderBottom: `1px solid ${
-               lastElement ? 'transparent' : 'rgba(180,180,180, 0.5)'
+               lastElement ? 'transparent' : 'rgba(180,180,180, 0.3)'
             }`,
             width: '100%',
          }}
@@ -56,23 +66,38 @@ const CardFilmography = ({ production, lastElement }: PropTypes) => {
                overflow: 'hidden',
             }}
          >
-            {production?.poster_path ? (
-               <Image
-                  src={`${BASE_URL}${IMAGE_SIZE.POSTER.W342}/${production.poster_path}`}
-                  objectFit="cover"
-                  width="100%"
-                  loading="lazy"
-                  alt="Production Poster"
-               />
-            ) : (
-               <div
-                  style={{
-                     width: '100%',
-                     height: '100%',
-                     backgroundColor: 'rgba(180,180,180, 0.3)',
-                  }}
-               ></div>
-            )}
+            <Link
+               to={
+                  production?.title
+                     ? `/${ROUTES.MOVIE_DETAILS}/${productionTitle}/${production.id}`
+                     : `/${ROUTES.SERIES_DETAILS}/${productionTitle}/${production.id}`
+               }
+            >
+               {production?.poster_path ? (
+                  <Image
+                     src={`${BASE_URL}${IMAGE_SIZE.POSTER.W342}/${production.poster_path}`}
+                     objectFit="cover"
+                     width="100%"
+                     loading="lazy"
+                     alt="Production Poster"
+                  />
+               ) : (
+                  <div
+                     style={{
+                        display: 'flex',
+                        width: '100%',
+                        height: '100%',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(180,180,180, 0.3)',
+                     }}
+                  >
+                     <MdLocalMovies
+                        style={{ fontSize: '2.6rem', color: '#9210A0' }}
+                     />
+                  </div>
+               )}
+            </Link>
          </div>
          <div
             style={{
@@ -90,18 +115,30 @@ const CardFilmography = ({ production, lastElement }: PropTypes) => {
             >
                <Row css={{ fd: 'column' }}>
                   <Row>
-                     <Text
-                        h4
-                        css={{
-                           fontFamily: 'Roboto',
-                           fontSize: '1rem',
-                           letterSpacing: '0.1px',
-                        }}
+                     <Link
+                        to={
+                           production?.title
+                              ? `/${ROUTES.MOVIE_DETAILS}/${productionTitle}/${production.id}`
+                              : `/${ROUTES.SERIES_DETAILS}/${productionTitle}/${production.id}`
+                        }
                      >
-                        {production?.title
-                           ? production?.title
-                           : production?.name}
-                     </Text>
+                        <Text
+                           h4
+                           css={{
+                              fontFamily: 'Roboto',
+                              fontSize: '1rem',
+                              letterSpacing: '0.1px',
+                              '&:hover': {
+                                 textDecoration: 'underline',
+                                 color: '#9210A0',
+                              },
+                           }}
+                        >
+                           {production?.title
+                              ? production?.title
+                              : production?.name}
+                        </Text>
+                     </Link>
                   </Row>
                   <Row
                      style={{
