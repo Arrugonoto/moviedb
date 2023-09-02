@@ -77,9 +77,9 @@ const Crew = ({ crew }: PropTypes) => {
       <Container
          css={{ d: 'flex', fd: 'column', width: '80%', gap: '2rem', m: '0' }}
       >
-         {producer && (
-            <Row css={{ fd: 'column' }}>
-               <Row css={{ marginBottom: '2rem' }}>
+         {producer?.length > 0 && (
+            <Row css={{ fd: 'column', marginTop: ' 1rem' }}>
+               <Row css={{ marginBottom: '0.5rem' }}>
                   <Text
                      h3
                      css={{
@@ -105,9 +105,9 @@ const Crew = ({ crew }: PropTypes) => {
             </Row>
          )}
 
-         {director && (
-            <Row css={{ fd: 'column' }}>
-               <Row css={{ marginBottom: '2rem' }}>
+         {director?.length > 0 && (
+            <Row css={{ fd: 'column', marginTop: ' 1rem' }}>
+               <Row css={{ marginBottom: '0.5rem' }}>
                   <Text
                      h3
                      css={{
@@ -132,9 +132,10 @@ const Crew = ({ crew }: PropTypes) => {
                </Row>
             </Row>
          )}
-         {writer && (
-            <Row css={{ fd: 'column' }}>
-               <Row css={{ marginBottom: '2rem' }}>
+
+         {writer?.length > 0 && (
+            <Row css={{ fd: 'column', marginTop: ' 1rem' }}>
+               <Row css={{ marginBottom: '0.5rem' }}>
                   <Text
                      h3
                      css={{

@@ -42,8 +42,8 @@ const Cast = ({ cast }: PropTypes) => {
    });
 
    return (
-      <Container css={{ width: '80%', m: '0' }}>
-         <Row css={{ marginBottom: '2rem' }}>
+      <Container css={{ width: '80%', m: '0 0 1rem 0' }}>
+         <Row css={{ marginBottom: '0.5rem' }}>
             <Text
                h3
                css={{
@@ -63,14 +63,16 @@ const Cast = ({ cast }: PropTypes) => {
                         key={production?.credit_id}
                         production={production}
                         lastElement={
-                           sortedProductions?.indexOf(production) === 20
+                           sortedProductions?.indexOf(production) === 19 ||
+                           sortedProductions?.indexOf(production) ===
+                              sortedProductions?.length - 1
                         }
                      />
                   );
             })}
             {sortedProductions?.length > 19 && (
-               <Row css={{ jc: 'center' }}>
-                  <Button>Show entire Acting</Button>
+               <Row css={{ jc: 'center', paddingBottom: '1rem' }}>
+                  <Button ghost>View acting history</Button>
                </Row>
             )}
          </Row>
