@@ -35,7 +35,6 @@ interface CreditsTypes {
       credit_id: string;
       order: number;
       media_type: string;
-      //
       origin_country: string[];
       original_name: string;
       first_air_date: string;
@@ -72,9 +71,8 @@ interface CreditsTypes {
 const Filmography = () => {
    const { personId } = useParams();
    const { handleFetch, data } = useFetch<CreditsTypes>({} as CreditsTypes);
-   //
 
-   const fetchDetails = async (): Promise<void> => {
+   const fetchData = async (): Promise<void> => {
       const options: OptionsTypes = {
          method: METHODS.GET,
          headers: {
@@ -89,7 +87,7 @@ const Filmography = () => {
    };
 
    useEffect(() => {
-      fetchDetails();
+      fetchData();
       // eslint-disable-next-line
    }, [personId]);
 
@@ -115,9 +113,11 @@ const Filmography = () => {
                Filmography
             </Text>
          </Row>
-         <Row>
-            <Cast cast={data?.cast} />
-         </Row>
+         {data?.cast?.length > 0 && (
+            <Row>
+               <Cast cast={data?.cast} />
+            </Row>
+         )}
          <Row>
             <Crew crew={data?.crew} />
          </Row>
