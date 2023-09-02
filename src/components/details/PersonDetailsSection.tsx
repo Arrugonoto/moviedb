@@ -64,7 +64,7 @@ const PersonDetailsSection = () => {
             <DetailsHeader person={data} />
          </Row>
          <Row>
-            <KnownFrom />
+            <KnownFrom knownDepartment={data?.known_for_department} />
          </Row>
          <Row>
             <Filmography />
