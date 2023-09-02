@@ -20,11 +20,7 @@ interface PropTypes {
 
 const CardMdBlur = ({
    id,
-   overview,
-   popularity,
    poster_path,
-   release_date,
-   first_air_date,
    name,
    title,
    vote_average,
