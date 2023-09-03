@@ -1,5 +1,6 @@
 const ROUTES: { [key: string]: string } = {
    HOME: 'moviedb',
+   SEARCH: 'moviedb/search',
    MOVIES: 'moviedb/movies',
    MOVIE_GENRE: 'moviedb/movie/genre', //moviedb/movie/genre/id
    MOVIES_POPULAR: 'moviedb/popular/movie',
