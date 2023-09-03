@@ -34,6 +34,7 @@ import MovieReviews from './pages/reviews/MovieReviews';
 import TvShowCredits from './pages/castandcrew/TvShowCredits';
 import TvShowReviews from './pages/reviews/TvShowReviews';
 import TvShowSeason from './pages/tvshow/TvShowSeason';
+import PersonFilmography from './pages/details/PersonFilmography';
 import NotFound from './pages/NotFound';
 import SearchResults from './pages/SearchResults';
 
@@ -146,6 +147,11 @@ function App() {
                            path={`${ROUTES.PERSON_DETAILS}/:personName/:personId`}
                            element={<PersonDetails />}
                         />
+                        <Route
+                           path={`${ROUTES.PERSON_DETAILS}/:personName/:personId/filmography`}
+                           element={<PersonFilmography />}
+                        />
+                        <Route path="*" element={<NotFound />}></Route>
                      </Routes>
                   </main>
                   <Spacer y={1} />
