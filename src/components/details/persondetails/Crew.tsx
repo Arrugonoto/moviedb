@@ -78,7 +78,7 @@ const Crew = ({ crew }: PropTypes) => {
          css={{ d: 'flex', fd: 'column', width: '80%', gap: '2rem', m: '0' }}
       >
          {producer?.length > 0 && (
-            <Row css={{ fd: 'column', marginTop: ' 1rem' }}>
+            <Row css={{ fd: 'column', marginTop: '1rem' }}>
                <Row css={{ marginBottom: '0.5rem' }}>
                   <Text
                      h3

@@ -1,5 +1,7 @@
 import { Container, Row, Text, Button } from '@nextui-org/react';
 import CardFilmography from '../../card/CardFilmography';
+import { Link, useParams } from 'react-router-dom';
+import ROUTES from '../../../routes/routes';
 
 interface PropTypes {
    cast: {
@@ -30,6 +32,7 @@ interface PropTypes {
 }
 
 const Cast = ({ cast }: PropTypes) => {
+   const { personName, personId } = useParams();
    const sortedProductions = cast?.sort((curr, next) => {
       const currDate = curr?.release_date || curr?.first_air_date;
       const nextDate = next?.release_date || next?.first_air_date;
@@ -72,7 +75,11 @@ const Cast = ({ cast }: PropTypes) => {
             })}
             {sortedProductions?.length > 19 && (
                <Row css={{ jc: 'center', paddingBottom: '1rem' }}>
-                  <Button ghost>View acting history</Button>
+                  <Link
+                     to={`/${ROUTES.PERSON_DETAILS}/${personName}/${personId}/filmography`}
+                  >
+                     <Button ghost>View acting history</Button>
+                  </Link>
                </Row>
             )}
          </Row>
