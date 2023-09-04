@@ -12,25 +12,30 @@ const useFetch = <T,>(initialData: T) => {
    const [lastPage, setLastPage] = useState<number>(0);
 
    const handleFetch = async ({ url, options }: FetchTypes): Promise<void> => {
-      setLoading(true);
+      try {
+         setLoading(true);
 
-      const response = await fetch(url, options);
-      const result = await response.json();
+         const response = await fetch(url, options);
+         const result = await response.json();
 
-      if (!response.ok) {
-         console.error(result);
-         setError(result);
-         throw new Error(`Couldn't fetch source`);
-      }
+         if (!response.ok) {
+            console.error(result);
+            setError(result);
+            throw new Error(`Couldn't fetch source`);
+         }
 
-      if (result.results) {
-         setData(result.results);
-      } else {
-         setData(result);
-      }
+         if (result.results) {
+            setData(result.results);
+         } else {
+            setData(result);
+         }
 
-      if (result.total_pages) {
-         setLastPage(result.total_pages);
+         if (result.total_pages) {
+            setLastPage(result.total_pages);
+         }
+      } catch (e: unknown) {
+         setError(e);
+         console.error(e);
       }
 
       setLoading(false);
