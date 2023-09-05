@@ -151,6 +151,10 @@ function App() {
                            path={`${ROUTES.PERSON_DETAILS}/:personName/:personId/filmography`}
                            element={<PersonFilmography />}
                         />
+                        <Route
+                           path={`${ROUTES.SEARCH}`}
+                           element={<SearchResults />}
+                        />
                         <Route path="*" element={<NotFound />}></Route>
                      </Routes>
                   </main>
