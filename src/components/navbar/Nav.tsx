@@ -5,20 +5,18 @@ import {
    changeTheme,
    useTheme,
    Container,
-   Input,
    Image,
-   Link,
 } from '@nextui-org/react';
 import styles from './nav.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { GENRES } from '../../data/genres';
 import { IoMoon } from 'react-icons/io5';
-import { HiOutlineSearch } from 'react-icons/hi';
 import { IoMdSunny } from 'react-icons/io';
 import Logo from '../../assets/logo.svg';
 import ROUTES from '../../routes/routes';
 import Dropdown from './Dropdown';
 import { MOVIES, SERIES } from '../../data/subMenu';
+import SearchInput from './SearchInput';
 
 const Nav = () => {
    const { isDark } = useTheme();
@@ -128,21 +126,7 @@ const Nav = () => {
                </div>
 
                <Navbar.Content>
-                  <Input
-                     type="search"
-                     size="xs"
-                     bordered
-                     clearable
-                     aria-label="Input search"
-                     placeholder="Search by title/series"
-                     contentLeft={
-                        <HiOutlineSearch
-                           style={{ width: '14px', marginLeft: '3px' }}
-                        />
-                     }
-                     contentLeftStyling={false}
-                     color="primary"
-                  />
+                  <SearchInput />
                   <Switch
                      checked={isDark}
                      onChange={handleChange}
