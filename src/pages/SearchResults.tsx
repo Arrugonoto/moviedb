@@ -13,7 +13,7 @@ const SearchResults = () => {
          >
             <Row css={{ justifyContent: 'center' }}>
                <Text h1 css={{ fontSize: '1.8rem', fontWeight: '600' }}>
-                  Search results for:{' '}
+                  {`Search results for: `}
                   <span style={{ color: '#9210A0' }}>{queryString}</span>
                </Text>
             </Row>
