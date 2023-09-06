@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Container, Input } from '@nextui-org/react';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
@@ -7,27 +7,30 @@ import ROUTES from '../../routes/routes';
 const SearchInput = () => {
    const [queryValue, setQueryValue] = useState<string>('');
    const navigate = useNavigate();
+   const inputRef = useRef<HTMLInputElement>(null);
 
-   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+   // eslint-disable-next-line
+   const handleChange = (e: any) => {
       setQueryValue(e.target.value);
-      console.log(e.target.value);
    };
 
-   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const encodedQuery = encodeURIComponent(queryValue);
 
-      if (queryValue) navigate(`/${ROUTES.SEARCH}/?query=${encodedQuery}`);
+      if (queryValue) navigate(`/${ROUTES.SEARCH}/?q=${encodedQuery}`);
 
       setQueryValue('');
+      inputRef?.current?.blur();
    };
 
    return (
       <Container css={{ m: '0', p: '0' }}>
          <form
-            onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSearch(e)}
+            onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
          >
             <Input
+               ref={inputRef}
                type="search"
                size="xs"
                bordered
