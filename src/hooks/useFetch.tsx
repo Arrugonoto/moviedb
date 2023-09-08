@@ -10,6 +10,7 @@ const useFetch = <T,>(initialData: T) => {
    const [error, setError] = useState<unknown>(null);
    const [data, setData] = useState<T>(initialData);
    const [lastPage, setLastPage] = useState<number>(0);
+   const [numberOfResults, setNumberOfResults] = useState<number>(0);
 
    const handleFetch = async ({ url, options }: FetchTypes): Promise<void> => {
       try {
@@ -23,15 +24,16 @@ const useFetch = <T,>(initialData: T) => {
             setError(result);
             throw new Error(`Couldn't fetch source`);
          }
-
          if (result.results) {
             setData(result.results);
          } else {
             setData(result);
          }
-
          if (result.total_pages) {
             setLastPage(result.total_pages);
+         }
+         if (result.total_results) {
+            setNumberOfResults(result.total_results);
          }
       } catch (e: unknown) {
          setError(e);
@@ -41,7 +43,7 @@ const useFetch = <T,>(initialData: T) => {
       setLoading(false);
    };
 
-   return { handleFetch, loading, error, data, lastPage };
+   return { handleFetch, loading, error, data, lastPage, numberOfResults };
 };
 
 export default useFetch;
