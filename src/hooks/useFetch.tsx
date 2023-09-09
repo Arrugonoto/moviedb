@@ -36,8 +36,11 @@ const useFetch = <T,>(initialData: T) => {
             setNumberOfResults(result.total_results);
          }
       } catch (e: unknown) {
-         setError(e);
-         console.error(e);
+         if (e instanceof Error) {
+            setError(e);
+         } else {
+            setError(new Error('Service Unavailable'));
+         }
       }
 
       setLoading(false);

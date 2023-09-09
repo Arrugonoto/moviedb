@@ -33,7 +33,7 @@ const useFetchMany = <T,>(initialData: T) => {
          if (e instanceof Error) {
             setError(e);
          } else {
-            setError(new Error('An unknown error occurred.'));
+            setError(new Error('Service Unavailable'));
          }
       }
       setLoading(false);
