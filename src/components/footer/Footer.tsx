@@ -2,7 +2,15 @@ import { Container } from '@nextui-org/react';
 
 const Footer = () => {
    return (
-      <footer style={{ width: '100%', marginTop: '3rem' }}>
+      <footer
+         style={{
+            position: 'relative',
+            left: '0',
+            bottom: '0',
+            width: '100%',
+            marginTop: '3rem',
+         }}
+      >
          <section style={{ width: '100%' }}>
             <Container
                fluid
