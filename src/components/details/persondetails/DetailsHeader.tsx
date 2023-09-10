@@ -52,7 +52,7 @@ const DetailsHeader = ({ person }: PropTypes) => {
                objectFit="cover"
                alt="Movie Poster"
                css={{ borderRadius: '0.2rem' }}
-            ></Image>
+            />
          </div>
          <div
             style={{
