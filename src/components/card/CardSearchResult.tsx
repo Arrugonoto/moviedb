@@ -2,6 +2,9 @@ import { Container, Row, Image, Text } from '@nextui-org/react';
 import { BASE_URL, IMAGE_SIZE } from '../../data/imageConfig';
 import { Link } from 'react-router-dom';
 import { BiSolidStar } from 'react-icons/bi';
+import ROUTES from '../../routes/routes';
+import { MdLocalMovies } from 'react-icons/md';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 interface PropTypes {
    result: {
@@ -9,11 +12,11 @@ interface PropTypes {
       id: number;
       name?: string;
       original_name?: string;
-      media_type: string;
+      media_type?: string;
       popularity: number;
       gender?: number;
-      known_for_department: string;
-      profile_path: string;
+      known_for_department?: string;
+      profile_path?: string;
       known_for?: {
          adult: boolean;
          backdrop_path: string;
@@ -33,23 +36,35 @@ interface PropTypes {
          vote_average: number;
          vote_count: number;
       }[];
-      backdrop_path: string;
+      backdrop_path?: string;
       title?: string;
       original_title?: string;
-      original_language: string;
-      overview: string;
-      poster_path: string;
+      original_language?: string;
+      overview?: string;
+      poster_path?: string;
       genre_ids?: number[];
       release_date?: string;
-      video: false;
-      vote_average: number;
-      vote_count: number;
+      video?: boolean;
+      vote_average?: number;
+      vote_count?: number;
       first_air_date?: string;
       origin_country?: string[];
    };
 }
 
 const CardSearchResult = ({ result }: PropTypes) => {
+   const nameRegex = /:|,|\.|\//g;
+   const resultName: string = (result?.name ?? result?.title) as string;
+   const replacedName: string = resultName
+      .toLowerCase()
+      .split(' ')
+      .join('-')
+      .replaceAll(nameRegex, '');
+
+   const linkPerson = `/${ROUTES.PERSON_DETAILS}/${replacedName}/${result?.id}`;
+   const linkMovie = `/${ROUTES.MOVIE_DETAILS}/${replacedName}/${result?.id}`;
+   const linkTvShow = `/${ROUTES.SERIES_DETAILS}/${replacedName}/${result?.id}`;
+
    return (
       <article
          style={{
@@ -66,29 +81,75 @@ const CardSearchResult = ({ result }: PropTypes) => {
                p: '0',
                gap: '1rem',
                flexWrap: 'no-wrap',
+               minHeight: '6rem',
             }}
          >
             <div
-               style={{ minWidth: '6rem', width: '6rem', cursor: 'pointer' }}
+               style={{
+                  minWidth: '6rem',
+                  width: '6rem',
+                  cursor: 'pointer',
+                  height: '100%',
+               }}
                title={`${result?.name ? result?.name : result?.title}`}
             >
-               <Link to={``}>
-                  <Image
-                     css={{ borderRadius: '0.2rem' }}
-                     src={`${BASE_URL}${
-                        result?.poster_path
-                           ? IMAGE_SIZE.POSTER.W342
-                           : IMAGE_SIZE.PROFILE.W632
-                     }/${
-                        result?.poster_path
-                           ? result?.poster_path
-                           : result?.profile_path
-                     }`}
-                     width="100%"
-                     loading="lazy"
-                     objectFit="cover"
-                     alt="Movie Poster"
-                  />
+               <Link
+                  to={
+                     result?.known_for
+                        ? linkPerson
+                        : result?.title
+                        ? linkMovie
+                        : linkTvShow
+                  }
+               >
+                  {(result?.poster_path || result?.profile_path) && (
+                     <Image
+                        css={{ borderRadius: '0.2rem' }}
+                        src={`${BASE_URL}${
+                           result?.poster_path
+                              ? IMAGE_SIZE.POSTER.W342
+                              : IMAGE_SIZE.PROFILE.W632
+                        }/${
+                           result?.poster_path
+                              ? result?.poster_path
+                              : result?.profile_path
+                        }`}
+                        width="100%"
+                        loading="lazy"
+                        objectFit="cover"
+                        alt="Movie Poster"
+                     />
+                  )}
+                  {!result?.poster_path && !result?.known_for && (
+                     <div
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'center',
+                           alignItems: 'center',
+                           minHeight: '8rem',
+                           backgroundColor: 'rgba(150,150,150, 0.1)',
+                        }}
+                     >
+                        <MdLocalMovies
+                           style={{ color: '#9210A0', fontSize: '2rem' }}
+                        />
+                     </div>
+                  )}
+                  {!result?.profile_path && result?.known_for && (
+                     <div
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'center',
+                           alignItems: 'center',
+                           minHeight: '8rem',
+                           backgroundColor: 'rgba(150,150,150, 0.1)',
+                        }}
+                     >
+                        <BsFillPersonFill
+                           style={{ color: '#9210A0', fontSize: '2rem' }}
+                        />
+                     </div>
+                  )}
                </Link>
             </div>
             <div style={{ padding: '0.5rem 0' }}>
@@ -112,14 +173,48 @@ const CardSearchResult = ({ result }: PropTypes) => {
                   </Row>
                )}
                <Row>
-                  <Text css={{ fotnFamily: 'Roboto', fontWeight: '600' }}>
-                     {result?.name ? result?.name : result?.title}
-                  </Text>
+                  <Link
+                     to={
+                        result?.known_for
+                           ? linkPerson
+                           : result?.title
+                           ? linkMovie
+                           : linkTvShow
+                     }
+                  >
+                     <Text
+                        css={{
+                           fotnFamily: 'Roboto',
+                           fontWeight: '600',
+                           transition: '0.2s color linear',
+                           '&:hover': {
+                              color: '#9210a0',
+                           },
+                        }}
+                     >
+                        {result?.name ? result?.name : result?.title}
+                     </Text>
+                  </Link>
                </Row>
                {result?.known_for && (
                   <Row css={{ flexWrap: 'wrap', gap: '0.5rem' }}>
                      {result?.known_for?.map((el, i, arr) => (
-                        <Link key={el.id} to={``}>
+                        <Link
+                           key={el.id}
+                           to={
+                              el?.title
+                                 ? `/${ROUTES.MOVIE_DETAILS}/${el?.title
+                                      ?.toLowerCase()
+                                      .split(' ')
+                                      .join('-')
+                                      .replaceAll(nameRegex, '')}/${el?.id}`
+                                 : `/${ROUTES.SERIES_DETAILS}/${el?.name
+                                      ?.toLowerCase()
+                                      .split(' ')
+                                      .join('-')
+                                      .replaceAll(nameRegex, '')}/${el?.id}`
+                           }
+                        >
                            <Text
                               css={{
                                  letterSpacing: '0.01px',
