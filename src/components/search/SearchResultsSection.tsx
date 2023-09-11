@@ -55,7 +55,7 @@ interface SearchTypes {
    poster_path: string;
    genre_ids: number[];
    release_date: string;
-   video: false;
+   video: boolean;
    vote_average: number;
    vote_count: number;
    first_air_date: string;
@@ -135,7 +135,10 @@ const SearchResultsSection = () => {
                      Total
                   </Text>
                </Button>
-               <Button onPress={() => setActiveTab('People')}>
+               <Button
+                  disabled={dataMany?.[0]?.total_results > 0 ? false : true}
+                  onPress={() => setActiveTab('People')}
+               >
                   <Text
                      h2
                      css={{
@@ -149,7 +152,10 @@ const SearchResultsSection = () => {
                      ({dataMany?.[0]?.total_results})
                   </span>
                </Button>
-               <Button onPress={() => setActiveTab('Movies')}>
+               <Button
+                  disabled={dataMany?.[1]?.total_results > 0 ? false : true}
+                  onPress={() => setActiveTab('Movies')}
+               >
                   <Text
                      h2
                      css={{
@@ -163,7 +169,10 @@ const SearchResultsSection = () => {
                      ({dataMany?.[1]?.total_results})
                   </span>
                </Button>
-               <Button onPress={() => setActiveTab('TvShows')}>
+               <Button
+                  disabled={dataMany?.[2]?.total_results > 0 ? false : true}
+                  onPress={() => setActiveTab('TvShows')}
+               >
                   <Text
                      h2
                      css={{
@@ -185,6 +194,11 @@ const SearchResultsSection = () => {
                   Results: {numberOfResults}
                </Text>
             </Row>
+            {data?.length === 0 && (
+               <Row>
+                  <Text>There are no results that matched your query.</Text>
+               </Row>
+            )}
             <Row>
                {activeTab === 'Summary' && <ResultsSummary results={data} />}
                {activeTab === 'People' && <ResultsPeople />}
