@@ -39,7 +39,7 @@ interface PropTypes {
       poster_path: string;
       genre_ids?: number[];
       release_date?: string;
-      video: false;
+      video: boolean;
       vote_average: number;
       vote_count: number;
       first_air_date?: string;
