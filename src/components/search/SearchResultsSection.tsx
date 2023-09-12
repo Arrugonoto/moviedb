@@ -93,6 +93,7 @@ const SearchResultsSection = () => {
       const url = `https://api.themoviedb.org/3/search/multi?query=${queryString}&include_adult=false&language=en-US&page=${page}`;
 
       handleFetch({ url, options });
+      console.log(page);
    };
 
    const fetchManyData = async (): Promise<void> => {
@@ -114,14 +115,29 @@ const SearchResultsSection = () => {
    };
 
    useEffect(() => {
-      fetchData();
+      setPage(1);
+      if (page === 1) {
+         fetchData();
+      }
       fetchManyData();
       setActiveTab('Summary');
       // eslint-disable-next-line
    }, [queryString]);
 
+   useEffect(() => {
+      fetchData();
+      // eslint-disable-next-line
+   }, [page]);
+
    return (
-      <Container css={{ d: 'flex', fd: 'column', gap: '2rem' }}>
+      <Container
+         css={{
+            d: 'flex',
+            fd: 'column',
+            flexGrow: 1,
+            gap: '2rem',
+         }}
+      >
          <Row justify="center">
             <Button.Group light rounded size="lg">
                <Button onPress={() => setActiveTab('Summary')}>
@@ -188,10 +204,17 @@ const SearchResultsSection = () => {
                </Button>
             </Button.Group>
          </Row>
-         <Row css={{ fd: 'column', gap: '1rem' }}>
+         <Row
+            css={{
+               d: 'flex',
+               fd: 'column',
+               gap: '1rem',
+               flexGrow: 1,
+            }}
+         >
             <Row>
                <Text h3 css={{ fontSize: '1.2rem' }}>
-                  Results: {numberOfResults}
+                  Results: {data?.length > 0 ? numberOfResults : 0}
                </Text>
             </Row>
             {data?.length === 0 && (
@@ -199,8 +222,15 @@ const SearchResultsSection = () => {
                   <Text>There are no results that matched your query.</Text>
                </Row>
             )}
-            <Row>
-               {activeTab === 'Summary' && <ResultsSummary results={data} />}
+            <Row css={{ display: 'flex', fd: 'column', flexGrow: 1 }}>
+               {activeTab === 'Summary' && (
+                  <ResultsSummary
+                     results={data}
+                     setPage={setPage}
+                     page={page}
+                     lastPage={lastPage}
+                  />
+               )}
                {activeTab === 'People' && <ResultsPeople />}
                {activeTab === 'Movies' && <ResultsMovies />}
                {activeTab === 'TvShows' && <ResultsTvShows />}

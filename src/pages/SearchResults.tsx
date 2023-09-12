@@ -7,9 +7,21 @@ const SearchResults = () => {
    const queryString = searchParams.get('q');
 
    return (
-      <section style={{ minHeight: '100dvh' }}>
+      <section
+         style={{
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100dvh',
+         }}
+      >
          <Container
-            css={{ d: 'flex', fd: 'column', m: '0', p: '0', gap: '1rem' }}
+            css={{
+               d: 'flex',
+               fd: 'column',
+               flexGrow: 1,
+               p: '0',
+               gap: '1rem',
+            }}
          >
             <Row css={{ justifyContent: 'center' }}>
                <Text h1 css={{ fontSize: '1.8rem', fontWeight: '600' }}>
@@ -17,7 +29,13 @@ const SearchResults = () => {
                   <span style={{ color: '#9210A0' }}>{queryString}</span>
                </Text>
             </Row>
-            <Row>
+            <Row
+               css={{
+                  d: 'flex',
+                  fd: 'column',
+                  flexGrow: 1,
+               }}
+            >
                <SearchResultsSection />
             </Row>
          </Container>
