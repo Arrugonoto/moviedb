@@ -71,6 +71,7 @@ const CardSearchResult = ({ result }: PropTypes) => {
             backgroundColor: 'rgba(180,180,180, 0.1)',
             borderRadius: '0.2rem',
             overflow: 'hidden',
+            width: '100%',
          }}
       >
          <Container
