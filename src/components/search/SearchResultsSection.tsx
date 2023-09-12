@@ -115,7 +115,6 @@ const SearchResultsSection = () => {
    };
 
    useEffect(() => {
-      setPage(1);
       if (page === 1) {
          fetchData();
       }

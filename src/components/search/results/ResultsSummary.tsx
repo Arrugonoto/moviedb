@@ -1,4 +1,5 @@
-import { Container } from '@nextui-org/react';
+import { useEffect } from 'react';
+import { Container, Row, Pagination } from '@nextui-org/react';
 import CardSearchResult from '../../card/CardSearchResult';
 
 interface PropTypes {
@@ -45,14 +46,43 @@ interface PropTypes {
       first_air_date?: string;
       origin_country?: string[];
    }[];
+   page: number;
+   setPage: React.Dispatch<React.SetStateAction<number>>;
+   lastPage: number;
 }
 
-const ResultsSummary = ({ results }: PropTypes) => {
+const ResultsSummary = ({ results, page, setPage, lastPage }: PropTypes) => {
+   useEffect(() => {
+      setPage(1);
+      // eslint-disable-next-line
+   }, []);
+
    return (
-      <Container fluid css={{ d: 'flex', fd: 'column', gap: '1rem' }}>
-         {results?.map(result => (
-            <CardSearchResult key={result?.id} result={result} />
-         ))}
+      <Container
+         css={{
+            d: 'flex',
+            fd: 'column',
+            flexGrow: 1,
+            height: '100%',
+            jc: 'space-between',
+            gap: '2rem',
+         }}
+      >
+         <Row css={{ fd: 'column', gap: '1rem' }}>
+            {results?.map(result => (
+               <CardSearchResult key={result?.id} result={result} />
+            ))}
+         </Row>
+         {results?.length > 0 && (
+            <Row css={{ jc: 'center' }}>
+               <Pagination
+                  initialPage={1}
+                  page={page}
+                  total={lastPage}
+                  onChange={(page: number) => setPage(page)}
+               />
+            </Row>
+         )}
       </Container>
    );
 };

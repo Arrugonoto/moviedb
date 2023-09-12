@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container } from '@nextui-org/react';
+import { Container, Row, Pagination } from '@nextui-org/react';
 import CardSearchResult from '../../card/CardSearchResult';
 import { useSearchParams } from 'react-router-dom';
 import { METHODS } from '../../../services/api';
@@ -54,13 +54,33 @@ const ResultsMovies = () => {
    useEffect(() => {
       fetchData();
       // eslint-disable-next-line
-   }, [queryString]);
+   }, [queryString, page]);
 
    return (
-      <Container fluid css={{ d: 'flex', fd: 'column', gap: '1rem' }}>
-         {data?.map(result => (
-            <CardSearchResult key={result?.id} result={result} />
-         ))}
+      <Container
+         fluid
+         css={{
+            d: 'flex',
+            fd: 'column',
+            flexGrow: 1,
+            height: '100%',
+            jc: 'space-between',
+            gap: '2rem',
+         }}
+      >
+         <Row css={{ fd: 'column', gap: '1rem' }}>
+            {data?.map(result => (
+               <CardSearchResult key={result?.id} result={result} />
+            ))}
+         </Row>
+         <Row css={{ jc: 'center' }}>
+            <Pagination
+               initialPage={1}
+               page={page}
+               total={lastPage}
+               onChange={(page: number) => setPage(page)}
+            />
+         </Row>
       </Container>
    );
 };
