@@ -30,26 +30,28 @@ const Footer = () => {
                      style={{
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: '0.5rem',
                      }}
                   >
                      <Text
                         css={{
                            fontFamily: 'Roboto',
-                           fontSize: '0.9rem',
-                           fontWeight: '500',
-                           letterSpacing: '1px',
+                           fontSize: '1rem',
+                           fontWeight: '800',
+                           letterSpacing: '0.5px',
                            textTransform: 'uppercase',
-                           color: '#fafafa',
+                           color: '#d2d2d2',
+                           paddingBottom: '2rem',
                         }}
                      >
-                        Created with:
+                        made with
                      </Text>
-                     <Image
-                        width="8rem"
-                        src={LogoTMDB}
-                        alt="The Movie Database - TMDB Logo"
-                     />
+                     <Link to="https://www.themoviedb.org">
+                        <Image
+                           width="8rem"
+                           src={LogoTMDB}
+                           alt="The Movie Database - TMDB Logo"
+                        />
+                     </Link>
                   </div>
                   <div
                      style={{
@@ -60,11 +62,12 @@ const Footer = () => {
                      <Text
                         css={{
                            fontFamily: 'Roboto',
-                           fontSize: '0.9rem',
-                           fontWeight: '500',
-                           letterSpacing: '1px',
+                           fontSize: '1rem',
+                           fontWeight: '800',
+                           letterSpacing: '0.5px',
                            textTransform: 'uppercase',
-                           color: '#fafafa',
+                           color: '#d2d2d2',
+                           paddingBottom: '1.5rem',
                         }}
                      >
                         Helpful links
@@ -72,7 +75,7 @@ const Footer = () => {
                      <Link to="https://www.themoviedb.org">
                         <Text
                            css={{
-                              fontWeight: '600',
+                              fontWeight: '500',
                               color: 'transparent',
                               background: '#fafafa',
                               backgroundClip: 'text',
@@ -90,7 +93,7 @@ const Footer = () => {
                      <Link to="https://developer.themoviedb.org/docs">
                         <Text
                            css={{
-                              fontWeight: '600',
+                              fontWeight: '500',
                               color: 'transparent',
                               background: '#fafafa',
                               backgroundClip: 'text',
