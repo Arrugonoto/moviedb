@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { GENRES, SERIES_GENRES } from '../../data/genres';
 import { FaLocationDot, FaCalendar } from 'react-icons/fa6';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 
 interface PropTypes {
@@ -70,7 +70,6 @@ const CardLg = ({
    image_source,
 }: PropTypes): ReactElement => {
    const { isDark } = useTheme();
-   const navigate = useNavigate();
    const titleRegex = /:|,|\./g;
    const movieTitle: string = (name ?? title) as string;
    const replacedTitle: string = movieTitle
@@ -78,14 +77,6 @@ const CardLg = ({
       .split(' ')
       .join('-')
       .replaceAll(titleRegex, '');
-
-   const handleRedirect = () => {
-      if (name) {
-         navigate(`/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${id}`);
-      } else {
-         navigate(`/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${id}`);
-      }
-   };
 
    return (
       <motion.article
@@ -250,23 +241,31 @@ const CardLg = ({
                   bf: 'blur(6px)',
                }}
             >
-               <Text
-                  size={15}
-                  css={{
-                     ta: 'center',
-                     fontWeight: '600',
-                     letterSpacing: '0.05px',
-                     w: '100%',
-                     truncateText: '100%',
-                     '&:hover': {
-                        tdl: 'underline',
-                     },
-                  }}
-                  title={title ? title : name}
-                  onClick={() => handleRedirect()}
+               <Link
+                  to={
+                     name
+                        ? `/${ROUTES.SERIES_DETAILS}/${replacedTitle}/${id}`
+                        : `/${ROUTES.MOVIE_DETAILS}/${replacedTitle}/${id}`
+                  }
+                  style={{ width: '100%' }}
                >
-                  {title ? title : name}
-               </Text>
+                  <Text
+                     size={15}
+                     css={{
+                        ta: 'center',
+                        fontWeight: '600',
+                        letterSpacing: '0.05px',
+                        w: '100%',
+                        truncateText: '100%',
+                        '&:hover': {
+                           tdl: 'underline',
+                        },
+                     }}
+                     title={title ? title : name}
+                  >
+                     {title ? title : name}
+                  </Text>
+               </Link>
             </Card.Footer>
          </Card>
       </motion.article>

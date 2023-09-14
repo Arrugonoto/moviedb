@@ -1,6 +1,6 @@
-import { Container, Row, Col, Text, Image } from '@nextui-org/react';
+import { Container, Row, Col, Text, Image, useTheme } from '@nextui-org/react';
 import { BASE_URL, IMAGE_SIZE } from '../../data/imageConfig';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 import { MdLocalMovies } from 'react-icons/md';
 
@@ -30,7 +30,7 @@ interface PersonProps {
 }
 
 const CardCastThumbnail = ({ person }: PersonProps) => {
-   const navigate = useNavigate();
+   const { isDark } = useTheme();
    const nameRegex = /:|,|\./g;
    const personFullname: string = person?.name
       .toLowerCase()
@@ -60,69 +60,68 @@ const CardCastThumbnail = ({ person }: PersonProps) => {
          >
             <div style={{ width: '6rem' }}>
                {person?.profile_path ? (
-                  <Image
-                     src={`${
-                        BASE_URL +
-                        IMAGE_SIZE.PROFILE.W185 +
-                        person?.profile_path
-                     }`}
-                     loading="lazy"
-                     objectFit="cover"
-                     alt="Person profile"
-                     css={{ cursor: 'pointer' }}
-                     onClick={() =>
-                        navigate(
-                           `/${ROUTES.PERSON_DETAILS}/${personFullname}/${person?.id}`
-                        )
-                     }
-                  />
-               ) : (
-                  <div
-                     style={{
-                        display: 'flex',
-                        width: '100%',
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'rgba(146, 16, 160, 0.3)',
-                        cursor: 'pointer',
-                     }}
-                     onClick={() =>
-                        navigate(
-                           `/${ROUTES.PERSON_DETAILS}/${personFullname}/${person?.id}`
-                        )
-                     }
+                  <Link
+                     to={`/${ROUTES.PERSON_DETAILS}/${personFullname}/${person?.id}`}
                   >
-                     <MdLocalMovies
-                        style={{ fontSize: '2rem', opacity: 0.6 }}
+                     <Image
+                        src={`${
+                           BASE_URL +
+                           IMAGE_SIZE.PROFILE.W185 +
+                           person?.profile_path
+                        }`}
+                        loading="lazy"
+                        objectFit="cover"
+                        alt="Person profile"
+                        css={{ cursor: 'pointer' }}
                      />
-                  </div>
+                  </Link>
+               ) : (
+                  <Link
+                     to={`/${ROUTES.PERSON_DETAILS}/${personFullname}/${person?.id}`}
+                  >
+                     <div
+                        style={{
+                           display: 'flex',
+                           width: '100%',
+                           height: '100%',
+                           justifyContent: 'center',
+                           alignItems: 'center',
+                           backgroundColor: 'rgba(146, 16, 160, 0.3)',
+                           cursor: 'pointer',
+                        }}
+                     >
+                        <MdLocalMovies
+                           style={{ fontSize: '2rem', opacity: 0.6 }}
+                        />
+                     </div>
+                  </Link>
                )}
             </div>
             <Col css={{ d: 'flex', fd: 'column', jc: 'center' }}>
                <Row>
-                  <Text
-                     size={18}
-                     color={
-                        person?.name === 'J.R.R. Tolkien'
-                           ? 'rgb(64, 197, 24)'
-                           : ''
-                     }
-                     css={{
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        '&:hover': {
-                           textDecoration: 'underline',
-                        },
-                     }}
-                     onClick={() =>
-                        navigate(
-                           `/${ROUTES.PERSON_DETAILS}/${personFullname}/${person?.id}`
-                        )
-                     }
+                  <Link
+                     to={`/${ROUTES.PERSON_DETAILS}/${personFullname}/${person?.id}`}
                   >
-                     {person?.name}
-                  </Text>
+                     <Text
+                        size={18}
+                        color={
+                           person?.name === 'J.R.R. Tolkien'
+                              ? 'rgb(64, 197, 24)'
+                              : isDark
+                              ? '$white'
+                              : '$black'
+                        }
+                        css={{
+                           fontWeight: '600',
+                           cursor: 'pointer',
+                           '&:hover': {
+                              textDecoration: 'underline',
+                           },
+                        }}
+                     >
+                        {person?.name}
+                     </Text>
+                  </Link>
                </Row>
                <Row>
                   <Text
