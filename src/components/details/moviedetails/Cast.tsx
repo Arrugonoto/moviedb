@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Container, Row, Text, Button } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CardPersonCast from '../../card/CardPersonCast';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
 interface CastProps {
@@ -25,7 +25,6 @@ interface CastProps {
 const Cast = ({ cast }: CastProps) => {
    const castContainerRef = useRef<HTMLDivElement>(null);
    const { movieTitle, movieId } = useParams();
-   const navigate = useNavigate();
 
    return (
       <Container css={{ d: 'flex', fd: 'column', p: '0' }}>
@@ -66,40 +65,38 @@ const Cast = ({ cast }: CastProps) => {
                         cursor: 'default',
                      }}
                   >
-                     <Button
-                        onPress={() =>
-                           navigate(
-                              `/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/cast-and-crew`
-                           )
-                        }
-                        css={{
-                           bc: 'transparent',
-                        }}
+                     <Link
+                        to={`/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/cast-and-crew`}
                      >
-                        <Text
+                        <Button
                            css={{
-                              '&:hover': { color: '#9210a0', tdl: 'underline' },
+                              bc: 'transparent',
                            }}
                         >
-                           Show entire Cast & Crew
-                        </Text>
-                     </Button>
+                           <Text
+                              css={{
+                                 '&:hover': {
+                                    color: '#9210a0',
+                                    tdl: 'underline',
+                                 },
+                              }}
+                           >
+                              Show entire Cast & Crew
+                           </Text>
+                        </Button>
+                     </Link>
                   </div>
                </motion.div>
             </motion.div>
          </Row>
          <Row css={{ d: 'flex', jc: 'center' }}>
-            <Button
-               ghost
-               color="primary"
-               onPress={() =>
-                  navigate(
-                     `/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/cast-and-crew`
-                  )
-               }
+            <Link
+               to={`/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}/cast-and-crew`}
             >
-               Show entire Cast & Crew
-            </Button>
+               <Button ghost color="primary">
+                  Show entire Cast & Crew
+               </Button>
+            </Link>
          </Row>
       </Container>
    );

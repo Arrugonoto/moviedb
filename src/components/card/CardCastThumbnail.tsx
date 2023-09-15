@@ -86,6 +86,7 @@ const CardCastThumbnail = ({ person }: PersonProps) => {
                            height: '100%',
                            justifyContent: 'center',
                            alignItems: 'center',
+                           color: 'rgb(180,180,180)',
                            backgroundColor: 'rgba(146, 16, 160, 0.3)',
                            cursor: 'pointer',
                         }}

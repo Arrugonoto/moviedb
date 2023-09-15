@@ -8,7 +8,7 @@ import {
    Image,
 } from '@nextui-org/react';
 import styles from './nav.module.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { GENRES } from '../../data/genres';
 import { IoMoon } from 'react-icons/io5';
 import { IoMdSunny } from 'react-icons/io';
@@ -20,7 +20,6 @@ import SearchInput from './SearchInput';
 
 const Nav = () => {
    const { isDark } = useTheme();
-   const navigate = useNavigate();
 
    const handleChange = () => {
       const nextTheme = isDark ? 'light' : 'dark';
@@ -65,7 +64,7 @@ const Nav = () => {
                      alignItems: 'center',
                   }}
                >
-                  <Navbar.Brand onClick={() => navigate(`/${ROUTES.HOME}`)}>
+                  <Navbar.Brand>
                      <NavLink to={ROUTES.HOME}>
                         <Image
                            width={140}

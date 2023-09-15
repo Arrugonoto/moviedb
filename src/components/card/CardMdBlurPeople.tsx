@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { Card, Text, Col, useTheme } from '@nextui-org/react';
 import { FaImage } from 'react-icons/fa';
 import style from './movieCard.module.css';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 
 interface PropTypes {
@@ -21,10 +21,8 @@ interface PropTypes {
 const CardMdBlurPeople = ({
    id,
    name,
-   original_name,
    profile_path,
 }: PropTypes): ReactElement => {
-   const navigate = useNavigate();
    const { isDark } = useTheme();
    const nameRegex = /:|,|\./g;
    const personFullname: string = name
@@ -87,27 +85,27 @@ const CardMdBlurPeople = ({
                      }`,
                   }}
                >
-                  <Text
-                     size={15}
-                     css={{
-                        ta: 'center',
-                        fontWeight: '600',
-                        letterSpacing: '0.05px',
-                        w: '100%',
-                        truncateText: '100%',
-                        '&:hover': {
-                           tdl: 'underline',
-                        },
-                     }}
-                     title={name}
-                     onClick={() =>
-                        navigate(
-                           `/${ROUTES.PERSON_DETAILS}/${personFullname}/${id}`
-                        )
-                     }
+                  <Link
+                     to={`/${ROUTES.PERSON_DETAILS}/${personFullname}/${id}`}
+                     style={{ width: '100%' }}
                   >
-                     {name}
-                  </Text>
+                     <Text
+                        size={15}
+                        css={{
+                           ta: 'center',
+                           fontWeight: '600',
+                           letterSpacing: '0.05px',
+                           w: '100%',
+                           truncateText: '100%',
+                           '&:hover': {
+                              tdl: 'underline',
+                           },
+                        }}
+                        title={name}
+                     >
+                        {name}
+                     </Text>
+                  </Link>
                </Card.Footer>
             </Card.Body>
          </Card>

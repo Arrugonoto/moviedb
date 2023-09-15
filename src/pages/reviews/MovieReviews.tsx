@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { METHODS } from '../../services/api';
 import { API_KEY } from '../../services/api-key';
 import useFetch from '../../hooks/useFetch';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Text, Image } from '@nextui-org/react';
 import { BASE_URL, IMAGE_SIZE } from '../../data/imageConfig';
 import Review from '../../components/details/reviews/Review';
@@ -77,7 +77,6 @@ interface ReviewsTypes {
 
 const MovieReviews = () => {
    const { movieId, movieTitle } = useParams();
-   const navigate = useNavigate();
    const { handleFetch, data } = useFetch<MovieDetailsTypes>(
       {} as MovieDetailsTypes
    );
@@ -135,26 +134,25 @@ const MovieReviews = () => {
                   }}
                >
                   <Row css={{ d: 'flex', gap: '.4rem' }}>
-                     <Text
-                        h1
-                        size={30}
-                        css={{
-                           fontFamily: 'Roboto',
-                           letterSpacing: '0.1px',
-                           cursor: 'pointer',
-                           '&:hover': {
-                              textDecoration: 'underline',
-                              color: '#9210A0',
-                           },
-                        }}
-                        onClick={() =>
-                           navigate(
-                              `/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}`
-                           )
-                        }
+                     <Link
+                        to={`/${ROUTES.MOVIE_DETAILS}/${movieTitle}/${movieId}`}
                      >
-                        {data?.title}
-                     </Text>
+                        <Text
+                           h1
+                           size={30}
+                           css={{
+                              fontFamily: 'Roboto',
+                              letterSpacing: '0.1px',
+                              cursor: 'pointer',
+                              '&:hover': {
+                                 textDecoration: 'underline',
+                                 color: '#9210A0',
+                              },
+                           }}
+                        >
+                           {data?.title}
+                        </Text>
+                     </Link>
                      <Text size={18} color="rgb(150, 150, 150)">
                         ({data?.release_date?.slice(0, 4)})
                      </Text>

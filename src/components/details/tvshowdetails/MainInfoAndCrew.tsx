@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import useFetch from '../../../hooks/useFetch';
 import { METHODS } from '../../../services/api';
 import { API_KEY } from '../../../services/api-key';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
 interface OptionsTypes {
@@ -78,7 +78,6 @@ const MainInfoAndCrew = ({
    const { isDark } = useTheme();
    const { tvShowId } = useParams();
    const nameRegex = /:|,|\./g;
-   const navigate = useNavigate();
    const { handleFetch, data } = useFetch<CreditsTypes>({} as CreditsTypes);
    const credits = data?.crew?.filter(
       person => person?.department === 'Directing'
@@ -161,32 +160,32 @@ const MainInfoAndCrew = ({
                   </Text>
                   <div style={{ display: 'flex', gap: '.5rem' }}>
                      {creators?.map(person => (
-                        <Text
-                           key={person?.id}
-                           css={{
-                              fontFamily: 'Roboto',
-                              cursor: 'pointer',
-                              letterSpacing: '0.01px',
-                              '&:hover': {
-                                 textDecoration: 'underline',
-                                 color: '#C340C5',
-                              },
-                           }}
-                           onClick={() =>
-                              navigate(
-                                 `/${ROUTES.PERSON_DETAILS}/${person?.name
-                                    .toLowerCase()
-                                    .split(' ')
-                                    .join('-')
-                                    .replaceAll(nameRegex, '')}/${person?.id}`
-                              )
-                           }
+                        <Link
+                           to={`/${ROUTES.PERSON_DETAILS}/${person?.name
+                              .toLowerCase()
+                              .split(' ')
+                              .join('-')
+                              .replaceAll(nameRegex, '')}/${person?.id}`}
                         >
-                           {person.name}
-                           {creators?.indexOf(person) !== creators?.length - 1
-                              ? ','
-                              : ''}
-                        </Text>
+                           <Text
+                              key={person?.id}
+                              css={{
+                                 fontFamily: 'Roboto',
+                                 cursor: 'pointer',
+                                 letterSpacing: '0.01px',
+                                 '&:hover': {
+                                    textDecoration: 'underline',
+                                    color: '#C340C5',
+                                 },
+                              }}
+                           >
+                              {person.name}
+                              {creators?.indexOf(person) !==
+                              creators?.length - 1
+                                 ? ','
+                                 : ''}
+                           </Text>
+                        </Link>
                      ))}
                   </div>
                </Row>
@@ -210,33 +209,33 @@ const MainInfoAndCrew = ({
                      }}
                   >
                      {director?.map(person => (
-                        <Text
-                           key={person?.id}
-                           css={{
-                              whiteSpace: 'nowrap',
-                              fontFamily: 'Roboto',
-                              cursor: 'pointer',
-                              letterSpacing: '0.01px',
-                              '&:hover': {
-                                 textDecoration: 'underline',
-                                 color: '#C340C5',
-                              },
-                           }}
-                           onClick={() =>
-                              navigate(
-                                 `/${ROUTES.PERSON_DETAILS}/${person?.name
-                                    .toLowerCase()
-                                    .split(' ')
-                                    .join('-')
-                                    .replaceAll(nameRegex, '')}/${person?.id}`
-                              )
-                           }
+                        <Link
+                           to={`/${ROUTES.PERSON_DETAILS}/${person?.name
+                              .toLowerCase()
+                              .split(' ')
+                              .join('-')
+                              .replaceAll(nameRegex, '')}/${person?.id}`}
                         >
-                           {person?.name}
-                           {director?.indexOf(person) !== creators?.length - 1
-                              ? ','
-                              : ''}
-                        </Text>
+                           <Text
+                              key={person?.id}
+                              css={{
+                                 whiteSpace: 'nowrap',
+                                 fontFamily: 'Roboto',
+                                 cursor: 'pointer',
+                                 letterSpacing: '0.01px',
+                                 '&:hover': {
+                                    textDecoration: 'underline',
+                                    color: '#C340C5',
+                                 },
+                              }}
+                           >
+                              {person?.name}
+                              {director?.indexOf(person) !==
+                              creators?.length - 1
+                                 ? ','
+                                 : ''}
+                           </Text>
+                        </Link>
                      ))}
                   </div>
                </Row>

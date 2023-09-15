@@ -1,6 +1,6 @@
 import { Container, Row, Text, Col, useTheme } from '@nextui-org/react';
 import { format } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
 interface PropsTypes {
@@ -46,7 +46,6 @@ const MainInfoAndCrew = ({
 }: PropsTypes) => {
    const { isDark } = useTheme();
    const nameRegex = /:|,|\./g;
-   const navigate = useNavigate();
 
    return (
       <Container
@@ -95,29 +94,28 @@ const MainInfoAndCrew = ({
                   </Text>
                   <div>
                      {director?.map(person => (
-                        <Text
-                           key={person?.id}
-                           css={{
-                              fontFamily: 'Roboto',
-                              cursor: 'pointer',
-                              letterSpacing: '0.01px',
-                              '&:hover': {
-                                 textDecoration: 'underline',
-                                 color: '#C340C5',
-                              },
-                           }}
-                           onClick={() =>
-                              navigate(
-                                 `/${ROUTES.PERSON_DETAILS}/${person?.name
-                                    .toLowerCase()
-                                    .split(' ')
-                                    .join('-')
-                                    .replaceAll(nameRegex, '')}/${person?.id}`
-                              )
-                           }
+                        <Link
+                           to={`/${ROUTES.PERSON_DETAILS}/${person?.name
+                              .toLowerCase()
+                              .split(' ')
+                              .join('-')
+                              .replaceAll(nameRegex, '')}/${person?.id}`}
                         >
-                           {person?.name}
-                        </Text>
+                           <Text
+                              key={person?.id}
+                              css={{
+                                 fontFamily: 'Roboto',
+                                 cursor: 'pointer',
+                                 letterSpacing: '0.01px',
+                                 '&:hover': {
+                                    textDecoration: 'underline',
+                                    color: '#C340C5',
+                                 },
+                              }}
+                           >
+                              {person?.name}
+                           </Text>
+                        </Link>
                      ))}
                   </div>
                </Row>
@@ -135,33 +133,32 @@ const MainInfoAndCrew = ({
                   </Text>
                   <div style={{ display: 'flex', gap: '.5rem' }}>
                      {screenplay?.map(person => (
-                        <Text
-                           key={person?.id}
-                           css={{
-                              fontFamily: 'Roboto',
-                              cursor: 'pointer',
-                              letterSpacing: '0.01px',
-                              '&:hover': {
-                                 textDecoration: 'underline',
-                                 color: '#C340C5',
-                              },
-                           }}
-                           onClick={() =>
-                              navigate(
-                                 `/${ROUTES.PERSON_DETAILS}/${person?.name
-                                    .toLowerCase()
-                                    .split(' ')
-                                    .join('-')
-                                    .replaceAll(nameRegex, '')}/${person?.id}`
-                              )
-                           }
+                        <Link
+                           to={`/${ROUTES.PERSON_DETAILS}/${person?.name
+                              .toLowerCase()
+                              .split(' ')
+                              .join('-')
+                              .replaceAll(nameRegex, '')}/${person?.id}`}
                         >
-                           {person.name}
-                           {screenplay?.indexOf(person) !==
-                           screenplay?.length - 1
-                              ? ','
-                              : ''}
-                        </Text>
+                           <Text
+                              key={person?.id}
+                              css={{
+                                 fontFamily: 'Roboto',
+                                 cursor: 'pointer',
+                                 letterSpacing: '0.01px',
+                                 '&:hover': {
+                                    textDecoration: 'underline',
+                                    color: '#C340C5',
+                                 },
+                              }}
+                           >
+                              {person.name}
+                              {screenplay?.indexOf(person) !==
+                              screenplay?.length - 1
+                                 ? ','
+                                 : ''}
+                           </Text>
+                        </Link>
                      ))}
                   </div>
                </Row>
