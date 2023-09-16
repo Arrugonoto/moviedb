@@ -95,6 +95,14 @@ const KnownFrom = ({ knownDepartment }: PropTypes) => {
       return nextValue - currValue;
    });
 
+   const uniqWorksId = new Set();
+   const uniqWorks = mostPopularWorks?.filter(el => {
+      if (!uniqWorksId.has(el.id)) {
+         uniqWorksId.add(el.id);
+         return el;
+      }
+   });
+
    const fetchData = async (): Promise<void> => {
       const options: OptionsTypes = {
          method: METHODS.GET,
@@ -173,8 +181,8 @@ const KnownFrom = ({ knownDepartment }: PropTypes) => {
                      padding: '1.5rem 1rem',
                   }}
                >
-                  {mostPopularWorks?.map(production => {
-                     if (mostPopularWorks?.indexOf(production) < 10)
+                  {uniqWorks?.map(production => {
+                     if (uniqWorks?.indexOf(production) < 10)
                         return production?.title ? (
                            <CardMdBlur
                               key={production?.credit_id}
