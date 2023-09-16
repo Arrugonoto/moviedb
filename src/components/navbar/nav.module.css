@@ -54,12 +54,14 @@
 }
 
 .categoryLink {
-   padding: 0.5rem 0.2rem;
+   padding: 0.1rem 1rem;
    font-family: 'Roboto', sans-serif;
    font-size: 0.9rem !important;
    font-weight: 600 !important;
    transition: all 0.2s linear;
    cursor: pointer;
+   border: 2px solid #9210a0;
+   border-radius: 0.5rem;
 }
 
 .categoryLink:hover {

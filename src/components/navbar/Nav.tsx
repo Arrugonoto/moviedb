@@ -57,60 +57,47 @@ const Nav = () => {
                   maxWidth: '1500px',
                }}
             >
-               <div
-                  style={{
-                     display: 'flex',
-                     gap: '.5rem',
-                     alignItems: 'center',
-                  }}
-               >
-                  <Navbar.Brand>
-                     <NavLink to={ROUTES.HOME}>
-                        <Image
-                           width={140}
-                           src={Logo}
-                           alt="MovieDB - app logo"
-                           style={{ cursor: 'pointer' }}
-                        />
-                     </NavLink>
-                  </Navbar.Brand>
-                  <Navbar.Content
-                     gap={20}
-                     css={{
-                        br: '0.3rem',
-                        // p: '0 .5rem',
-                        bc: 'rgba(40, 127, 184, 0.6)',
-                     }}
-                  >
-                     <Navbar.Item>
-                        <div className={styles.categoryLinkWrapper}>
-                           <NavLink
-                              to={ROUTES.MOVIES}
-                              style={{
-                                 color: `${isDark ? '#fafafa' : '#000000'}`,
-                              }}
-                              className={styles.categoryLink}
-                           >
-                              Movies
-                           </NavLink>
-                           <Dropdown data={MOVIES} />
-                        </div>
-                     </Navbar.Item>
-                     <Navbar.Item>
-                        <div className={styles.categoryLinkWrapper}>
-                           <NavLink
-                              to={ROUTES.SERIES}
-                              style={{
-                                 color: `${isDark ? '#fafafa' : '#000000'}`,
-                              }}
-                              className={styles.categoryLink}
-                           >
-                              TV Series
-                           </NavLink>
-                           <Dropdown data={SERIES} />
-                        </div>
-                     </Navbar.Item>
-                     <Navbar.Item>
+               <Navbar.Brand>
+                  <NavLink to={ROUTES.HOME}>
+                     <Image
+                        width={140}
+                        src={Logo}
+                        alt="MovieDB - app logo"
+                        style={{ cursor: 'pointer' }}
+                     />
+                  </NavLink>
+               </Navbar.Brand>
+               <Navbar.Content gap={6}>
+                  <Navbar.Item>
+                     <div className={styles.categoryLinkWrapper}>
+                        <NavLink
+                           to={ROUTES.MOVIES}
+                           style={{
+                              color: `${isDark ? '#fafafa' : '#000000'}`,
+                           }}
+                           className={styles.categoryLink}
+                        >
+                           Movies
+                        </NavLink>
+                        <Dropdown data={MOVIES} />
+                     </div>
+                  </Navbar.Item>
+                  <Navbar.Item>
+                     <div className={styles.categoryLinkWrapper}>
+                        <NavLink
+                           to={ROUTES.SERIES}
+                           style={{
+                              color: `${isDark ? '#fafafa' : '#000000'}`,
+                           }}
+                           className={styles.categoryLink}
+                        >
+                           TV Series
+                        </NavLink>
+                        <Dropdown data={SERIES} />
+                     </div>
+                  </Navbar.Item>
+                  <Navbar.Item>
+                     <div className={styles.categoryLinkWrapper}>
                         <NavLink
                            to={ROUTES.PEOPLE}
                            style={{
@@ -120,9 +107,9 @@ const Nav = () => {
                         >
                            People
                         </NavLink>
-                     </Navbar.Item>
-                  </Navbar.Content>
-               </div>
+                     </div>
+                  </Navbar.Item>
+               </Navbar.Content>
 
                <Navbar.Content>
                   <SearchInput />
