@@ -6,6 +6,7 @@ import {
    useTheme,
    Container,
    Image,
+   Link,
 } from '@nextui-org/react';
 import styles from './nav.module.css';
 import { NavLink } from 'react-router-dom';
@@ -15,7 +16,7 @@ import { IoMdSunny } from 'react-icons/io';
 import Logo from '../../assets/logo.svg';
 import ROUTES from '../../routes/routes';
 import Dropdown from './Dropdown';
-import { MOVIES, SERIES } from '../../data/subMenu';
+import { SUBMENU, MENU_ITEMS } from '../../data/subMenu';
 import SearchInput from './SearchInput';
 
 const Nav = () => {
@@ -57,17 +58,34 @@ const Nav = () => {
                   maxWidth: '1500px',
                }}
             >
-               <Navbar.Brand>
+               <Navbar.Brand css={{ gap: '0.5rem' }}>
+                  <Navbar.Toggle
+                     aria-label="toggle navigation"
+                     css={{ '@smMin': { display: 'none' } }}
+                  />
                   <NavLink to={ROUTES.HOME}>
                      <Image
-                        width={140}
                         src={Logo}
                         alt="MovieDB - app logo"
-                        style={{ cursor: 'pointer' }}
+                        css={{
+                           width: '9rem',
+                           cursor: 'pointer',
+                           transition: '0.3s width linear',
+                           '@xsMax': {
+                              width: '8rem',
+                           },
+                        }}
                      />
                   </NavLink>
                </Navbar.Brand>
-               <Navbar.Content gap={6}>
+               <Navbar.Content
+                  css={{
+                     gap: '0.3rem',
+                     '@smMax': {
+                        display: 'none',
+                     },
+                  }}
+               >
                   <Navbar.Item>
                      <div className={styles.categoryLinkWrapper}>
                         <NavLink
@@ -79,7 +97,7 @@ const Nav = () => {
                         >
                            Movies
                         </NavLink>
-                        <Dropdown data={MOVIES} />
+                        <Dropdown data={SUBMENU.MOVIES} />
                      </div>
                   </Navbar.Item>
                   <Navbar.Item>
@@ -93,7 +111,7 @@ const Nav = () => {
                         >
                            TV Series
                         </NavLink>
-                        <Dropdown data={SERIES} />
+                        <Dropdown data={SUBMENU.SERIES} />
                      </div>
                   </Navbar.Item>
                   <Navbar.Item>
@@ -107,6 +125,23 @@ const Nav = () => {
                         >
                            People
                         </NavLink>
+                     </div>
+                  </Navbar.Item>
+                  <Navbar.Item>
+                     <div className={styles.categoryLinkWrapper}>
+                        <NavLink to={'https://www.themoviedb.org/'}>
+                           <Text
+                              css={{
+                                 fontWeight: '700',
+                                 letterSpacing: '2px',
+                                 textGradient:
+                                    '90deg,rgb(144, 206, 161), rgb(1, 180, 228)',
+                              }}
+                           >
+                              TMDB
+                           </Text>
+                        </NavLink>
+                        <Dropdown data={SUBMENU.TMDB} />
                      </div>
                   </Navbar.Item>
                </Navbar.Content>
@@ -127,6 +162,9 @@ const Nav = () => {
                css={{
                   margin: '0 0.5rem',
                   oy: 'visible',
+                  '@xsMax': {
+                     display: 'none',
+                  },
                }}
             >
                <Text
@@ -160,6 +198,18 @@ const Nav = () => {
                   )}
                </div>
             </Navbar.Content>
+            <Navbar.Collapse>
+               {MENU_ITEMS.map((el, i) => (
+                  <Navbar.CollapseItem key={i}>
+                     <Link
+                        css={{ color: 'inherit', minWidth: '100%' }}
+                        href={el.route}
+                     >
+                        {el.name}
+                     </Link>
+                  </Navbar.CollapseItem>
+               ))}
+            </Navbar.Collapse>
          </Container>
       </Navbar>
    );
