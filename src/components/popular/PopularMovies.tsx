@@ -61,7 +61,8 @@ const PopularMovies = () => {
                display: 'flex',
                overflowX: 'hidden',
                gap: '1.2rem',
-               background: 'rgba(146, 16, 160, 0.8)',
+               background:
+                  'linear-gradient(transparent,#730B89, #1B609A, transparent )',
                borderRadius: '.2rem',
             }}
          >

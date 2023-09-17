@@ -26,6 +26,7 @@ const Trending = () => {
             <Row justify="center">
                <Button.Group light rounded size="lg">
                   <Button
+                     css={{ zIndex: '1' }}
                      onPress={() => setDisplayTrending('movies')}
                      className={`${style.trendingBtn} ${
                         displayTrending === 'movies'
@@ -36,6 +37,7 @@ const Trending = () => {
                      Movies
                   </Button>
                   <Button
+                     css={{ zIndex: '1' }}
                      onPress={() => setDisplayTrending('series')}
                      className={`${style.trendingBtn} ${
                         displayTrending === 'series'
@@ -46,6 +48,7 @@ const Trending = () => {
                      TV Series
                   </Button>
                   <Button
+                     css={{ zIndex: '1' }}
                      onPress={() => setDisplayTrending('people')}
                      className={`${style.trendingBtn} ${
                         displayTrending === 'people'

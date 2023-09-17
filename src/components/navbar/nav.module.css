@@ -38,10 +38,6 @@
 }
 
 .dropdownContainer a {
-   font-family: 'Roboto';
-   font-size: 0.9rem;
-   padding: 0.2rem 4rem 0.2rem 1rem;
-   width: 100%;
    transition: background-color 0.1s linear;
 }
 
