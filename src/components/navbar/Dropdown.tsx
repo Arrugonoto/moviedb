@@ -1,4 +1,4 @@
-import { Container, useTheme } from '@nextui-org/react';
+import { Container, useTheme, Text } from '@nextui-org/react';
 import styles from './nav.module.css';
 import { NavLink } from 'react-router-dom';
 
@@ -40,11 +40,23 @@ const Dropdown = ({ data }: PropTypes) => {
                <li key={i}>
                   <NavLink
                      style={{
+                        display: 'flex',
+                        width: '100%',
+                        fontFamily: 'Roboto',
+                        fontSize: '0.9rem',
                         color: `${isDark ? '#ffffff' : '#000000'}`,
                      }}
                      to={el.route}
                   >
-                     {el.name}
+                     <Text
+                        css={{
+                           lineHeight: '1.2',
+                           w: '100%',
+                           padding: '0.5rem 2rem 0.5rem 1rem',
+                        }}
+                     >
+                        {el.name}
+                     </Text>
                   </NavLink>
                </li>
             ))}
