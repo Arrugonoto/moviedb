@@ -83,10 +83,6 @@ function App() {
                      }}
                   >
                      <Routes>
-                        <Route
-                           path="/"
-                           element={<Navigate replace to={`/${ROUTES.HOME}`} />}
-                        />
                         <Route path={ROUTES.HOME} element={<Home />} />
                         <Route path={ROUTES.MOVIES} element={<Movies />} />
                         <Route
