@@ -37,7 +37,7 @@ touch api-key.ts
 ### 4. Paste following configuration in newly created file and iclude Your TheMovieDatabase key with token
 
 ```sh
-export const API_KEY: { key: string; access_token: string } = {
+export const API_KEY: { key: string, access_token: string } = {
    key: 'TMDB key',
    access_token:
       'TMDB access token',
