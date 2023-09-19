@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // react-router-dom
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // nextui
 
 import {
