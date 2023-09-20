@@ -18,6 +18,7 @@ import Footer from './components/footer/Footer';
 // pages
 import Home from './pages/Home';
 import Genre from './pages/Genre';
+import GenreTvShows from './pages/GenreTvShows';
 import MovieDetails from './pages/details/MovieDetails';
 import TopRatedSeries from './pages/toprated/TopRatedSeries';
 import TopRatedMovies from './pages/toprated/TopRatedMovies';
@@ -102,6 +103,10 @@ function App() {
                            element={<TopRatedMovies />}
                         />
                         <Route path={ROUTES.SERIES} element={<TvShows />} />
+                        <Route
+                           path={`${ROUTES.SERIES_GENRE}/:genreId`}
+                           element={<GenreTvShows />}
+                        />
                         <Route
                            path={ROUTES.SERIES_POPULAR}
                            element={<PopularSeries />}
