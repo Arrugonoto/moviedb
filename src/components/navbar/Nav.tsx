@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
    Navbar,
    Text,
@@ -10,7 +11,7 @@ import {
 } from '@nextui-org/react';
 import styles from './nav.module.css';
 import { NavLink } from 'react-router-dom';
-import { GENRES } from '../../data/genres';
+import { GENRES, SERIES_GENRES } from '../../data/genres';
 import { IoMoon } from 'react-icons/io5';
 import { IoMdSunny } from 'react-icons/io';
 import Logo from '../../assets/logo.svg';
@@ -21,6 +22,7 @@ import SearchInput from './SearchInput';
 
 const Nav = () => {
    const { isDark } = useTheme();
+   const [movieGenres, setMovieGenres] = useState<boolean>(true);
 
    const handleChange = () => {
       const nextTheme = isDark ? 'light' : 'dark';
@@ -158,44 +160,105 @@ const Nav = () => {
                </Navbar.Content>
             </Container>
             <Navbar.Content
-               gap={10}
                css={{
                   margin: '0 0.5rem',
                   oy: 'visible',
                   '@xsMax': {
                      display: 'none',
                   },
+                  gap: '1rem',
                }}
             >
-               <Text
-                  css={{
-                     fontFamily: 'Roboto',
-                     fontSize: '0.9rem',
-                     letterSpacing: '0.05px',
+               <div
+                  style={{
+                     position: 'relative',
                   }}
-                  title="Genre"
                >
-                  movie:
-               </Text>
+                  <label
+                     htmlFor="genres"
+                     style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                     }}
+                  >
+                     <input
+                        type="checkbox"
+                        id="genres"
+                        name="genres"
+                        style={{ display: 'none' }}
+                        onChange={() => setMovieGenres(prev => !prev)}
+                     />
+                     <div
+                        style={{
+                           display: 'flex',
+                           position: 'relative',
+                           alignItems: 'center',
+                           width: '4rem',
+                        }}
+                     >
+                        {movieGenres ? (
+                           <span
+                              style={{
+                                 display: 'flex',
+                                 position: 'absolute',
+                                 padding: '0.1rem',
+                                 background: 'blue',
+                              }}
+                           >
+                              movie
+                           </span>
+                        ) : (
+                           <span
+                              style={{
+                                 display: 'flex',
+                                 position: 'absolute',
+                                 padding: '0.1rem',
+                                 background: 'blue',
+                                 whiteSpace: 'nowrap',
+                              }}
+                           >
+                              tv show
+                           </span>
+                        )}
+                     </div>
+                  </label>
+               </div>
+
                <div className={styles.container_scrollbar}>
-                  {GENRES?.map(
-                     (genre: { id: number; name: string }): JSX.Element => (
-                        <NavLink
-                           key={genre.id}
-                           to={`${ROUTES.MOVIE_GENRE}/${genre.id}`}
-                           className={({ isActive, isPending }) =>
-                              isPending
-                                 ? 'pending'
-                                 : isActive
-                                 ? styles.active
-                                 : ''
-                           }
-                           style={{ textTransform: 'uppercase' }}
-                        >
-                           {genre.name}
-                        </NavLink>
-                     )
-                  )}
+                  {movieGenres
+                     ? GENRES?.map(genre => (
+                          <NavLink
+                             key={genre.id}
+                             to={`${ROUTES.MOVIE_GENRE}/${genre.id}`}
+                             className={({ isActive, isPending }) =>
+                                isPending
+                                   ? 'pending'
+                                   : isActive
+                                   ? styles.active
+                                   : ''
+                             }
+                             style={{ textTransform: 'uppercase' }}
+                          >
+                             {genre.name}
+                          </NavLink>
+                       ))
+                     : SERIES_GENRES?.map(genre => (
+                          <NavLink
+                             key={genre.id}
+                             to={`${ROUTES.SERIES_GENRE}/${genre.id}`}
+                             className={({ isActive, isPending }) =>
+                                isPending
+                                   ? 'pending'
+                                   : isActive
+                                   ? styles.active
+                                   : ''
+                             }
+                             style={{ textTransform: 'uppercase' }}
+                          >
+                             {genre.name}
+                          </NavLink>
+                       ))}
                </div>
             </Navbar.Content>
             <Navbar.Collapse>
