@@ -38,7 +38,9 @@ const GenreSectionShows = () => {
    const { genreId } = useParams();
    const [page, setPage] = useState<number>(1);
    const [sortType, setSortType] = useState<string>('popularity.desc');
-   const { handleFetch, data, lastPage } = useInfiniteFetch<SeriesTypes[]>([]);
+   const { handleFetch, data, setData, lastPage } = useInfiniteFetch<
+      SeriesTypes[]
+   >([]);
    const lastShowRef = useRef<HTMLElement>(null);
 
    const fetchData = async (): Promise<void> => {
@@ -51,6 +53,8 @@ const GenreSectionShows = () => {
       };
       const url = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=${sortType}&with_genres=${genreId}`;
 
+      console.log('fetched');
+
       handleFetch({ url, options });
    };
 
@@ -60,9 +64,12 @@ const GenreSectionShows = () => {
    });
 
    useEffect(() => {
+      setData([]);
+      setPage(1);
       fetchData();
+      console.log('fired');
       // eslint-disable-next-line
-   }, []);
+   }, [genreId, sortType]);
 
    useEffect(() => {
       if (page !== 1) {
