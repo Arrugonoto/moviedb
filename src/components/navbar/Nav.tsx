@@ -19,6 +19,7 @@ import ROUTES from '../../routes/routes';
 import Dropdown from './Dropdown';
 import { SUBMENU, MENU_ITEMS } from '../../data/subMenu';
 import SearchInput from './SearchInput';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Nav = () => {
    const { isDark } = useTheme();
@@ -193,34 +194,65 @@ const Nav = () => {
                         style={{
                            display: 'flex',
                            position: 'relative',
-                           alignItems: 'center',
-                           width: '4rem',
+                           width: '7rem',
+                           justifyContent: 'center',
+                           height: '2.1rem',
                         }}
                      >
-                        {movieGenres ? (
-                           <span
-                              style={{
-                                 display: 'flex',
-                                 position: 'absolute',
-                                 padding: '0.1rem',
-                                 background: 'blue',
-                              }}
-                           >
-                              movie
-                           </span>
-                        ) : (
-                           <span
-                              style={{
-                                 display: 'flex',
-                                 position: 'absolute',
-                                 padding: '0.1rem',
-                                 background: 'blue',
-                                 whiteSpace: 'nowrap',
-                              }}
-                           >
-                              tv show
-                           </span>
-                        )}
+                        <AnimatePresence mode="wait">
+                           {movieGenres ? (
+                              <motion.span
+                                 key="movie"
+                                 initial={{ bottom: '-10px', opacity: 0 }}
+                                 animate={{ bottom: '5px', opacity: 1 }}
+                                 exit={{ scale: '0', opacity: 0 }}
+                                 transition={{
+                                    duration: 0.5,
+                                    bottom: { duration: 0.2 },
+                                 }}
+                                 style={{
+                                    display: 'flex',
+                                    position: 'absolute',
+                                    padding: '0.3rem 1rem',
+                                    color: '#fafafa',
+                                    fontFamily: 'Roboto',
+                                    fontSize: '0.9rem',
+                                    fontWeight: '600',
+                                    backgroundColor: '#9210a0',
+                                    textTransform: 'uppercase',
+                                    borderRadius: '0.5rem',
+                                 }}
+                              >
+                                 movie
+                              </motion.span>
+                           ) : (
+                              <motion.span
+                                 initial={{ bottom: '-10px', opacity: 0 }}
+                                 animate={{ bottom: '5px', opacity: 1 }}
+                                 exit={{ scale: '0', opacity: 0 }}
+                                 transition={{
+                                    duration: 0.5,
+                                    bottom: { duration: 0.2 },
+                                 }}
+                                 key="tvshow"
+                                 style={{
+                                    display: 'flex',
+                                    position: 'absolute',
+                                    padding: '0.3rem 1rem',
+                                    whiteSpace: 'nowrap',
+                                    color: '#fafafa',
+                                    fontFamily: 'Roboto',
+                                    fontSize: '0.9rem',
+                                    fontWeight: '600',
+                                    backgroundColor: '#9210a0',
+                                    textTransform: 'uppercase',
+                                    borderRadius: '0.5rem',
+                                 }}
+                              >
+                                 tv show
+                              </motion.span>
+                           )}
+                        </AnimatePresence>
                      </div>
                   </label>
                </div>
