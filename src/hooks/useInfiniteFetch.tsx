@@ -36,7 +36,7 @@ const useInfiniteFetch = <T,>(initialData: T) => {
       setLoading(false);
    };
 
-   return { handleFetch, loading, error, data, lastPage };
+   return { handleFetch, loading, error, data, setData, lastPage };
 };
 
 export default useInfiniteFetch;
