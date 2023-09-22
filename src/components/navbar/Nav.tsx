@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
    Navbar,
    Text,
@@ -24,12 +24,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Nav = () => {
    const { isDark } = useTheme();
    const [movieGenres, setMovieGenres] = useState<boolean>(true);
+   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+   const genreContainerRef = useRef<HTMLDivElement>(null);
 
    const handleChange = () => {
       const nextTheme = isDark ? 'light' : 'dark';
       window.localStorage.setItem('data-theme', nextTheme);
       changeTheme(nextTheme);
    };
+
+   useEffect(() => {
+      setIsFirstRender(false);
+   }, []);
+
+   useEffect(() => {
+      if (genreContainerRef.current) {
+         genreContainerRef.current.scrollTo({
+            left: 0,
+            behavior: 'smooth',
+         });
+      }
+   }, [movieGenres]);
 
    return (
       <Navbar
@@ -203,11 +218,15 @@ const Nav = () => {
                            {movieGenres ? (
                               <motion.span
                                  key="movie"
-                                 initial={{ bottom: '-10px', opacity: 0 }}
+                                 initial={
+                                    isFirstRender
+                                       ? false
+                                       : { bottom: '-10px', opacity: 0 }
+                                 }
                                  animate={{ bottom: '5px', opacity: 1 }}
-                                 exit={{ scale: '0', opacity: 0 }}
+                                 exit={{ scale: 0.6, opacity: 0 }}
                                  transition={{
-                                    duration: 0.5,
+                                    duration: 0.3,
                                     bottom: { duration: 0.2 },
                                  }}
                                  style={{
@@ -229,10 +248,11 @@ const Nav = () => {
                               <motion.span
                                  initial={{ bottom: '-10px', opacity: 0 }}
                                  animate={{ bottom: '5px', opacity: 1 }}
-                                 exit={{ scale: '0', opacity: 0 }}
+                                 exit={{ scale: 0.6, opacity: 0 }}
                                  transition={{
-                                    duration: 0.5,
+                                    duration: 0.4,
                                     bottom: { duration: 0.2 },
+                                    opacity: { duration: 0.2 },
                                  }}
                                  key="tvshow"
                                  style={{
@@ -257,40 +277,63 @@ const Nav = () => {
                   </label>
                </div>
 
-               <div className={styles.container_scrollbar}>
-                  {movieGenres
-                     ? GENRES?.map(genre => (
-                          <NavLink
-                             key={genre.id}
-                             to={`${ROUTES.MOVIE_GENRE}/${genre.id}`}
-                             className={({ isActive, isPending }) =>
-                                isPending
-                                   ? 'pending'
-                                   : isActive
-                                   ? styles.active
-                                   : ''
-                             }
-                             style={{ textTransform: 'uppercase' }}
-                          >
-                             {genre.name}
-                          </NavLink>
-                       ))
-                     : SERIES_GENRES?.map(genre => (
-                          <NavLink
-                             key={genre.id}
-                             to={`${ROUTES.SERIES_GENRE}/${genre.id}`}
-                             className={({ isActive, isPending }) =>
-                                isPending
-                                   ? 'pending'
-                                   : isActive
-                                   ? styles.active
-                                   : ''
-                             }
-                             style={{ textTransform: 'uppercase' }}
-                          >
-                             {genre.name}
-                          </NavLink>
-                       ))}
+               <div
+                  className={styles.container_scrollbar}
+                  ref={genreContainerRef}
+               >
+                  <AnimatePresence mode="wait">
+                     {movieGenres ? (
+                        <motion.div
+                           key="movie_genres"
+                           initial={isFirstRender ? false : { opacity: 0 }}
+                           animate={{ opacity: 1 }}
+                           exit={{ opacity: 0 }}
+                           transition={{ duration: 0.3 }}
+                        >
+                           {GENRES?.map(genre => (
+                              <NavLink
+                                 key={genre.id}
+                                 to={`${ROUTES.MOVIE_GENRE}/${genre.id}`}
+                                 className={({ isActive, isPending }) =>
+                                    isPending
+                                       ? 'pending'
+                                       : isActive
+                                       ? styles.active
+                                       : ''
+                                 }
+                                 style={{ textTransform: 'uppercase' }}
+                              >
+                                 {genre.name}
+                              </NavLink>
+                           ))}
+                        </motion.div>
+                     ) : (
+                        <motion.div
+                           key="tvshow_genres"
+                           initial={{ opacity: 0 }}
+                           animate={{ opacity: 1 }}
+                           exit={{ opacity: 0 }}
+                           transition={{ duration: 0.3 }}
+                        >
+                           {SERIES_GENRES?.map(genre => (
+                              <NavLink
+                                 key={genre.id}
+                                 to={`${ROUTES.SERIES_GENRE}/${genre.id}`}
+                                 className={({ isActive, isPending }) =>
+                                    isPending
+                                       ? 'pending'
+                                       : isActive
+                                       ? styles.active
+                                       : ''
+                                 }
+                                 style={{ textTransform: 'uppercase' }}
+                              >
+                                 {genre.name}
+                              </NavLink>
+                           ))}
+                        </motion.div>
+                     )}
+                  </AnimatePresence>
                </div>
             </Navbar.Content>
             <Navbar.Collapse>
