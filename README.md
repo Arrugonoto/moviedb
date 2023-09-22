@@ -27,7 +27,7 @@ Or maybe just look what's currently trending.
 
 ## Tech Stack
 
-<div align='center' style='display: flex; justify-content: center; gap: 30px;'>
+<div align='center' style='display: flex; justify-content: center; gap: 20px;'>
 <div>
 <img width='50px' src='https://camo.githubusercontent.com/61e102d7c605ff91efedb9d7e47c1c4a07cef59d3e1da202fd74f4772122ca4e/68747470733a2f2f766974656a732e6465762f6c6f676f2e737667' alt='Vite logo' />
 
