@@ -98,7 +98,7 @@ const Nav = () => {
                </Navbar.Brand>
                <Navbar.Content
                   css={{
-                     gap: '0.3rem',
+                     gap: '1rem',
                      '@smMax': {
                         display: 'none',
                      },
@@ -152,8 +152,14 @@ const Nav = () => {
                               css={{
                                  fontWeight: '700',
                                  letterSpacing: '2px',
-                                 textGradient:
-                                    '90deg,rgb(144, 206, 161), rgb(1, 180, 228)',
+                                 transition: '0.2s all linear',
+                                 textGradient: isDark
+                                    ? '#fafafa, #fafafa'
+                                    : '$black, $black',
+                                 '&:hover': {
+                                    textGradient:
+                                       '90deg,rgb(144, 206, 161), rgb(1, 180, 228)',
+                                 },
                               }}
                            >
                               TMDB
@@ -223,7 +229,7 @@ const Nav = () => {
                                        ? false
                                        : { bottom: '-10px', opacity: 0 }
                                  }
-                                 animate={{ bottom: '5px', opacity: 1 }}
+                                 animate={{ bottom: '2px', opacity: 1 }}
                                  exit={{ scale: 0.6, opacity: 0 }}
                                  transition={{
                                     duration: 0.3,
@@ -247,7 +253,7 @@ const Nav = () => {
                            ) : (
                               <motion.span
                                  initial={{ bottom: '-10px', opacity: 0 }}
-                                 animate={{ bottom: '5px', opacity: 1 }}
+                                 animate={{ bottom: '2px', opacity: 1 }}
                                  exit={{ scale: 0.6, opacity: 0 }}
                                  transition={{
                                     duration: 0.4,
