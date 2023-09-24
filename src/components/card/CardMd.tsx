@@ -60,7 +60,13 @@ const CardMd = ({
                   className={style.cardHeader}
                >
                   <Row align="center" justify="center" css={{ gap: '.4rem;' }}>
-                     <Tooltip content={'Rating'} shadow={true}>
+                     <Tooltip
+                        content={'Rating'}
+                        shadow={true}
+                        color="default"
+                        contentColor="default"
+                        css={{}}
+                     >
                         <FaStar
                            style={{ fontSize: '1.2rem', color: '#9210A0' }}
                         />
@@ -72,7 +78,13 @@ const CardMd = ({
                      </Text>
                   </Row>
                   <Row align="center" justify="center" css={{ gap: '.4rem;' }}>
-                     <Tooltip content={'Vote count'} shadow={true}>
+                     <Tooltip
+                        content={'Vote count'}
+                        shadow={true}
+                        color="default"
+                        contentColor="default"
+                        css={{}}
+                     >
                         <FaUser
                            style={{ fontSize: '1.2rem', color: '#9210A0' }}
                         />

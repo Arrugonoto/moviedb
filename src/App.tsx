@@ -52,7 +52,7 @@ function App() {
       const theme: string | null = window.localStorage.getItem('data-theme');
       setIsDark(theme === 'dark');
 
-      const observer: MutationObserver = new MutationObserver(mutation => {
+      const observer: MutationObserver = new MutationObserver(() => {
          const newTheme: string = getDocumentTheme(document?.documentElement);
          setIsDark(newTheme === 'dark');
       });

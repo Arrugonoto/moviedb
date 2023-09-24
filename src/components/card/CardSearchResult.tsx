@@ -201,7 +201,7 @@ const CardSearchResult = ({ result }: PropTypes) => {
                   <Row css={{ flexWrap: 'wrap', gap: '0.5rem' }}>
                      {result?.known_for?.map((el, i, arr) => (
                         <Link
-                           key={el.id}
+                           key={i}
                            to={
                               el?.title
                                  ? `/${ROUTES.MOVIE_DETAILS}/${el?.title
