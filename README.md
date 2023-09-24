@@ -27,44 +27,23 @@ Or maybe just look what's currently trending.
 
 ## Tech Stack
 
-<div align='center' style='display: flex; justify-content: center; gap: 20px;'>
-<div>
-<img width='50px' src='https://camo.githubusercontent.com/61e102d7c605ff91efedb9d7e47c1c4a07cef59d3e1da202fd74f4772122ca4e/68747470733a2f2f766974656a732e6465762f6c6f676f2e737667' alt='Vite logo' />
+<div align='center'>
 
-`Vite`
-
-</div>
-<div>
-<img width='56px' src='https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' alt='React logo' />
-
-`React`
+<img title='Vite' width='50px' src='https://camo.githubusercontent.com/61e102d7c605ff91efedb9d7e47c1c4a07cef59d3e1da202fd74f4772122ca4e/68747470733a2f2f766974656a732e6465762f6c6f676f2e737667' alt='Vite logo' style='margin: 0 auto;'/>
+<img title='React' width='56px' src='https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' alt='React logo' style='margin: 0 auto;'/>
+<img title='TypeScript' width='50px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png' alt='TypeScript logo' style='margin: 0 10px;'/>
+<img title='The Movie Database' width='70px' src='https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg' alt='TMDB logo' style='object-fit: cover;' />
+<img title='NextUI' width='50px' src='https://raw.githubusercontent.com/nextui-org/nextui/main/apps/docs/public/isotipo.png' alt='NextUI logo' style='margin: 0 10px;'/>
+<img title='Framer Motion' width='50px' src='https://camo.githubusercontent.com/179d66ab2b0321726c88a586c4ad38802e7113a3c98c6fd3f0156c01c98cfd14/68747470733a2f2f6672616d657275736572636f6e74656e742e636f6d2f696d616765732f34386861395a52396f5a51475136675a38595566456c50335430412e706e67' alt='Framer Motion logo' style='margin: 0 auto;'/>
 
 </div>
-<div>
-<img width='50px' src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png' alt='TypeScript logo' />
 
-`TypeScript`
-
-</div>
-<div>
-<img width='70px' src='https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg' alt='TMDB logo' style='object-fit: cover;' />
-
-`TMDB`
-
-</div>
-<div>
-<img width='50px' src='https://raw.githubusercontent.com/nextui-org/nextui/main/apps/docs/public/isotipo.png' alt='NextUI logo' />
-
-`NextUI`
-
-</div>
-<div>
-<img width='50px' src='https://camo.githubusercontent.com/179d66ab2b0321726c88a586c4ad38802e7113a3c98c6fd3f0156c01c98cfd14/68747470733a2f2f6672616d657275736572636f6e74656e742e636f6d2f696d616765732f34386861395a52396f5a51475136675a38595566456c50335430412e706e67' alt='Framer Motion logo' />
-
-`Framer Motion`
-
-</div>
-</div>
+-  [`Vite`](https://vitejs.dev/)
+-  [`React`](https://react.dev/)
+-  [`TypeScript`](https://www.typescriptlang.org/)
+-  [`The Movie Database`](https://www.themoviedb.org/)
+-  [`NextUI`](https://nextui.org/)
+-  [`Framer Motion`](https://www.framer.com/motion/)
 
 ## Getting Started
 
