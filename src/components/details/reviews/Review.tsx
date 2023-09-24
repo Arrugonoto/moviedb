@@ -19,8 +19,6 @@ const Review = ({
    avatar_path,
    author,
    updated_at,
-   created_at,
-   id,
    rating,
    content,
 }: PropTypes) => {

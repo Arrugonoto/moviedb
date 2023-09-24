@@ -2,7 +2,7 @@ import { Container, Row, Col, Text, Image, useTheme } from '@nextui-org/react';
 import { format } from 'date-fns';
 import { BiSolidStar } from 'react-icons/bi';
 
-interface MovieDetailsProps {
+interface PropTypes {
    backdropPath: string;
    posterPath: string;
    releaseDate: string;
@@ -20,7 +20,7 @@ const DetailsHeader = ({
    title,
    releaseDate,
    runtime,
-}: MovieDetailsProps) => {
+}: PropTypes) => {
    const { isDark } = useTheme();
 
    return (

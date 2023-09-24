@@ -5,7 +5,7 @@ import CardPersonCast from '../../card/CardPersonCast';
 import { Link, useParams } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
-interface CastProps {
+interface PropTypes {
    cast: {
       adult: boolean;
       gender: number;
@@ -22,7 +22,7 @@ interface CastProps {
    }[];
 }
 
-const Cast = ({ cast }: CastProps) => {
+const Cast = ({ cast }: PropTypes) => {
    const castContainerRef = useRef<HTMLDivElement>(null);
    const { movieTitle, movieId } = useParams();
 

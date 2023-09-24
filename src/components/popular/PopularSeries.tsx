@@ -14,7 +14,7 @@ interface OptionsTypes {
    };
 }
 
-interface SeriesProps {
+interface SeriesTypes {
    adult: boolean;
    backdrop_path: string;
    genre_ids: number[];
@@ -33,7 +33,7 @@ interface SeriesProps {
 }
 
 const PopularSeries = () => {
-   const { handleFetch, data } = useFetch<SeriesProps[]>([]);
+   const { handleFetch, data } = useFetch<SeriesTypes[]>([]);
    const constraintsRef = useRef<HTMLDivElement>(null);
 
    const fetchSeries = async (): Promise<void> => {

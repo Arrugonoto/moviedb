@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type MovieProps = {
+type MovieTypes = {
    adult: boolean;
    backdrop_path: string;
    genre_ids: number[];
@@ -17,7 +17,7 @@ type MovieProps = {
    vote_count: number;
 };
 
-type PropTypes = {
+type OptionsTypes = {
    url: string;
    options: {
       method: string;
@@ -30,10 +30,13 @@ type PropTypes = {
 const useFetchMovies = () => {
    const [loading, setLoading] = useState<boolean>(false);
    const [error, setError] = useState<unknown>(null);
-   const [movies, setMovies] = useState<MovieProps[]>([]);
+   const [movies, setMovies] = useState<MovieTypes[]>([]);
    const [lastPage, setLastPage] = useState<number>(0);
 
-   const handleFetch = async ({ url, options }: PropTypes): Promise<void> => {
+   const handleFetch = async ({
+      url,
+      options,
+   }: OptionsTypes): Promise<void> => {
       setLoading(true);
 
       const controller = new AbortController();

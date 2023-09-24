@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 import { BsFillPersonFill } from 'react-icons/bs';
 
-interface PersonProps {
+interface PropTypes {
    person: {
       adult: boolean;
       gender: number;
@@ -20,7 +20,7 @@ interface PersonProps {
    };
 }
 
-const CardPersonCast = ({ person }: PersonProps) => {
+const CardPersonCast = ({ person }: PropTypes) => {
    const nameRegex = /:|,|\./g;
    const personFullname: string = person.name
       .toLowerCase()

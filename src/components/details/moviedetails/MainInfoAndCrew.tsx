@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../../routes/routes';
 
-interface PropsTypes {
+interface PropTypes {
    genres: { id: number; name: string }[];
    overview: string;
    director: {
@@ -43,7 +43,7 @@ const MainInfoAndCrew = ({
    screenplay,
    productionCountries,
    releaseDate,
-}: PropsTypes) => {
+}: PropTypes) => {
    const { isDark } = useTheme();
    const nameRegex = /:|,|\./g;
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ROUTES from '../../routes/routes';
 import { MdLocalMovies } from 'react-icons/md';
 
-interface PersonProps {
+interface PropTypes {
    person: {
       id: number;
       known_for_department: string;
@@ -29,7 +29,7 @@ interface PersonProps {
    };
 }
 
-const CardCastThumbnail = ({ person }: PersonProps) => {
+const CardCastThumbnail = ({ person }: PropTypes) => {
    const { isDark } = useTheme();
    const nameRegex = /:|,|\./g;
    const personFullname: string = person?.name

@@ -20,7 +20,7 @@ interface OptionsTypes {
    };
 }
 
-interface ImagesTypes {
+interface ImageTypes {
    backdrops: {
       aspect_ratio: number;
       height: number;
@@ -132,7 +132,7 @@ interface SeriesDetailsTypes {
    type: string;
    vote_average: number;
    vote_count: number;
-   images: ImagesTypes;
+   images: ImageTypes;
 }
 
 const SeriesDetailsSection = () => {

@@ -14,7 +14,7 @@ interface OptionsTypes {
    };
 }
 
-interface MovieProps {
+interface MovieTypes {
    adult: boolean;
    backdrop_path: string;
    genre_ids: number[];
@@ -33,7 +33,7 @@ interface MovieProps {
 }
 
 const Upcoming = () => {
-   const { handleFetch, data } = useFetch<MovieProps[]>([]);
+   const { handleFetch, data } = useFetch<MovieTypes[]>([]);
    const constraintsRef = useRef<HTMLDivElement>(null);
 
    const fetchMovies = async (): Promise<void> => {

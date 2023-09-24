@@ -14,7 +14,7 @@ interface OptionsTypes {
    };
 }
 
-interface PeopleProps {
+interface PeopleTypes {
    adult: boolean;
    id: number;
    name: string;
@@ -28,7 +28,7 @@ interface PeopleProps {
 }
 
 const TrendingPeople = () => {
-   const { handleFetch, data } = useFetch<PeopleProps[]>([]);
+   const { handleFetch, data } = useFetch<PeopleTypes[]>([]);
    const constraintsRef = useRef<HTMLDivElement>(null);
 
    const fetchSeries = async (): Promise<void> => {

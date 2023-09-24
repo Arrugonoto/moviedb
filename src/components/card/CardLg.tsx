@@ -59,12 +59,9 @@ SERIES_GENRES.forEach(el => {
 const CardLg = ({
    id,
    overview,
-   popularity,
    release_date,
    name,
    title,
-   vote_average,
-   vote_count,
    genre_ids,
    origin_country,
    image_source,
