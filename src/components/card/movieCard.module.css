@@ -1,9 +1,9 @@
 .cardImage {
-   transition: scale 0.2s linear;
+   transition: all 0.2s linear;
 }
 
 .card:hover .cardImage {
-   scale: 1.1;
+   transform: scale(1.1);
 }
 
 .card:focus-visible .cardImage {

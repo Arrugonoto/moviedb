@@ -41,7 +41,7 @@ const CardMd = ({
                allowTextSelectionOnPress={true}
                css={{
                   w: '12.3rem',
-                  h: '22.2rem',
+                  minHeight: '20rem',
                   borderRadius: '0.5rem',
                   ov: 'hidden',
                }}
