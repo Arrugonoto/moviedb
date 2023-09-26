@@ -44,246 +44,306 @@ const MovieFullCrew = ({ crew }: PropTypes) => {
          >
             Crew
          </Text>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Directing
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {directing?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         {directing?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Directing
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {directing?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Writing
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {writing?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {writing?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Writing
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {writing?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Production
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {production?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {production?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Production
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {production?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Camera
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {camera?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {camera?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Camera
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {camera?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Sound
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {sound?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {sound?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Sound
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {sound?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Art
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {art?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {art?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Art
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {art?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Costume & Make up
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {costume?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {costume?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Costume & Make up
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {costume?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Visual Effects
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {effects?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {effects?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Visual Effects
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {effects?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Editing
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {editing?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {editing?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Editing
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {editing?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
-         <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
-            <Text
-               h4
-               size={15}
-               css={{
-                  fontFamily: 'Roboto',
-                  letterSpacing: '0.09px',
-                  opacity: 0.8,
-               }}
-            >
-               Crew
-            </Text>
-            <Row
-               css={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(22rem, 1fr))',
-                  gap: '1rem',
-               }}
-            >
-               {staff?.map(person => (
-                  <CardCastThumbnail key={person?.credit_id} person={person} />
-               ))}
+         )}
+         {staff?.length > 0 && (
+            <Row css={{ d: 'flex', fd: 'column', marginBottom: '2.5rem' }}>
+               <Text
+                  h4
+                  size={15}
+                  css={{
+                     fontFamily: 'Roboto',
+                     letterSpacing: '0.09px',
+                     opacity: 0.8,
+                  }}
+               >
+                  Crew
+               </Text>
+               <Row
+                  css={{
+                     display: 'grid',
+                     gridTemplateColumns:
+                        'repeat(auto-fill, minmax(22rem, 1fr))',
+                     gap: '1rem',
+                  }}
+               >
+                  {staff?.map(person => (
+                     <CardCastThumbnail
+                        key={person?.credit_id}
+                        person={person}
+                     />
+                  ))}
+               </Row>
             </Row>
-         </Row>
+         )}
       </Container>
    );
 };
